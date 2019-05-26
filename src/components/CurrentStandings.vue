@@ -6,7 +6,7 @@
     appear-active-class="fade-enter-active"
   >
     <div>
-      <h3>Standings</h3>
+      <h3>Current Standings</h3>
 
       <table class="standings">
         <thead>
