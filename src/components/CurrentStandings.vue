@@ -15,23 +15,18 @@
           <th>Nationality</th>
           <th>Team</th>
           <th>Wins</th>
+          <th>Points</th>
         </thead>
-        <transition
-          appear
-          appear-class="fade-enter"
-          appear-to-class="fade-enter-to"
-          appear-active-class="fade-enter-active"
-        >
-          <tbody>
-            <tr v-for="standing in allStandings" :key="standing.position" class="standing">
-              <td>{{standing.position}}</td>
-              <td>{{standing.Driver.driverId}}</td>
-              <td>{{standing.Driver.nationality}}</td>
-              <td>{{standing.Constructors[0].constructorId}}</td>
-              <td>{{standing.wins}}</td>
-            </tr>
-          </tbody>
-        </transition>
+        <tbody>
+          <tr v-for="standing in allStandings" :key="standing.position" class="standing">
+            <td>{{standing.position }}</td>
+            <td>{{standing.Driver.driverId | to-uppercase | rm-underscore}}</td>
+            <td>{{standing.Driver.nationality | to-uppercase}}</td>
+            <td>{{standing.Constructors[0].constructorId | to-uppercase}}</td>
+            <td>{{standing.wins }}</td>
+            <td>{{standing.points}}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </transition>
@@ -48,7 +43,9 @@ export default {
     ...mapActions(["fetchStandings"])
   },
 
-  computed: mapGetters(["allStandings"]),
+  computed: {
+    ...mapGetters(["allStandings"])
+  },
 
   created() {
     this.fetchStandings();
@@ -70,6 +67,16 @@ export default {
 }
 .fade-enter-to {
   opacity: 1;
+}
+
+h3 {
+  padding: 25px 0 0 0;
+  color: rgba(
+    255,
+    255,
+    255,
+    0.6
+  ); // figure out how to get 'headerText' from styles import
 }
 </style>
 

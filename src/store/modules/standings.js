@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 const state = {
-  standings: [
-
-  ],
+  standings: [],
 };
 
 const getters = {
@@ -12,7 +10,6 @@ const getters = {
 };
 
 const mutations = {
-
   setStandings: (state, standings) => (state.standings = standings),
 };
 
