@@ -20,9 +20,9 @@
         <tbody>
           <tr v-for="standing in allStandings" :key="standing.position" class="standing">
             <td>{{standing.position }}</td>
-            <td>{{standing.Driver.driverId | to-uppercase | rm-underscore}}</td>
+            <td>{{standing.Driver.driverId | last-name | to-uppercase}}</td>
             <td>{{standing.Driver.nationality | to-uppercase}}</td>
-            <td>{{standing.Constructors[0].constructorId | to-uppercase}}</td>
+            <td>{{standing.Constructors[0].constructorId | remove-underscore | to-uppercase}}</td>
             <td>{{standing.wins }}</td>
             <td>{{standing.points}}</td>
           </tr>
