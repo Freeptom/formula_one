@@ -11,8 +11,9 @@
       <!-- <ul>
         <li v-for="(link, index) in links" v-bind:key="index">{{ link }}</li>
       </ul>-->
-
-      <input type="text" v-model="getTitle" placeholder="search driver">
+      <form @submit.prevent="searchGo">
+        <input type="text" v-model="searchQuery" placeholder="search driver">
+      </form>
       <table class="standings">
         <thead>
           <th>Position</th>
@@ -23,7 +24,7 @@
           <th>Points</th>
         </thead>
         <tbody>
-          <tr v-for="standing in allStandings" :key="standing.position" class="standing">
+          <tr v-for="standing in ALL_STANDINGS" :key="standing.position" class="standing">
             <td>{{standing.position }}</td>
             <td>{{standing.Driver.driverId | last-name | to-title-case}}</td>
             <td>{{standing.Driver.nationality | to-title-case}}</td>
@@ -39,26 +40,41 @@
 
 <script>
 import styles from "../styles/styles.scss";
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "CurrentStandings",
 
-  methods: {
-    ...mapActions(["fetchStandings"])
-  },
-
-  computed: {
-    ...mapGetters(["allStandings", "getTitle"])
-    // ...mapState(["title", "links"])
+  data() {
+    return {
+      searchQuery: ""
+    };
   },
 
   created() {
-    this.fetchStandings();
+    this.FETCH_STANDINGS();
   },
 
   mounted() {
     this.created = true;
+  },
+
+  computed: {
+    ...mapGetters(["ALL_STANDINGS", "GET_SEARCH"])
+  },
+
+  methods: {
+    ...mapActions(["FETCH_STANDINGS"]),
+    ...mapMutations(["SET_SEARCH", "CHANGE_SEARCH"]),
+    searchGo: function() {
+      this.SET_SEARCH(this.searchQuery);
+      console.log(
+        this.ALL_STANDINGS.filter(driver => {
+          return driver.Driver.driverId[0];
+        })
+      );
+      this.searchQuery = "";
+    }
   }
 };
 </script>
