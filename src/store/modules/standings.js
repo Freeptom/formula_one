@@ -3,7 +3,7 @@ import axios from 'axios';
 const state = {
   standings: [],
   title: 'test',
-  search: '123',
+  search: '',
 };
 
 const getters = {
@@ -16,9 +16,8 @@ const getters = {
 const mutations = {
   SET_STANDINGS: (state, standings) => (state.standings = standings),
   SET_SEARCH: (state, search) => (state.search = search),
-  CHANGE_SEARCH(state, query) {
-    state.search.push(query);
-  },
+  FILTER_SEARCH: (state, search) => (state.standings = search),
+
 };
 
 
