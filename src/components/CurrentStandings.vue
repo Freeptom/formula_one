@@ -8,6 +8,11 @@
     <div>
       <h3>Current Standings</h3>
 
+      <!-- <ul>
+        <li v-for="(link, index) in links" v-bind:key="index">{{ link }}</li>
+      </ul>-->
+
+      <input type="text" v-model="getTitle" placeholder="search driver">
       <table class="standings">
         <thead>
           <th>Position</th>
@@ -34,7 +39,7 @@
 
 <script>
 import styles from "../styles/styles.scss";
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   name: "CurrentStandings",
@@ -44,7 +49,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["allStandings"])
+    ...mapGetters(["allStandings", "getTitle"])
+    // ...mapState(["title", "links"])
   },
 
   created() {
@@ -56,6 +62,13 @@ export default {
   }
 };
 </script>
+
+
+
+
+
+
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
