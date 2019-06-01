@@ -65,17 +65,18 @@ export default {
 
   methods: {
     ...mapActions(["FETCH_STANDINGS"]),
-    ...mapMutations(["SET_SEARCH", "FILTER_SEARCH"]),
+    ...mapMutations(["SET_SEARCH", "FILTER_SEARCH", "CLEAR_SEARCH"]),
 
     search: function() {
       this.$store.commit("SET_SEARCH", this.searchQuery);
       this.FILTER_SEARCH(
         this.ALL_STANDINGS.filter(standing => {
           return standing.Driver.driverId.match(this.searchQuery);
-          this.searchQuery = "";
-          this.$store.commit("SET_SEARCH", this.searchQuery);
         })
       );
+      this.searchQuery = "";
+      this.$store.commit("SET_SEARCH", "");
+      this.FETCH_STANDINGS();
     }
   }
 };

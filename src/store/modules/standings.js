@@ -3,7 +3,7 @@ import axios from 'axios';
 const state = {
   standings: [],
   title: 'test',
-  search: '',
+  search: 'abc',
 };
 
 const getters = {
