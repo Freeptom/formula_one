@@ -52,7 +52,7 @@ export default {
   },
 
   created() {
-    this.FETCH_STANDINGS();
+    this.fetchStandings();
   },
 
   mounted() {
@@ -64,7 +64,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["FETCH_STANDINGS"]),
+    ...mapActions(["fetchStandings"]),
     ...mapMutations([
       "SET_SEARCH",
       "FILTER_SEARCH",
@@ -75,12 +75,13 @@ export default {
     search: function() {
       // set SEARCH to input
       this.$store.commit("SET_SEARCH", this.searchQuery);
-      // FILTER the ALL_STANDINGS by input
+      // FILTER ALL_STANDINGS by input
       this.FILTER_SEARCH(
+        // filter ALL_STANDINGS ...
         this.ALL_STANDINGS.filter(standing => {
+          // by SEARCH query
           return standing.Driver.driverId.match(this.GET_SEARCH);
         })
-        // this.FETCH_STANDINGS()
       );
     }
   }

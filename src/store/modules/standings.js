@@ -11,6 +11,7 @@ const state = {
 const getters = {
   /* eslint no-shadow: ["error", { "allow": ["state"] }] */
   ALL_STANDINGS: state => state.standings,
+  FILTERED_STANDINGS: state => state.filter,
   GET_SEARCH: state => state.search,
 
 };
@@ -25,7 +26,7 @@ const mutations = {
 
 
 const actions = {
-  async FETCH_STANDINGS({ commit }) {
+  async fetchStandings({ commit }) {
     const response = await axios.get('https://ergast.com/api/f1/current/driverStandings.json');
 
     commit('SET_STANDINGS', response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings); // response.data is passed to 'standings' in the mutation (2nd arg)
