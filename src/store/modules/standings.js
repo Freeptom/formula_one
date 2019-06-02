@@ -1,9 +1,11 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
 import axios from 'axios';
 
 const state = {
   standings: [],
-  title: 'test',
-  search: 'abc',
+  filter: [],
+  search: '',
 };
 
 const getters = {
@@ -16,7 +18,8 @@ const getters = {
 const mutations = {
   SET_STANDINGS: (state, standings) => (state.standings = standings),
   SET_SEARCH: (state, search) => (state.search = search),
-  FILTER_SEARCH: (state, search) => (state.standings = search),
+  FILTER_SEARCH: (state, filter) => (state.standings = filter),
+  RESET_STANDINGS: (state, standings) => (state.filter = standings),
 
 };
 

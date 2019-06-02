@@ -11,9 +11,9 @@
       <!-- <ul>
         <li v-for="(link, index) in links" v-bind:key="index">{{ link }}</li>
       </ul>-->
-      <form @submit.prevent="search">
-        <input type="text" v-model="searchQuery" placeholder="search driver">
-      </form>
+
+      <input type="text" v-model="searchQuery" v-on:input="search" placeholder="search driver">
+
       <table class="standings">
         <thead>
           <th>Position</th>
@@ -65,18 +65,23 @@ export default {
 
   methods: {
     ...mapActions(["FETCH_STANDINGS"]),
-    ...mapMutations(["SET_SEARCH", "FILTER_SEARCH", "CLEAR_SEARCH"]),
+    ...mapMutations([
+      "SET_SEARCH",
+      "FILTER_SEARCH",
+      "CLEAR_SEARCH",
+      "RESET_STANDINGS"
+    ]),
 
     search: function() {
+      // set SEARCH to input
       this.$store.commit("SET_SEARCH", this.searchQuery);
+      // FILTER the ALL_STANDINGS by input
       this.FILTER_SEARCH(
         this.ALL_STANDINGS.filter(standing => {
-          return standing.Driver.driverId.match(this.searchQuery);
+          return standing.Driver.driverId.match(this.GET_SEARCH);
         })
+        // this.FETCH_STANDINGS()
       );
-      this.searchQuery = "";
-      this.$store.commit("SET_SEARCH", "");
-      this.FETCH_STANDINGS();
     }
   }
 };
