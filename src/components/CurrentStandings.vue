@@ -8,10 +8,6 @@
     <div>
       <h3>Current Standings</h3>
 
-      <!-- <ul>
-        <li v-for="(link, index) in links" v-bind:key="index">{{ link }}</li>
-      </ul>-->
-
       <input type="text" v-model="searchQuery" v-on:input="search" placeholder="search driver">
 
       <table class="standings">
@@ -60,27 +56,35 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["ALL_STANDINGS", "GET_SEARCH"])
+    ...mapState(["standings", "filter"]),
+    ...mapGetters(["ALL_STANDINGS", "GET_SEARCH", "FILTERED_STANDINGS"])
   },
 
   methods: {
     ...mapActions(["fetchStandings"]),
-    ...mapMutations([
-      "SET_SEARCH",
-      "FILTER_SEARCH",
-      "CLEAR_SEARCH",
-      "RESET_STANDINGS"
-    ]),
+    ...mapMutations(["SET_SEARCH", "SET_FILTER"]),
 
+    // search: function() {
+    //   // set SEARCH to input
+    //   this.$store.commit("SET_SEARCH", this.searchQuery);
+    //   // return matches between ALL_STANDINGS and SEARCH
+    //   this.SET_FILTER(
+    //     this.ALL_STANDINGS.filter(standing => {
+    //       return (
+    //         !this.GET_SEARCH || standing.Driver.driverId.match(this.GET_SEARCH)
+    //       );
+    //     })
+    //   );
     search: function() {
       // set SEARCH to input
       this.$store.commit("SET_SEARCH", this.searchQuery);
-      // FILTER ALL_STANDINGS by input
-      this.FILTER_SEARCH(
-        // filter ALL_STANDINGS ...
+      // return matches between ALL_STANDINGS and SEARCH
+      this.SET_FILTER(
         this.ALL_STANDINGS.filter(standing => {
-          // by SEARCH query
-          return standing.Driver.driverId.match(this.GET_SEARCH);
+          return (
+            !this.GET_SEARCH || this.FILTERED_STANDINGS,
+            console.log(typeof this.FILTERED_STANDINGS)
+          );
         })
       );
     }

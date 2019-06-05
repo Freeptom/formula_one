@@ -19,7 +19,7 @@ const getters = {
 const mutations = {
   SET_STANDINGS: (state, standings) => (state.standings = standings),
   SET_SEARCH: (state, search) => (state.search = search),
-  FILTER_SEARCH: (state, filter) => (state.standings = filter),
+  SET_FILTER: (state, filter) => (state.filter = filter),
   RESET_STANDINGS: (state, standings) => (state.filter = standings),
 
 };
