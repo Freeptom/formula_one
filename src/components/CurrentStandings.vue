@@ -8,12 +8,7 @@
     <div>
       <h3>Current Standings</h3>
 
-      <input
-        type="text"
-        v-model="searchQuery"
-        v-on:input="filterStandings"
-        placeholder="search driver"
-      >
+      <input type="text" v-model="searchQuery" @input="filterStandings" placeholder="search driver">
       <table class="standings">
         <thead>
           <th>Position</th>
@@ -24,7 +19,7 @@
           <th>Points</th>
         </thead>
         <tbody>
-          <tr v-for="standing in GET_STANDINGS" :key="standing.position" class="standing">
+          <tr v-for="standing in filteredStandings" :key="standing.position" class="standing">
             <td>{{standing.position }}</td>
             <td>{{standing.Driver.driverId | last-name | to-title-case}}</td>
             <td>{{standing.Driver.nationality | to-title-case}}</td>
@@ -47,8 +42,7 @@ export default {
 
   data() {
     return {
-      searchQuery: "",
-      drivers: []
+      searchQuery: ""
     };
   },
 
@@ -56,58 +50,21 @@ export default {
     this.fetchStandings();
   },
 
-  mounted() {
-    this.drivers = this.GET_STANDINGS;
-  },
-
   computed: {
-    ...mapState(["standings", "filter"]),
-    ...mapGetters(["GET_STANDINGS", "GET_SEARCH", "FILTERED_STANDINGS"])
+    ...mapState(["standings", "search", "filter"]),
+    ...mapGetters(["filteredStandings"])
   },
 
   methods: {
     ...mapActions(["fetchStandings"]),
-    ...mapMutations(["SET_SEARCH", "SET_FILTER"]),
+    ...mapMutations(["SET_SEARCH"]),
 
     filterStandings() {
       this.$store.commit("SET_SEARCH", this.searchQuery);
-      console.log(this.GET_SEARCH);
-      this.SET_FILTER(
-        this.GET_STANDINGS.filter(standing => {
-          console.log(standing.Driver.driverId.match(this.GET_SEARCH));
-          let driver = standing.Driver.driverId.match(this.GET_SEARCH);
-          return driver;
-        })
-        // this.FILTERED_STANDINGS(
-        // this.FILTERED_STANDINGS = GET_STANDINGS,
-        // return this.FILTERED_STANDINGS
-        // )
-      );
     }
-
-    // filterStandings() {
-    //   console.log(this.GET_STANDINGS);
-    //   this.$store.commit("SET_SEARCH", this.searchQuery);
-    //   console.log(this.GET_SEARCH);
-    //   this.SET_FILTER(
-    //     this.drivers.filter(standing => {
-    //       return (
-    //         !this.searchQuery ||
-    //         console.log(standing.Driver.driverId.match(this.searchQuery))
-    //       );
-    //     })
-    //   );
-    // }
   }
 };
 </script>
-
-
-
-
-
-
-
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
