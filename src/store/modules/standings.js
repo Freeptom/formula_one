@@ -15,6 +15,7 @@ const getters = {
 const mutations = {
   SET_STANDINGS: (state, standings) => (state.standings = standings),
   SET_SEARCH: (state, search) => (state.search = search),
+
 };
 
 const actions = {
