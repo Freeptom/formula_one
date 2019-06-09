@@ -52,7 +52,7 @@ export default {
 
   computed: {
     ...mapState(["standings", "search", "filter"]),
-    ...mapGetters(["filteredStandings"])
+    ...mapGetters(["filteredStandings", "sortedFilteredStandings"])
   },
 
   methods: {
