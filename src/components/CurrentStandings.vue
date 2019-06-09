@@ -8,6 +8,16 @@
     <div>
       <h3>Current Standings</h3>
 
+      <!-- <button @click="sortBy('message')">click</button>
+      <table>
+        <tbody>
+          <tr v-for="item in items">
+            <td>{{item.message }}</td>
+          </tr>
+        </tbody>
+      </table>-->
+      <button @click="sortBy('position')">click</button>
+
       <input type="text" v-model="searchQuery" @input="filterStandings" placeholder="search driver">
       <table class="standings">
         <thead>
@@ -42,7 +52,8 @@ export default {
 
   data() {
     return {
-      searchQuery: ""
+      searchQuery: "",
+      items: [{ message: "Foo" }, { message: "Bar" }]
     };
   },
 
@@ -52,15 +63,22 @@ export default {
 
   computed: {
     ...mapState(["standings", "search", "filter"]),
-    ...mapGetters(["filteredStandings", "sortedFilteredStandings"])
+    ...mapGetters(["filteredStandings"])
   },
 
   methods: {
     ...mapActions(["fetchStandings"]),
-    ...mapMutations(["SET_SEARCH"]),
+    ...mapMutations(["set_search"]),
 
     filterStandings() {
-      this.$store.commit("SET_SEARCH", this.searchQuery);
+      this.$store.commit("set_search", this.searchQuery);
+    },
+    sortBy(prop) {
+      this.filteredStandings.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
+      console.log(
+        this.filteredStandings[0].position,
+        this.filteredStandings[0].prop
+      );
     }
   }
 };
