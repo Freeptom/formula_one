@@ -17,8 +17,12 @@
         </tbody>
       </table>-->
       <button @click="sortBy('position')">click</button>
-
-      <input type="text" v-model="searchQuery" @input="filterStandings" placeholder="search driver">
+      <input
+        type="text"
+        :value="standings.search"
+        @input="filterStandings"
+        placeholder="search driver"
+      >
       <table class="standings">
         <thead>
           <th>Position</th>
@@ -52,7 +56,6 @@ export default {
 
   data() {
     return {
-      searchQuery: "",
       items: [{ message: "Foo" }, { message: "Bar" }]
     };
   },
@@ -62,7 +65,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["standings", "search", "filter"]),
+    ...mapState(["standings"]),
     ...mapGetters(["filteredStandings"])
   },
 
@@ -70,15 +73,12 @@ export default {
     ...mapActions(["fetchStandings"]),
     ...mapMutations(["set_search"]),
 
-    filterStandings() {
-      this.$store.commit("set_search", this.searchQuery);
+    filterStandings({ type, target }) {
+      this.$store.commit("set_search", target.value);
     },
     sortBy(prop) {
       this.filteredStandings.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
-      console.log(
-        this.filteredStandings[0].position,
-        this.filteredStandings[0].prop
-      );
+      console.log(this.filteredStandings[0][prop]);
     }
   }
 };

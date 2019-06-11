@@ -8,14 +8,13 @@ const state = {
 
 const getters = {
   /* eslint no-shadow: ["error", { "allow": ["state"] }] */
-  filteredStandings: state => state.standings.filter(standing => standing.Driver.driverId.match(state.search)),
+  filteredStandings: state => state.standings.filter(standing => standing.Driver.driverId.toLowerCase().includes(state.search.toLowerCase()),),
   sortedFilteredStandings: (state, getters) => getters.filteredStandings.sort((a, b) => a - b),
 };
 
 const mutations = {
   set_standings: (state, standings) => (state.standings = standings),
   set_search: (state, search) => (state.search = search),
-
 };
 
 const actions = {
