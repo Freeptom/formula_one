@@ -8,15 +8,6 @@
     <div>
       <h3>Current Standings</h3>
 
-      <!-- <button @click="sortBy('message')">click</button>
-      <table>
-        <tbody>
-          <tr v-for="item in items">
-            <td>{{item.message }}</td>
-          </tr>
-        </tbody>
-      </table>-->
-      <button @click="sortBy('position')">click</button>
       <input
         type="text"
         :value="standings.search"
@@ -25,7 +16,25 @@
       >
       <table class="standings">
         <thead>
-          <th>Position</th>
+          <th @click="sortBy('position')">
+            Position
+            <!-- <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#000000"
+                stroke-width="3"
+                stroke-linecap="square"
+                stroke-linejoin="arcs"
+              >
+                <path d="M6 9l6 6 6-6"></path>
+              </svg>
+            </span>-->
+          </th>
+
           <th>Driver Name</th>
           <th>Nationality</th>
           <th>Team</th>
@@ -77,14 +86,14 @@ export default {
       this.$store.commit("set_search", target.value);
     },
     sortBy(prop) {
-      this.filteredStandings.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
-      console.log(this.filteredStandings[0][prop]);
+      // let sort = this.filteredStandings.sort((a, b) => b[prop] - a[prop]);
+      let sort = this.filteredStandings.reverse();
+      this.$store.commit("set_standings", sort);
     }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .fade-enter {
   opacity: 0;
