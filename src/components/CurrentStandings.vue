@@ -18,21 +18,21 @@
         <thead>
           <th @click="sortBy('position')">
             Position
-            <!-- <span>
+            <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#000000"
+                stroke="grey"
                 stroke-width="3"
                 stroke-linecap="square"
                 stroke-linejoin="arcs"
               >
                 <path d="M6 9l6 6 6-6"></path>
               </svg>
-            </span>-->
+            </span>
           </th>
 
           <th>Driver Name</th>
