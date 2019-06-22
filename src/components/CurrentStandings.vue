@@ -38,7 +38,7 @@
         <tbody>
           <tr v-for="standing in filteredStandings" :key="standing.position" class="standing">
             <td>{{standing.position }}</td>
-            <td>{{standing.Driver.driverId | last-name | to-title-case}}</td>
+            <td>{{standing.Driver.familyName | to-title-case}}</td>
             <td>{{standing.Driver.nationality | to-title-case}}</td>
             <td>{{standing.Constructors[0].constructorId | to-title-case}}</td>
             <td>{{standing.wins }}</td>
