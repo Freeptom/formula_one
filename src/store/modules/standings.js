@@ -11,6 +11,7 @@ const getters = {
   filteredStandings: state => state.standings.filter(standing => standing.Driver.driverId.toLowerCase().includes(state.search.toLowerCase())),
 };
 
+
 const mutations = {
   set_standings: (state, standings) => (state.standings = standings),
   set_search: (state, search) => (state.search = search),

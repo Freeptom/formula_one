@@ -16,23 +16,17 @@
       >
       <table class="standings">
         <thead>
-          <th @click="sortBy('position')">
+          <th @click="sortBy('position'); flipIcon()">
             Position
-            <!-- <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#000000"
-                stroke-width="3"
-                stroke-linecap="square"
-                stroke-linejoin="arcs"
+            <span>
+              <img
+                v-if="flip"
+                class="icon-arrow"
+                src="../assets/chevron-down.svg"
+                alt="chevron-down"
               >
-                <path d="M6 9l6 6 6-6"></path>
-              </svg>
-            </span>-->
+              <img v-else class="icon-arrow" src="../assets/chevron-up.svg" alt="chevron-up">
+            </span>
           </th>
 
           <th>Driver Name</th>
@@ -65,7 +59,7 @@ export default {
 
   data() {
     return {
-      items: [{ message: "Foo" }, { message: "Bar" }]
+      flip: true
     };
   },
 
@@ -82,11 +76,14 @@ export default {
     ...mapActions(["fetchStandings"]),
     ...mapMutations(["set_search"]),
 
+    flipIcon() {
+      this.flip = !this.flip;
+    },
+
     filterStandings({ type, target }) {
       this.$store.commit("set_search", target.value);
     },
     sortBy(prop) {
-      // let sort = this.filteredStandings.sort((a, b) => b[prop] - a[prop]);
       let sort = this.filteredStandings.reverse();
       this.$store.commit("set_standings", sort);
     }

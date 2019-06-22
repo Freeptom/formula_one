@@ -1,4 +1,7 @@
 table {
+  // display: flex;
+  // flex-direction: column;
+
   border-collapse: collapse;
   font-size: 1.25rem;
   background-color: $surface;
@@ -15,11 +18,11 @@ table {
   th {
     padding: 20px 50px;
     text-align: left;
+    cursor: pointer;
   }
   td {
     padding: 15px 50px;
     text-align: left;
-    cursor: pointer;
     color: $bodyText;
     background-color: $surface;
   }
