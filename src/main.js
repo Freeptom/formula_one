@@ -14,11 +14,11 @@ Vue.filter('last-name', (value) => {
 Vue.filter('to-uppercase', value => value.charAt(0).toUpperCase() + value.slice(1)); //
 
 Vue.filter('to-title-case', value => value
-    .replace(/_/gi, ' ')
-    .toLowerCase()
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' '),);
+  .replace(/_/gi, ' ')
+  .toLowerCase()
+  .split(' ')
+  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' '));
 
 new Vue({
   store,

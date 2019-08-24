@@ -7,15 +7,13 @@ const state = {
 };
 
 const getters = {
-  /* eslint no-shadow: ["error", { "allow": ["state"] }] */
-  // filteredStandings: state => state.standings.filter(standing => standing.Driver.driverId.toLowerCase().includes(state.search.toLowerCase()),),
-  filteredStandings: state => state.standings.filter(standing => standing.Driver.familyName.toLowerCase().includes(state.search.toLowerCase()),),
+  filteredStandings: state => state.standings.filter(standing => standing.Driver.familyName.toLowerCase().includes(state.search.toLowerCase())),
 };
 
 
 const mutations = {
   set_standings: (state, standings) => (state.standings = standings),
-  // set_standings: (state, standings) => (state.standings = standings.split("_").pop()), // object so won't work!
+
   set_search: (state, search) => (state.search = search),
 };
 
