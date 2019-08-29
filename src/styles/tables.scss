@@ -1,31 +1,30 @@
-table {
-  border-collapse: collapse;
-  font-size: 1.25rem;
-  background-color: white;
-  border-radius: 10px;
+table.standings {
   overflow: hidden;
-  position: relative;
-  font-size: 1rem;
-
-  thead {
-    color: $gray4;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.02rem;
-  }
+  border-collapse: collapse;
+  max-width: 800px;
   th {
-    padding: 20px 20px;
+    padding: 20px;
+    color: white;
+    background-color: #6c7ae0;
     text-align: left;
-    cursor: pointer;
+    &.number {
+      text-align: right;
+      padding: 10px 40px 10px 0px;
+      &:first-of-type {
+        padding: 10px 10px 10px 10px;
+      }
+    }
   }
   td {
-    padding: 15px 20px;
+    color: $black;
     text-align: left;
-    color: $gray4;
-    background-color: white;
-    width: auto;
-  }
-  .number {
-    text-align: right;
+    padding: 10px 20px 10px 20px;
+    &.number {
+      text-align: right;
+      padding: 10px 40px 10px 0px;
+      &:first-of-type {
+        padding: 10px 10px 10px 10px;
+      }
+    }
   }
 }

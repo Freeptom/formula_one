@@ -1,3 +1,14 @@
+body {
+  background: $gray1;
+}
+
+#app {
+  height: 100%;
+  background: $gray1;
+
+  margin: 0 auto;
+}
+
 .icon-arrow {
   padding: 0 0 0 2px;
   position: relative;
@@ -8,24 +19,25 @@
   fill: $gray4;
 }
 
-#app {
-  background: $gray1;
-}
-
 h3 {
   margin: 0;
-  text-align: left;
   color: $black;
 }
 .module {
+  max-width: 800px;
+  margin: 4rem auto 4rem auto;
+  border-radius: 10px;
+  background: white;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgb(0, 0, 0, 0);
   .module-header {
+    padding: 2rem 0 1rem 2rem;
     text-align: left;
-    margin: 2rem 1rem 1rem 0;
+    background-color: #6c7ae0;
+    border-radius: 10px 10px 0 0;
     .module-heading {
+      color: white;
       display: inline;
       margin: 0 1rem 0 0;
     }
@@ -33,4 +45,10 @@ h3 {
 }
 
 .search {
+  background: $gray2;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: $black;
 }

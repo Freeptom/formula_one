@@ -1,55 +1,42 @@
 <template>
-  <transition
-    appear
-    appear-class="fade-enter"
-    appear-to-class="fade-enter-to"
-    appear-active-class="fade-enter-active"
-  >
-    <div class="module">
-      <div class="module-header">
-        <h3 class="module-heading">Current Standings</h3>
-        <input
-          type="text"
-          :value="standings.search"
-          @input="filterStandings"
-          placeholder="search driver"
-          class="search"
-        />
-      </div>
-      <table class="standings">
-        <thead>
-          <th @click="sortBy('position'); flipIcon()" class="number">
-            Pos
-            <span>
-              <img
-                v-if="flip"
-                class="icon-arrow"
-                src="../assets/chevron-down.svg"
-                alt="chevron-down"
-              />
-              <img v-else class="icon-arrow" src="../assets/chevron-up.svg" alt="chevron-up" />
-            </span>
-          </th>
-
-          <th>Driver</th>
-          <th>Nat</th>
-          <th>Team</th>
-          <th class="number">Wins</th>
-          <th class="number">Pts</th>
-        </thead>
-        <tbody>
-          <tr v-for="standing in filteredStandings" :key="standing.position" class="standing">
-            <td class="number">{{standing.position }}</td>
-            <td>{{standing.Driver.familyName | to-title-case}}</td>
-            <td>{{standing.Driver.nationality | to-title-case}}</td>
-            <td>{{standing.Constructors[0].constructorId | to-title-case}}</td>
-            <td class="number">{{standing.wins }}</td>
-            <td class="number">{{standing.points}}</td>
-          </tr>
-        </tbody>
-      </table>
+  <section class="module">
+    <div class="module-header">
+      <h3 class="module-heading">Current Standings</h3>
+      <input
+        type="text"
+        :value="standings.search"
+        @input="filterStandings"
+        placeholder="search driver"
+        class="search"
+      />
     </div>
-  </transition>
+    <table class="standings">
+      <thead>
+        <th @click="sortBy('position'); flipIcon()" class="number">
+          Pos
+          <span>
+            <img v-if="flip" class="icon-arrow" src="../assets/chevron-down.svg" alt="chevron-down" />
+            <img v-else class="icon-arrow" src="../assets/chevron-up.svg" alt="chevron-up" />
+          </span>
+        </th>
+        <th>Driver</th>
+        <th>Nat</th>
+        <th>Team</th>
+        <th class="number">Wins</th>
+        <th class="number">Pts</th>
+      </thead>
+      <tbody>
+        <tr v-for="standing in filteredStandings" :key="standing.position" class="standing">
+          <td class="number">{{standing.position }}</td>
+          <td>{{standing.Driver.familyName | to-title-case}}</td>
+          <td>{{standing.Driver.nationality | to-title-case}}</td>
+          <td>{{standing.Constructors[0].constructorId | to-title-case}}</td>
+          <td class="number">{{standing.wins }}</td>
+          <td class="number">{{standing.points}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 </template>
 
 <script>
