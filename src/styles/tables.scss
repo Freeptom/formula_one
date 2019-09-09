@@ -7,6 +7,9 @@ table.standings {
     color: white;
     background-color: #6c7ae0;
     text-align: left;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 1px;
     &.number {
       text-align: right;
       padding: 10px 40px 10px 0px;

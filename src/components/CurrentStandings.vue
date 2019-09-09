@@ -6,17 +6,30 @@
         type="text"
         :value="standings.search"
         @input="filterStandings"
-        placeholder="search driver"
+        placeholder="Search Driver"
         class="search"
       />
     </div>
     <table class="standings">
       <thead>
-        <th @click="sortBy('position'); flipIcon()" class="number">
+        <th
+          @click="sortBy('position'); flipIcon()"
+          class="number"
+        >
           Pos
           <span>
-            <img v-if="flip" class="icon-arrow" src="../assets/chevron-down.svg" alt="chevron-down" />
-            <img v-else class="icon-arrow" src="../assets/chevron-up.svg" alt="chevron-up" />
+            <img
+              v-if="flip"
+              class="icon-arrow"
+              src="../assets/chevron-down.svg"
+              alt="chevron-down"
+            />
+            <img
+              v-else
+              class="icon-arrow"
+              src="../assets/chevron-up.svg"
+              alt="chevron-up"
+            />
           </span>
         </th>
         <th>Driver</th>
@@ -26,7 +39,11 @@
         <th class="number">Pts</th>
       </thead>
       <tbody>
-        <tr v-for="standing in filteredStandings" :key="standing.position" class="standing">
+        <tr
+          v-for="standing in filteredStandings"
+          :key="standing.position"
+          class="standing"
+        >
           <td class="number">{{standing.position }}</td>
           <td>{{standing.Driver.familyName | to-title-case}}</td>
           <td>{{standing.Driver.nationality | to-title-case}}</td>
@@ -40,15 +57,15 @@
 </template>
 
 <script>
-import styles from "../styles/styles.scss";
 import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
+import styles from "../styles/styles.scss";
 
 export default {
-  name: "CurrentStandings",
+  name: 'CurrentStandings',
 
   data() {
     return {
-      flip: true
+      flip: true,
     };
   },
 
@@ -57,26 +74,26 @@ export default {
   },
 
   computed: {
-    ...mapState(["standings"]),
-    ...mapGetters(["filteredStandings"])
+    ...mapState(['standings']),
+    ...mapGetters(['filteredStandings']),
   },
 
   methods: {
-    ...mapActions(["fetchStandings"]),
-    ...mapMutations(["set_search"]),
+    ...mapActions(['fetchStandings']),
+    ...mapMutations(['set_search']),
 
     flipIcon() {
       this.flip = !this.flip;
     },
 
     filterStandings({ type, target }) {
-      this.$store.commit("set_search", target.value);
+      this.$store.commit('set_search', target.value);
     },
     sortBy(prop) {
-      let sort = this.filteredStandings.reverse();
-      this.$store.commit("set_standings", sort);
-    }
-  }
+      const sort = this.filteredStandings.reverse();
+      this.$store.commit('set_standings', sort);
+    },
+  },
 };
 </script>
 
@@ -91,6 +108,3 @@ export default {
   opacity: 1;
 }
 </style>
-
-
- 
