@@ -2,37 +2,40 @@
   <section class="module">
     <div class="module-header">
       <h3 class="module-heading">Race Calendar</h3>
+    </div>
+    <div class="current-month">
+      <div @click="subtractMonth">
+        <
+          </div>
+          <h4
+        >{{month + ' - ' + year}}</h4>
+          <div @click="addMonth">></div>
 
-      <div class="calendar">
-        <div @click="subtractMonth">
-          <
-            </div>
-            <h4
-          >{{month + ' - ' + year}}</h4>
-            <div @click="addMonth">></div>
-        </div>
       </div>
-      <ul class="weekdays">
+
+      <ol class="weekdays">
         <li v-for="day in days">
           {{day}}
         </li>
-      </ul>
-      <ul class="dates">
+      </ol>
+
+      <ol class="dates">
         <li v-for="blank in firstDayOfMonth">&nbsp;</li>
         {{blank}}
         <li
           v-for="date in daysInMonth"
           :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}"
-        >;
+        >
           <span>{{date}}</span>
         </li>
-      </ul>
+      </ol>
+
   </section>
 </template>
 
 <script>
 import {
-  mapState, mapGetters, mapActions, mapMutations,
+  mapState, mapGetters, mapActions, mapMutations, around,
 } from 'vuex';
 import moment from 'moment';
 import styles from '../styles/styles.scss';
@@ -41,7 +44,7 @@ import styles from '../styles/styles.scss';
 export default {
   name: 'RaceCalendar',
 
-  data () {
+  data() {
     return {
       today: moment(),
       dateContext: moment(),
@@ -49,45 +52,45 @@ export default {
     };
   },
 
-  created () {
+  created() {
     this.fetchRaces();
   },
 
   computed: {
     ...mapState(['races']),
     // view items
-    year () {
+    year() {
       const t = this;
       return t.dateContext.format('Y');
     },
-    month () {
+    month() {
       const t = this;
       return t.dateContext.format('MMMM');
     },
     // work out month info
-    daysInMonth () {
+    daysInMonth() {
       const t = this;
       return t.dateContext.daysInMonth();
     },
-    currentDate () {
+    currentDate() {
       const t = this;
       return t.dateContext.get('date');
     },
-    firstDayOfMonth () {
+    firstDayOfMonth() {
       const t = this;
       const firstDay = moment(t.dateContext).subtract((t.currentDate - 1), 'days');
       return firstDay.weekday();
     },
     // set init
-    initialDate () {
+    initialDate() {
       const t = this;
       return t.today.get('date');
     },
-    initialMonth () {
+    initialMonth() {
       const t = this;
       return t.today.format('MMMM');
     },
-    initialYear () {
+    initialYear() {
       const t = this;
       return t.today.format('Y');
     },
@@ -95,11 +98,11 @@ export default {
 
   methods: {
     ...mapActions(['fetchRaces']),
-    addMonth () {
+    addMonth() {
       const t = this;
       t.dateContext = moment(t.dateContext).add(1, 'month');
     },
-    subtractMonth () {
+    subtractMonth() {
       const t = this;
       t.dateContext = moment(t.dateContext).subtract(1, 'month');
     },
@@ -119,15 +122,35 @@ export default {
   opacity: 1;
 }
 .dates, .weekdays {
-  
+
 }
-.weekdays {
+.weekdays, .dates {
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   li {
     list-style-type: none;
+  }
+}
+
+.dates {
+  list-style: none;
+}
+
+.current-month {
+  background-color: #6c7ae0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30rem 2rem 2rem;
+  align-content: center;
+  color: white;
+  h4 {
+    margin: 0;
+     text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: white;
   }
 }
 
