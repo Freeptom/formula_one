@@ -1,0 +1,32 @@
+@import "../mixins/drop-shadows.scss";
+
+.module {
+  max-width: 800px;
+  margin: 4rem auto 4rem auto;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  @include box_shadow(1);
+  .module-header {
+    padding: 2rem 0 1rem 2rem;
+    text-align: left;
+
+    border-radius: 10px 10px 0 0;
+    .module-heading {
+      color: $gray4;
+      font-weight: 700;
+      display: inline;
+      margin: 0 1rem 0 0;
+    }
+  }
+}
+
+.search {
+  background: $gray2;
+  border: none;
+  padding: 0.4rem;
+  border-radius: 3px;
+  font-size: 1rem;
+  color: $black;
+}

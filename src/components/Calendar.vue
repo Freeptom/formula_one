@@ -105,6 +105,7 @@ export default {
 
 <style scoped lang="scss">
 @import "@/styles/variables/colors.scss";
+@import "../mixins/drop-shadows.scss";
 .fade-enter {
   opacity: 0;
 }
@@ -171,7 +172,9 @@ export default {
   position: relative;
   z-index: 1;
   color: white;
+
   &::before {
+    @include box_shadow(2);
     content: "";
     position: absolute;
     height: 50px;
