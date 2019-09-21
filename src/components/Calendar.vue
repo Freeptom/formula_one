@@ -130,7 +130,7 @@ export default {
 }
 
 .weekdays {
-  margin: 0 2rem 2rem 2rem;
+  margin: 0 2rem 1rem 2rem;
   position: relative;
   z-index: 1;
   &:before {
@@ -147,7 +147,8 @@ export default {
 .dates {
   list-style: none;
   li {
-    margin: 0 0 2rem 0;
+    align-items: center;
+    margin: 2rem auto 2rem auto;
   }
 }
 
@@ -167,6 +168,21 @@ export default {
 }
 
 .current-day {
-  color: red;
+  position: relative;
+  z-index: 1;
+  color: white;
+  &::before {
+    content: "";
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 50%;
+    left: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+    border-radius: 50%;
+    background: linear-gradient(-45deg, #00d2ff 0%, #3a47d5 100%);
+    z-index: -1;
+  }
 }
 </style>
