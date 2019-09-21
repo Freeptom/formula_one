@@ -4,51 +4,41 @@
       <h3 class="module-heading">Race Calendar</h3>
     </div>
     <div class="current-month">
-      <div @click="subtractMonth">
-        <
-          </div>
-          <h4
-        >{{month + ' - ' + year}}</h4>
-          <div @click="addMonth">></div>
+      <div @click="subtractMonth"><-</div>
+      <h4>{{month + ' - ' + year}}</h4>
+      <div @click="addMonth">-></div>
+    </div>
 
-      </div>
+    <ol class="weekdays">
+      <li v-for="day in days" class="weekday">{{day}}</li>
+    </ol>
 
-      <ol class="weekdays">
-        <li v-for="day in days">
-          {{day}}
-        </li>
-      </ol>
-
-      <ol class="dates">
-        <li v-for="blank in firstDayOfMonth">&nbsp;</li>
-        {{blank}}
-        <li
-          v-for="date in daysInMonth"
-          :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}"
-        >
-          <span>{{date}}</span>
-        </li>
-      </ol>
-
+    <ol class="dates">
+      <li v-for="blank in firstDayOfMonth">&nbsp;</li>
+      {{blank}}
+      <li
+        v-for="date in daysInMonth"
+        :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}"
+      >
+        <span>{{date}}</span>
+      </li>
+    </ol>
   </section>
 </template>
 
 <script>
-import {
-  mapState, mapGetters, mapActions, mapMutations, around,
-} from 'vuex';
-import moment from 'moment';
-import styles from '../styles/styles.scss';
-
+import { mapState, mapGetters, mapActions, mapMutations, around } from "vuex";
+import moment from "moment";
+import styles from "../styles/styles.scss";
 
 export default {
-  name: 'RaceCalendar',
+  name: "RaceCalendar",
 
   data() {
     return {
       today: moment(),
       dateContext: moment(),
-      days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+      days: ["S", "M", "T", "W", "T", "F", "S"]
     };
   },
 
@@ -57,15 +47,15 @@ export default {
   },
 
   computed: {
-    ...mapState(['races']),
+    ...mapState(["races"]),
     // view items
     year() {
       const t = this;
-      return t.dateContext.format('Y');
+      return t.dateContext.format("Y");
     },
     month() {
       const t = this;
-      return t.dateContext.format('MMMM');
+      return t.dateContext.format("MMMM");
     },
     // work out month info
     daysInMonth() {
@@ -74,44 +64,47 @@ export default {
     },
     currentDate() {
       const t = this;
-      return t.dateContext.get('date');
+      return t.dateContext.get("date");
     },
     firstDayOfMonth() {
       const t = this;
-      const firstDay = moment(t.dateContext).subtract((t.currentDate - 1), 'days');
+      const firstDay = moment(t.dateContext).subtract(
+        t.currentDate - 1,
+        "days"
+      );
       return firstDay.weekday();
     },
     // set init
     initialDate() {
       const t = this;
-      return t.today.get('date');
+      return t.today.get("date");
     },
     initialMonth() {
       const t = this;
-      return t.today.format('MMMM');
+      return t.today.format("MMMM");
     },
     initialYear() {
       const t = this;
-      return t.today.format('Y');
-    },
+      return t.today.format("Y");
+    }
   },
 
   methods: {
-    ...mapActions(['fetchRaces']),
+    ...mapActions(["fetchRaces"]),
     addMonth() {
       const t = this;
-      t.dateContext = moment(t.dateContext).add(1, 'month');
+      t.dateContext = moment(t.dateContext).add(1, "month");
     },
     subtractMonth() {
       const t = this;
-      t.dateContext = moment(t.dateContext).subtract(1, 'month');
-    },
-
-  },
+      t.dateContext = moment(t.dateContext).subtract(1, "month");
+    }
+  }
 };
 </script>
 
 <style scoped lang="scss">
+@import "@/styles/variables/colors.scss";
 .fade-enter {
   opacity: 0;
 }
@@ -121,13 +114,11 @@ export default {
 .fade-enter-to {
   opacity: 1;
 }
-.dates, .weekdays {
-
-}
-.weekdays, .dates {
-  margin: 0;
+.weekdays,
+.dates {
   padding: 0;
   display: grid;
+  justify-content: space-between;
   grid-template-columns: repeat(7, 1fr);
   li {
     list-style-type: none;
@@ -135,24 +126,47 @@ export default {
 }
 
 .dates {
+  margin: 0 2rem;
+}
+
+.weekdays {
+  margin: 0 2rem 2rem 2rem;
+  position: relative;
+  z-index: 1;
+  &:before {
+    content: "";
+    position: absolute;
+    left: 5%;
+    top: 30px;
+    height: 1px;
+    width: 90%; /* or 100px */
+    border-bottom: 1px solid rgba(221, 226, 229, 0.4);
+  }
+}
+
+.dates {
   list-style: none;
+  li {
+    margin: 0 0 2rem 0;
+  }
 }
 
 .current-month {
-  background-color: #6c7ae0;
   display: flex;
   justify-content: space-between;
   padding: 0 30rem 2rem 2rem;
   align-content: center;
-  color: white;
+  color: $gray4;
   h4 {
     margin: 0;
-     text-transform: uppercase;
+    text-transform: uppercase;
     font-weight: 400;
     letter-spacing: 1px;
-    color: white;
+    color: $gray4;
   }
 }
 
-
+.current-day {
+  color: red;
+}
 </style>
