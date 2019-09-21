@@ -3,7 +3,7 @@ table.standings {
   border-collapse: collapse;
   max-width: 800px;
   th {
-    padding: 20px;
+    padding: 1rem;
     color: $gray4;
     text-align: left;
     text-transform: uppercase;
@@ -11,22 +11,26 @@ table.standings {
     letter-spacing: 1px;
     &.number {
       text-align: right;
-      padding: 10px 40px 10px 0px;
+      padding: 0.5rem 2.5rem 0.5rem 0px;
       &:first-of-type {
-        padding: 10px 10px 10px 10px;
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
       }
     }
   }
   td {
     color: $black;
     text-align: left;
-    padding: 10px 20px 10px 20px;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     &.number {
+      position: relative;
       text-align: right;
-      padding: 10px 40px 10px 0px;
+      padding: 0.5rem 2.5rem 0.5rem 0px;
       &:first-of-type {
-        padding: 10px 10px 10px 10px;
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
       }
+    }
+    &:last-of-type {
+      margin-bottom: 20px;
     }
   }
 }
