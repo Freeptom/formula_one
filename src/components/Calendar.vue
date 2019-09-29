@@ -3,6 +3,7 @@
     <div class="module-header">
       <h3 class="module-heading">Race Calendar</h3>
     </div>
+
     <div class="current-month">
       <div @click="subtractMonth"><-</div>
       <h4>{{month + ' - ' + year}}</h4>
@@ -10,15 +11,17 @@
     </div>
 
     <div class="calendar">
+      <!-- <h1>{{raceDates}}</h1> -->
       <ol class="weekdays">
         <li v-for="day in days" class="weekday">{{day}}</li>
       </ol>
 
       <ol class="dates">
-        <li v-for="blank in firstDayOfMonth">&nbsp;</li>
-        {{blank}}
+        <li v-for="empty in firstDayOfMonth">&nbsp;</li>
+        {{empty}}
         <li
           v-for="date in daysInMonth"
+          @mouseover="getFullDate(date)"
           :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}"
         >
           <span>{{date}}</span>
@@ -38,6 +41,7 @@ export default {
 
   data() {
     return {
+      empty: null,
       today: moment(),
       dateContext: moment(),
       days: ["S", "M", "T", "W", "T", "F", "S"]
@@ -47,9 +51,13 @@ export default {
   created() {
     this.fetchRaces();
   },
+  // mounted() {
+  //   this.convertRaceDay();
+  // },
 
   computed: {
-    ...mapState(["races"]),
+    ...mapGetters(["races", "raceDates"]),
+
     // view items
     year() {
       const t = this;
@@ -59,7 +67,8 @@ export default {
       const t = this;
       return t.dateContext.format("MMMM");
     },
-    // work out month info
+
+    // work out info for each month
     daysInMonth() {
       const t = this;
       return t.dateContext.daysInMonth();
@@ -76,6 +85,7 @@ export default {
       );
       return firstDay.weekday();
     },
+
     // set init
     initialDate() {
       const t = this;
@@ -93,6 +103,29 @@ export default {
 
   methods: {
     ...mapActions(["fetchRaces"]),
+
+    compareDates(date) {
+      // console.log(
+      //   `clicked ${date} is same as ${this.raceDates}?` +
+      //     moment(this.raceDates).isSame(date)
+      // );
+    },
+    // api formatting
+    getFullDate(clickedDate) {
+      const fullDateString = `${clickedDate} ${this.month} ${this.year}`;
+      const selMonth = moment()
+        .month(this.month)
+        .format("MM");
+
+      const selYear = moment()
+        .month(this.year)
+        .format("Y");
+      const selDay = clickedDate;
+      const buildDate = `${selYear}-${selMonth}-${selDay}`;
+      console.log(buildDate);
+    },
+
+    // calendar view
     addMonth() {
       const t = this;
       t.dateContext = moment(t.dateContext).add(1, "month");
@@ -128,9 +161,6 @@ export default {
   }
 }
 
-.dates {
-}
-
 .calendar {
   margin: 0 2rem 1rem 2rem;
   @media screen and (max-width: 900px) {
@@ -156,7 +186,6 @@ export default {
   list-style: none;
   li {
     align-items: center;
-
     margin: 2rem auto 2rem auto;
     @media screen and (max-width: 900px) {
       margin: 0 0.5rem 0.5rem 0.5rem;
@@ -183,7 +212,6 @@ export default {
   position: relative;
   z-index: 1;
   color: white;
-
   &::before {
     @include box_shadow(2);
     content: "";

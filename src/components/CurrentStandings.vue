@@ -10,13 +10,19 @@
         class="search"
       />
     </div>
+
     <table class="standings">
       <thead>
         <th class="limiter"></th>
         <th @click="sortBy('position'); flipIcon()" class="number">
           Pos
           <span>
-            <img v-if="flip" class="icon-arrow" src="../assets/chevron-down.svg" alt="chevron-down" />
+            <img
+              v-if="numericalOrder"
+              class="icon-arrow"
+              src="../assets/chevron-down.svg"
+              alt="chevron-down"
+            />
             <img v-else class="icon-arrow" src="../assets/chevron-up.svg" alt="chevron-up" />
           </span>
         </th>
@@ -54,7 +60,7 @@ export default {
 
   data() {
     return {
-      flip: true
+      numericalOrder: true
     };
   },
 
@@ -72,7 +78,7 @@ export default {
     ...mapMutations(["set_search"]),
 
     flipIcon() {
-      this.flip = !this.flip;
+      this.numericalOrder = !this.numericalOrder;
     },
 
     filterStandings({ type, target }) {
