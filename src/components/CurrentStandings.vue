@@ -12,6 +12,7 @@
     </div>
     <table class="standings">
       <thead>
+        <th class="limiter"></th>
         <th @click="sortBy('position'); flipIcon()" class="number">
           Pos
           <span>
@@ -24,15 +25,18 @@
         <th>Team</th>
         <th class="number">Wins</th>
         <th class="number">Pts</th>
+        <th class="limiter"></th>
       </thead>
       <tbody>
         <tr v-for="standing in filteredStandings" :key="standing.position" class="standing">
+          <td class="limiter"></td>
           <td class="number">{{standing.position }}</td>
           <td>{{standing.Driver.familyName | to-title-case}}</td>
           <td>{{standing.Driver.nationality | to-title-case}}</td>
           <td>{{standing.Constructors[0].constructorId | to-title-case}}</td>
           <td class="number">{{standing.wins }}</td>
           <td class="number">{{standing.points}}</td>
+          <td class="limiter"></td>
         </tr>
       </tbody>
     </table>

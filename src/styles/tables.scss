@@ -1,7 +1,11 @@
 table.standings {
+  width: 100%;
+  table-layout: fixed;
   overflow: hidden;
   border-collapse: collapse;
-  max-width: 800px;
+  @media screen and (max-width: 900px) {
+    font-size: 0.8rem;
+  }
   th {
     padding: 1rem;
     color: $gray4;
@@ -32,5 +36,14 @@ table.standings {
     &:last-of-type {
       margin-bottom: 20px;
     }
+  }
+}
+
+.limiter {
+  display: none;
+  padding: 0;
+  width: 5%;
+  @media screen and (min-width: 900px) {
+    display: table-cell;
   }
 }
