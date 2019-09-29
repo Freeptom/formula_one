@@ -21,7 +21,7 @@
           </span>
         </th>
         <th>Driver</th>
-        <th>Nat</th>
+        <th class="nat">Nat</th>
         <th>Team</th>
         <th class="number">Wins</th>
         <th class="number">Pts</th>
@@ -31,8 +31,10 @@
         <tr v-for="standing in filteredStandings" :key="standing.position" class="standing">
           <td class="limiter"></td>
           <td class="number">{{standing.position }}</td>
-          <td>{{standing.Driver.familyName | to-title-case}}</td>
-          <td>{{standing.Driver.nationality | to-title-case}}</td>
+          <td>
+            <strong>{{standing.Driver.familyName | to-uppercase | abrv}}</strong>
+          </td>
+          <td class="nat">{{standing.Driver.nationality | to-title-case}}</td>
           <td>{{standing.Constructors[0].constructorId | to-title-case}}</td>
           <td class="number">{{standing.wins }}</td>
           <td class="number">{{standing.points}}</td>

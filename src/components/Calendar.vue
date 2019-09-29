@@ -9,20 +9,22 @@
       <div @click="addMonth">-></div>
     </div>
 
-    <ol class="weekdays">
-      <li v-for="day in days" class="weekday">{{day}}</li>
-    </ol>
+    <div class="calendar">
+      <ol class="weekdays">
+        <li v-for="day in days" class="weekday">{{day}}</li>
+      </ol>
 
-    <ol class="dates">
-      <li v-for="blank in firstDayOfMonth">&nbsp;</li>
-      {{blank}}
-      <li
-        v-for="date in daysInMonth"
-        :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}"
-      >
-        <span>{{date}}</span>
-      </li>
-    </ol>
+      <ol class="dates">
+        <li v-for="blank in firstDayOfMonth">&nbsp;</li>
+        {{blank}}
+        <li
+          v-for="date in daysInMonth"
+          :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}"
+        >
+          <span>{{date}}</span>
+        </li>
+      </ol>
+    </div>
   </section>
 </template>
 
@@ -127,11 +129,16 @@ export default {
 }
 
 .dates {
-  margin: 0 2rem;
+}
+
+.calendar {
+  margin: 0 2rem 1rem 2rem;
+  @media screen and (max-width: 900px) {
+    margin: 0 1rem 1rem 1rem;
+  }
 }
 
 .weekdays {
-  margin: 0 2rem 1rem 2rem;
   position: relative;
   z-index: 1;
   &:before {
@@ -149,14 +156,18 @@ export default {
   list-style: none;
   li {
     align-items: center;
+
     margin: 2rem auto 2rem auto;
+    @media screen and (max-width: 900px) {
+      margin: 0 0.5rem 0.5rem 0.5rem;
+    }
   }
 }
 
 .current-month {
   display: flex;
   justify-content: space-between;
-  padding: 0 30rem 2rem 2rem;
+  padding: 0 2rem 2rem 2rem;
   align-content: center;
   color: $gray4;
   h4 {

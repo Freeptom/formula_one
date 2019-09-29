@@ -11,7 +11,10 @@ Vue.filter('last-name', (value) => {
   return splitString.pop();
 });
 
-Vue.filter('to-uppercase', value => value.charAt(0).toUpperCase() + value.slice(1)); //
+Vue.filter('abrv', value => value.slice(0, 3));
+
+Vue.filter('to-uppercase', value => value.toUpperCase());
+
 
 Vue.filter('to-title-case', value => value
   .replace(/_/gi, ' ')

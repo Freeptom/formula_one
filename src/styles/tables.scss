@@ -3,9 +3,7 @@ table.standings {
   table-layout: fixed;
   overflow: hidden;
   border-collapse: collapse;
-  @media screen and (max-width: 900px) {
-    font-size: 0.8rem;
-  }
+
   th {
     padding: 1rem;
     color: $gray4;
@@ -17,7 +15,7 @@ table.standings {
       text-align: right;
       padding: 0.5rem 2.5rem 0.5rem 0px;
       &:first-of-type {
-        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+        padding: 0.5rem;
       }
     }
   }
@@ -43,7 +41,23 @@ table.standings {
   display: none;
   padding: 0;
   width: 5%;
-  @media screen and (min-width: 900px) {
+  @media screen and (max-width: 900px) {
     display: table-cell;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  table.standings {
+    font-size: 0.825rem;
+    th,
+    th.number,
+    td,
+    td.number {
+      padding: 1rem 1rem 0.5rem 1rem;
+    }
+
+    .nat {
+      display: none;
+    }
   }
 }
