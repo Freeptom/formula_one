@@ -111,18 +111,24 @@ export default {
       // );
     },
     // api formatting
+
     getFullDate(clickedDate) {
       const fullDateString = `${clickedDate} ${this.month} ${this.year}`;
+      // new func 'buildDate
       const selMonth = moment()
         .month(this.month)
         .format("MM");
-
       const selYear = moment()
-        .month(this.year)
-        .format("Y");
+        .year(this.year)
+        .format("YYYY");
       const selDay = clickedDate;
       const buildDate = `${selYear}-${selMonth}-${selDay}`;
-      console.log(buildDate);
+      // compare (new func)
+      console.log(
+        `buildDate ${buildDate} is same as ${this.raceDates}?` +
+          " " +
+          moment(this.raceDates).isSame(buildDate)
+      );
     },
 
     // calendar view
