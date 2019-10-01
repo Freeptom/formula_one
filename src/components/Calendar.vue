@@ -44,7 +44,7 @@ import styles from '../styles/styles.scss';
 export default {
   name: 'RaceCalendar',
 
-  data () {
+  data() {
     return {
       empty: null,
       today: moment(),
@@ -53,7 +53,7 @@ export default {
     };
   },
 
-  created () {
+  created() {
     this.fetchRaces();
   },
   // mounted() {
@@ -64,25 +64,25 @@ export default {
     ...mapGetters(['races', 'raceDates']),
 
     // view items
-    year () {
+    year() {
       const t = this;
       return t.dateContext.format('Y');
     },
-    month () {
+    month() {
       const t = this;
       return t.dateContext.format('MMMM');
     },
 
     // work out info for each month
-    daysInMonth () {
+    daysInMonth() {
       const t = this;
       return t.dateContext.daysInMonth();
     },
-    currentDate () {
+    currentDate() {
       const t = this;
       return t.dateContext.get('date');
     },
-    firstDayOfMonth () {
+    firstDayOfMonth() {
       const t = this;
       const firstDay = moment(t.dateContext).subtract(
         t.currentDate - 1,
@@ -92,15 +92,15 @@ export default {
     },
 
     // set init
-    initialDate () {
+    initialDate() {
       const t = this;
       return t.today.get('date');
     },
-    initialMonth () {
+    initialMonth() {
       const t = this;
       return t.today.format('MMMM');
     },
-    initialYear () {
+    initialYear() {
       const t = this;
       return t.today.format('Y');
     },
@@ -109,7 +109,7 @@ export default {
   methods: {
     ...mapActions(['fetchRaces']),
 
-    compareDates (date) {
+    compareDates(date) {
       // console.log(
       //   `clicked ${date} is same as ${this.raceDates}?` +
       //     moment(this.raceDates).isSame(date)
@@ -117,23 +117,23 @@ export default {
     },
     // api formatting
 
-    addDigit (clickedDate) {
+    prependUnderTen(clickedDate) {
       return (clickedDate < 10) ? `0${clickedDate}` : clickedDate;
     },
 
 
-    buildDate (clickedDate) {
+    buildDate(clickedDate) {
       // format month to num
       const selMonth = moment()
         .month(this.month)
         .format('MM');
       // format day to include '0' if under 10
-      const selDay = this.addDigit(clickedDate);
+      const selDay = this.prependUnderTen(clickedDate);
       const fullDate = `${this.year}-${selMonth}-${selDay}`;
       return fullDate;
     },
 
-    getFullDate (clickedDate) {
+    getFullDate(clickedDate) {
       const builtDate = this.buildDate(clickedDate);
       console.log(`is ${builtDate} the same as ${this.raceDates}?`, moment(this.raceDates).isSame(builtDate));
 
@@ -141,11 +141,11 @@ export default {
     },
 
     // calendar view
-    addMonth () {
+    addMonth() {
       const t = this;
       t.dateContext = moment(t.dateContext).add(1, 'month');
     },
-    subtractMonth () {
+    subtractMonth() {
       const t = this;
       t.dateContext = moment(t.dateContext).subtract(1, 'month');
     },
