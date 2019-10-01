@@ -5,50 +5,55 @@
     </div>
 
     <div class="current-month">
-      <div @click="subtractMonth"><-</div>
-      <h4>{{month + ' - ' + year}}</h4>
-      <div @click="addMonth">-></div>
-    </div>
+      <div @click="subtractMonth">
+        <-</div> <h4>{{month + ' - ' + year}}</h4>
+          <div @click="addMonth">-></div>
+      </div>
 
-    <div class="calendar">
-      <!-- <h1>{{raceDates}}</h1> -->
-      <ol class="weekdays">
-        <li v-for="day in days" class="weekday">{{day}}</li>
-      </ol>
+      <div class="calendar">
+        <!-- <h1>{{raceDates}}</h1> -->
+        <ol class="weekdays">
+          <li
+            v-for="day in days"
+            class="weekday"
+          >{{day}}</li>
+        </ol>
 
-      <ol class="dates">
-        <li v-for="empty in firstDayOfMonth">&nbsp;</li>
-        {{empty}}
-        <li
-          v-for="date in daysInMonth"
-          @mouseover="getFullDate(date)"
-          :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}"
-        >
-          <span>{{date}}</span>
-        </li>
-      </ol>
-    </div>
+        <ol class="dates">
+          <li v-for="empty in firstDayOfMonth">&nbsp;</li>
+          {{empty}}
+          <li
+            v-for="date in daysInMonth"
+            @mouseover="getFullDate(date)"
+            :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}"
+          >
+            <span>{{date}}</span>
+          </li>
+        </ol>
+      </div>
   </section>
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions, mapMutations, around } from "vuex";
-import moment from "moment";
-import styles from "../styles/styles.scss";
+import {
+  mapState, mapGetters, mapActions, mapMutations, around,
+} from 'vuex';
+import moment from 'moment';
+import styles from '../styles/styles.scss';
 
 export default {
-  name: "RaceCalendar",
+  name: 'RaceCalendar',
 
-  data() {
+  data () {
     return {
       empty: null,
       today: moment(),
       dateContext: moment(),
-      days: ["S", "M", "T", "W", "T", "F", "S"]
+      days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
     };
   },
 
-  created() {
+  created () {
     this.fetchRaces();
   },
   // mounted() {
@@ -56,55 +61,55 @@ export default {
   // },
 
   computed: {
-    ...mapGetters(["races", "raceDates"]),
+    ...mapGetters(['races', 'raceDates']),
 
     // view items
-    year() {
+    year () {
       const t = this;
-      return t.dateContext.format("Y");
+      return t.dateContext.format('Y');
     },
-    month() {
+    month () {
       const t = this;
-      return t.dateContext.format("MMMM");
+      return t.dateContext.format('MMMM');
     },
 
     // work out info for each month
-    daysInMonth() {
+    daysInMonth () {
       const t = this;
       return t.dateContext.daysInMonth();
     },
-    currentDate() {
+    currentDate () {
       const t = this;
-      return t.dateContext.get("date");
+      return t.dateContext.get('date');
     },
-    firstDayOfMonth() {
+    firstDayOfMonth () {
       const t = this;
       const firstDay = moment(t.dateContext).subtract(
         t.currentDate - 1,
-        "days"
+        'days',
       );
       return firstDay.weekday();
     },
 
     // set init
-    initialDate() {
+    initialDate () {
       const t = this;
-      return t.today.get("date");
+      return t.today.get('date');
     },
-    initialMonth() {
+    initialMonth () {
       const t = this;
-      return t.today.format("MMMM");
+      return t.today.format('MMMM');
     },
-    initialYear() {
+    initialYear () {
       const t = this;
-      return t.today.format("Y");
-    }
+      return t.today.format('Y');
+    },
   },
 
   methods: {
-    ...mapActions(["fetchRaces"]),
+    ...mapActions(['fetchRaces']),
 
-    compareDates(date) {
+    compareDates (date) {
       // console.log(
       //   `clicked ${date} is same as ${this.raceDates}?` +
       //     moment(this.raceDates).isSame(date)
@@ -112,35 +117,39 @@ export default {
     },
     // api formatting
 
-    getFullDate(clickedDate) {
-      const fullDateString = `${clickedDate} ${this.month} ${this.year}`;
-      // new func 'buildDate
+    addDigit (clickedDate) {
+      return (clickedDate < 10) ? `0${clickedDate}` : clickedDate;
+    },
+
+
+    buildDate (clickedDate) {
+      // format month to num
       const selMonth = moment()
         .month(this.month)
-        .format("MM");
-      const selYear = moment()
-        .year(this.year)
-        .format("YYYY");
-      const selDay = clickedDate;
-      const buildDate = `${selYear}-${selMonth}-${selDay}`;
+        .format('MM');
+      // format day to include '0' if under 10
+      const selDay = this.addDigit(clickedDate);
+      const fullDate = `${this.year}-${selMonth}-${selDay}`;
+      return fullDate;
+    },
+
+    getFullDate (clickedDate) {
+      const builtDate = this.buildDate(clickedDate);
+      console.log(`is ${builtDate} the same as ${this.raceDates}?`, moment(this.raceDates).isSame(builtDate));
+
       // compare (new func)
-      console.log(
-        `buildDate ${buildDate} is same as ${this.raceDates}?` +
-          " " +
-          moment(this.raceDates).isSame(buildDate)
-      );
     },
 
     // calendar view
-    addMonth() {
+    addMonth () {
       const t = this;
-      t.dateContext = moment(t.dateContext).add(1, "month");
+      t.dateContext = moment(t.dateContext).add(1, 'month');
     },
-    subtractMonth() {
+    subtractMonth () {
       const t = this;
-      t.dateContext = moment(t.dateContext).subtract(1, "month");
-    }
-  }
+      t.dateContext = moment(t.dateContext).subtract(1, 'month');
+    },
+  },
 };
 </script>
 
