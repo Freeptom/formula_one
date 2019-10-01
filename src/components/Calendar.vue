@@ -116,31 +116,27 @@ export default {
       // );
     },
     // api formatting
-
-    prependUnderTen(clickedDate) {
-      return (clickedDate < 10) ? `0${clickedDate}` : clickedDate;
+    prependUnderTen(day) {
+      return (day < 10) ? `0${day}` : day;
     },
-
-
-    buildDate(clickedDate) {
+    buildDate(day) {
       // format month to num
       const selMonth = moment()
         .month(this.month)
         .format('MM');
       // format day to include '0' if under 10
-      const selDay = this.prependUnderTen(clickedDate);
+      const selDay = this.prependUnderTen(day);
+      // build date
       const fullDate = `${this.year}-${selMonth}-${selDay}`;
       return fullDate;
     },
-
     getFullDate(clickedDate) {
       const builtDate = this.buildDate(clickedDate);
       console.log(`is ${builtDate} the same as ${this.raceDates}?`, moment(this.raceDates).isSame(builtDate));
-
       // compare (new func)
     },
 
-    // calendar view
+    // change month view
     addMonth() {
       const t = this;
       t.dateContext = moment(t.dateContext).add(1, 'month');
