@@ -24,9 +24,10 @@
           {{empty}}
           <li
             v-for="date in daysInMonth"
-            @mouseover="getFullDate(date)"
+            @click="getFullDate(date)"
             :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}"
           >
+
             <span>{{date}}</span>
           </li>
         </ol>
@@ -56,8 +57,8 @@ export default {
   created() {
     this.fetchRaces();
   },
-  // mounted() {
-  //   this.convertRaceDay();
+  // mounted () {
+  //   this.getFullDate();
   // },
 
   computed: {
@@ -103,6 +104,11 @@ export default {
     initialYear() {
       const t = this;
       return t.today.format('Y');
+    },
+
+    // api interaction
+    checkDays() {
+
     },
   },
 
