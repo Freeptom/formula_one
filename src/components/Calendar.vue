@@ -19,11 +19,7 @@
       <ol class="dates">
         <li v-for="empty in firstDayOfMonth">&nbsp;</li>
         {{empty}}
-        <li
-          v-for="(date, index) in daysInMonth"
-          :key="index"
-          :class="{'current-day' : buildDate(date) == raceDates[3].date }"
-        >
+        <li v-for="(date, index) in daysInMonth" :key="index">
           <span>{{date}}</span>
         </li>
       </ol>
@@ -32,6 +28,7 @@
 </template>
 
 <script>
+//    :class="{'current-day' : buildDate(date) == this.raceDat}"
 import { mapState, mapGetters, mapActions, mapMutations, around } from "vuex";
 import moment from "moment";
 import styles from "../styles/styles.scss";
@@ -40,6 +37,7 @@ export default {
   name: "RaceCalendar",
   data() {
     return {
+      raceDatesToCompare: [],
       loading: true,
       isSameVar: "",
       empty: null,
@@ -50,10 +48,9 @@ export default {
   },
 
   mounted() {
-    return this.fetchRaces()
-      .then(() => console.log(this.raceDates))
-      .then(() => (this.loading = false))
-      .then(() => this.buildRaceDates(this.raceDates));
+    this.fetchRaces()
+      .then(() => this.buildRaceDates(this.raceDates))
+      .then(() => (this.loading = false));
   },
 
   computed: {
@@ -100,12 +97,6 @@ export default {
     initialYear() {
       const t = this;
       return t.today.format("Y");
-    },
-
-    setDateToTest() {
-      if (!this.loading) {
-        this.dateToTest = raceDates[3].date;
-      }
     }
   },
 
@@ -130,7 +121,10 @@ export default {
     },
 
     buildRaceDates(raceDates) {
-      console.log(raceDates[0].date);
+      for (let i = 0; i < raceDates.length; i++) {
+        this.raceDatesToCompare.push(i);
+      }
+      console.log(this.raceDatesToCompare);
     },
 
     getFullDate(clickedDate) {
