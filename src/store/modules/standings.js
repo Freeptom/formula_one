@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign, no-return-assign */
 import axios from 'axios';
 
@@ -13,7 +14,6 @@ const getters = {
 
 const mutations = {
   set_standings: (state, standings) => (state.standings = standings),
-
   set_search: (state, search) => (state.search = search),
 };
 

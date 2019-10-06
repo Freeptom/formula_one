@@ -1,5 +1,5 @@
 <template>
-  <section class="module">
+  <section class="module" v-if="!loading">
     <div class="module-header">
       <h3 class="module-heading">Race Calendar</h3>
     </div>
@@ -22,7 +22,7 @@
         <li
           v-for="(date, index) in daysInMonth"
           :key="index"
-          :class="{'current-day' : buildDate(date) == '2019-03-17'}"
+          :class="{'current-day' : buildDate(date) == raceDates[3].date }"
         >
           <span>{{date}}</span>
         </li>
@@ -38,11 +38,9 @@ import styles from "../styles/styles.scss";
 
 export default {
   name: "RaceCalendar",
-  //  :class="{ 'current-day': year &amp date == isSameVar, }",
-
-  // :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}"
   data() {
     return {
+      loading: true,
       isSameVar: "",
       empty: null,
       today: moment(),
@@ -51,12 +49,15 @@ export default {
     };
   },
 
-  created() {
-    this.fetchRaces();
+  mounted() {
+    this.fetchRaces().then((this.loading = false));
+    console.log(this.raceDates);
+    // this.buildRaceDates(this.raceDates);
   },
 
   computed: {
-    ...mapGetters(["races", "raceDates"]),
+    ...mapState(["races"]),
+    ...mapGetters(["raceDates"]),
 
     // view items
     year() {
@@ -98,6 +99,12 @@ export default {
     initialYear() {
       const t = this;
       return t.today.format("Y");
+    },
+
+    setDateToTest() {
+      if (!this.loading) {
+        this.dateToTest = raceDates[3].date;
+      }
     }
   },
 
@@ -118,8 +125,12 @@ export default {
       const selDay = this.prependUnderTen(day);
       // build date
       const fullDate = `${this.year}-${selMonth}-${selDay}`;
-      console.log(fullDate);
       return fullDate;
+    },
+
+    buildRaceDates(raceDates) {
+      console.log("test");
+      // console.log(raceDates[0].date);
     },
 
     getFullDate(clickedDate) {

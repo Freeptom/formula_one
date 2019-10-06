@@ -1,15 +1,14 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign, no-return-assign */
 import axios from 'axios';
-import moment from 'moment';
 
 const state = {
-  races: null,
+  races: '',
 
 };
 
 const getters = {
-  races: state => state.races,
-  raceDates: state => state.races.date,
+  raceDates: state => state.races,
 };
 
 
@@ -20,9 +19,15 @@ const mutations = {
 
 const actions = {
   async fetchRaces({ commit }) {
-    const response = await axios.get('https://ergast.com/api/f1/current.json');
-    commit('set_races', response.data.MRData.RaceTable.Races[0]);
+    try {
+      const response = await axios.get('https://ergast.com/api/f1/current.json');
+      commit('set_races', response.data.MRData.RaceTable.Races);
+    } catch (e) {
+      console.log(e);
+    }
   },
+
+
 };
 
 export default {
