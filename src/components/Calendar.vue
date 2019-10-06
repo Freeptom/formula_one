@@ -5,73 +5,65 @@
     </div>
 
     <div class="current-month">
-      <div @click="subtractMonth">
-        <-</div> <h4>{{month + ' - ' + year}}</h4>
-          <div @click="addMonth">-></div>
-      </div>
+      <div @click="subtractMonth"><-</div>
+      <h4>{{month + ' - ' + year}}</h4>
+      <div @click="addMonth">-></div>
+    </div>
 
-      <div class="calendar">
-        <!-- <h1>{{raceDates}}</h1> -->
-        <ol class="weekdays">
-          <li
-            v-for="day in days"
-            class="weekday"
-          >{{day}}</li>
-        </ol>
+    <div class="calendar">
+      <!-- <h1>{{raceDates}}</h1> -->
+      <ol class="weekdays">
+        <li v-for="day in days" class="weekday">{{day}}</li>
+      </ol>
 
-        <ol class="dates">
-          <li v-for="empty in firstDayOfMonth">&nbsp;</li>
-          {{empty}}
-          <li
-            v-for="date in daysInMonth"
-            @click="getFullDate(date)"
-            :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}"
-          >
-
-            <span>{{date}}</span>
-          </li>
-        </ol>
-      </div>
+      <ol class="dates">
+        <li v-for="empty in firstDayOfMonth">&nbsp;</li>
+        {{empty}}
+        <li
+          v-for="date in daysInMonth"
+          @click="getFullDate(date)"
+          :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear, 'current-day': date == getFullDate}"
+        >
+          {{printDays}}
+          <span>{{date}}</span>
+        </li>
+      </ol>
+    </div>
   </section>
 </template>
 
 <script>
-import {
-  mapState, mapGetters, mapActions, mapMutations, around,
-} from 'vuex';
-import moment from 'moment';
-import styles from '../styles/styles.scss';
+import { mapState, mapGetters, mapActions, mapMutations, around } from "vuex";
+import moment from "moment";
+import styles from "../styles/styles.scss";
 
 export default {
-  name: 'RaceCalendar',
+  name: "RaceCalendar",
 
   data() {
     return {
       empty: null,
       today: moment(),
       dateContext: moment(),
-      days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+      days: ["S", "M", "T", "W", "T", "F", "S"]
     };
   },
 
   created() {
     this.fetchRaces();
   },
-  // mounted () {
-  //   this.getFullDate();
-  // },
 
   computed: {
-    ...mapGetters(['races', 'raceDates']),
+    ...mapGetters(["races", "raceDates"]),
 
     // view items
     year() {
       const t = this;
-      return t.dateContext.format('Y');
+      return t.dateContext.format("Y");
     },
     month() {
       const t = this;
-      return t.dateContext.format('MMMM');
+      return t.dateContext.format("MMMM");
     },
 
     // work out info for each month
@@ -81,13 +73,13 @@ export default {
     },
     currentDate() {
       const t = this;
-      return t.dateContext.get('date');
+      return t.dateContext.get("date");
     },
     firstDayOfMonth() {
       const t = this;
       const firstDay = moment(t.dateContext).subtract(
         t.currentDate - 1,
-        'days',
+        "days"
       );
       return firstDay.weekday();
     },
@@ -95,41 +87,41 @@ export default {
     // set init
     initialDate() {
       const t = this;
-      return t.today.get('date');
+      return t.today.get("date");
     },
     initialMonth() {
       const t = this;
-      return t.today.format('MMMM');
+      return t.today.format("MMMM");
     },
     initialYear() {
       const t = this;
-      return t.today.format('Y');
+      return t.today.format("Y");
     },
 
-    // api interaction
-    checkDays() {
-
-    },
+    printDays() {
+      console.log(this);
+    }
   },
 
   methods: {
-    ...mapActions(['fetchRaces']),
+    ...mapActions(["fetchRaces"]),
 
-    compareDates(date) {
-      // console.log(
-      //   `clicked ${date} is same as ${this.raceDates}?` +
-      //     moment(this.raceDates).isSame(date)
-      // );
+    compareDates(builtDate) {
+      console.log(
+        `is ${builtDate} the same as ${this.raceDates}?`,
+        moment(this.raceDates).isSame(builtDate)
+      );
     },
+
     // api formatting
     prependUnderTen(day) {
-      return (day < 10) ? `0${day}` : day;
+      return day < 10 ? `0${day}` : day;
     },
     buildDate(day) {
       // format month to num
       const selMonth = moment()
         .month(this.month)
-        .format('MM');
+        .format("MM");
       // format day to include '0' if under 10
       const selDay = this.prependUnderTen(day);
       // build date
@@ -138,20 +130,19 @@ export default {
     },
     getFullDate(clickedDate) {
       const builtDate = this.buildDate(clickedDate);
-      console.log(`is ${builtDate} the same as ${this.raceDates}?`, moment(this.raceDates).isSame(builtDate));
-      // compare (new func)
+      const isSameAsRaceDate = this.compareDates(builtDate);
     },
 
     // change month view
     addMonth() {
       const t = this;
-      t.dateContext = moment(t.dateContext).add(1, 'month');
+      t.dateContext = moment(t.dateContext).add(1, "month");
     },
     subtractMonth() {
       const t = this;
-      t.dateContext = moment(t.dateContext).subtract(1, 'month');
-    },
-  },
+      t.dateContext = moment(t.dateContext).subtract(1, "month");
+    }
+  }
 };
 </script>
 
