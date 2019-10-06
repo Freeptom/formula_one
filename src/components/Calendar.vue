@@ -50,9 +50,10 @@ export default {
   },
 
   mounted() {
-    this.fetchRaces().then((this.loading = false));
-    console.log(this.raceDates);
-    // this.buildRaceDates(this.raceDates);
+    return this.fetchRaces()
+      .then(() => console.log(this.raceDates))
+      .then(() => (this.loading = false))
+      .then(() => this.buildRaceDates(this.raceDates));
   },
 
   computed: {
@@ -129,8 +130,7 @@ export default {
     },
 
     buildRaceDates(raceDates) {
-      console.log("test");
-      // console.log(raceDates[0].date);
+      console.log(raceDates[0].date);
     },
 
     getFullDate(clickedDate) {
