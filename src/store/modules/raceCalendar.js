@@ -4,6 +4,7 @@ import moment from 'moment';
 
 const state = {
   races: null,
+
 };
 
 const getters = {

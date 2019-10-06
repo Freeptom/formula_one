@@ -20,11 +20,10 @@
         <li v-for="empty in firstDayOfMonth">&nbsp;</li>
         {{empty}}
         <li
-          v-for="date in daysInMonth"
-          @click="getFullDate(date)"
-          :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear, 'current-day': date == getFullDate}"
+          v-for="(date, index) in daysInMonth"
+          :key="index"
+          :class="{'current-day' : buildDate(date) == '2019-03-17'}"
         >
-          {{printDays}}
           <span>{{date}}</span>
         </li>
       </ol>
@@ -39,9 +38,12 @@ import styles from "../styles/styles.scss";
 
 export default {
   name: "RaceCalendar",
+  //  :class="{ 'current-day': year &amp date == isSameVar, }",
 
+  // :class="{'current-day': date == initialDate &amp;&amp; month == initialMonth && year == initialYear}"
   data() {
     return {
+      isSameVar: "",
       empty: null,
       today: moment(),
       dateContext: moment(),
@@ -96,27 +98,17 @@ export default {
     initialYear() {
       const t = this;
       return t.today.format("Y");
-    },
-
-    printDays() {
-      console.log(this);
     }
   },
 
   methods: {
     ...mapActions(["fetchRaces"]),
 
-    compareDates(builtDate) {
-      console.log(
-        `is ${builtDate} the same as ${this.raceDates}?`,
-        moment(this.raceDates).isSame(builtDate)
-      );
-    },
-
     // api formatting
     prependUnderTen(day) {
       return day < 10 ? `0${day}` : day;
     },
+
     buildDate(day) {
       // format month to num
       const selMonth = moment()
@@ -126,11 +118,25 @@ export default {
       const selDay = this.prependUnderTen(day);
       // build date
       const fullDate = `${this.year}-${selMonth}-${selDay}`;
+      console.log(fullDate);
       return fullDate;
     },
+
     getFullDate(clickedDate) {
       const builtDate = this.buildDate(clickedDate);
       const isSameAsRaceDate = this.compareDates(builtDate);
+      console.log(`${builtDate} - builtDate`);
+      console.log(`${this.raceDates} - race Date being compared to`);
+      console.log(`is same - ${isSameAsRaceDate}`);
+
+      if (isSameAsRaceDate) {
+        this.isSameVar = builtDate;
+        console.log(this.isSameVar);
+      }
+    },
+
+    compareDates(builtDate) {
+      return moment(this.raceDates).isSame(builtDate);
     },
 
     // change month view
