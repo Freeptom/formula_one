@@ -22,25 +22,34 @@
           v-for="(date, index) in daysInMonth"
           :key="index"
           :class="{'current-day' : raceDates.includes(buildDate(date)) }"
-          @click="getRaceInfo(buildDate(date))"
+          @click="getRaceInfo(buildDate(date)); showModal();"
         >
           <span>{{date}}</span>
         </li>
       </ol>
+
+      <button type="button" class="btn">Open Modal!</button>
+
+      <modal v-show="isModalVisible" @close="closeModal" />
     </div>
   </section>
 </template>
 
 <script>
 import { mapState, mapGetters, mapActions, mapMutations, around } from "vuex";
+import modal from "@/components/Modal.vue";
 import moment from "moment";
 import styles from "../styles/styles.scss";
 
 export default {
   name: "RaceCalendar",
+  components: {
+    modal
+  },
   data() {
     return {
       loading: true,
+      isModalVisible: false,
       isSameVar: "",
       empty: null,
       today: moment(),
@@ -132,6 +141,15 @@ export default {
     subtractMonth() {
       const t = this;
       t.dateContext = moment(t.dateContext).subtract(1, "month");
+    },
+
+    // modal
+
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
     }
   }
 };
