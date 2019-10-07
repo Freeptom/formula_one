@@ -1,14 +1,4 @@
-<script>
-export default {
-  name: "modal",
 
-  methods: {
-    close() {
-      this.$emit("close");
-    }
-  }
-};
-</script>
 
 <template>
   <transition name="modal-fade">
@@ -21,7 +11,7 @@ export default {
       >
         <header class="modal-header" id="modalTitle">
           <slot name="header">
-            This is the default tile!
+            {{title}}
             <button
               type="button"
               class="btn-close"
@@ -48,6 +38,23 @@ export default {
     </div>
   </transition>
 </template>
+
+<script>
+export default {
+  name: "modal",
+
+  data() {
+    return {
+      title: "I am a dynamic title"
+    };
+  },
+  methods: {
+    close() {
+      this.$emit("close");
+    }
+  }
+};
+</script>
 
 <style>
 .modal-backdrop {
