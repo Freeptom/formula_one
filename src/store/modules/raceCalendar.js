@@ -8,7 +8,7 @@ const state = {
 };
 
 const getters = {
-  raceDates: state => state.races,
+  allRaces: state => state.races,
 };
 
 
