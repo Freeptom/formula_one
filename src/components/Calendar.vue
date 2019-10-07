@@ -11,7 +11,6 @@
     </div>
 
     <div class="calendar">
-      <!-- <h1>{{raceDates}}</h1> -->
       <ol class="weekdays">
         <li v-for="day in days" class="weekday">{{day}}</li>
       </ol>
@@ -22,7 +21,7 @@
         <li
           v-for="(date, index) in daysInMonth"
           :key="index"
-          :class="{'current-day' : raceDatesArr.includes(buildDate(date)) }"
+          :class="{'current-day' : raceDates.includes(buildDate(date)) }"
         >
           <span>{{date}}</span>
         </li>
@@ -40,7 +39,6 @@ export default {
   name: "RaceCalendar",
   data() {
     return {
-      raceDatesArr: [],
       loading: true,
       isSameVar: "",
       empty: null,
@@ -51,15 +49,11 @@ export default {
   },
 
   mounted() {
-    this.fetchRaces()
-      // .then(() => (this.raceDatesToCompare = [...this.raceDates]))
-      .then(() => this.buildRaceDateArr())
-      .then(() => (this.loading = false));
+    this.fetchRaces().then(() => (this.loading = false));
   },
 
   computed: {
-    ...mapState(["races"]),
-    ...mapGetters(["allRaces"]),
+    ...mapGetters(["allRaces", "raceDates"]),
 
     // view items
     year() {
@@ -106,12 +100,10 @@ export default {
 
   methods: {
     ...mapActions(["fetchRaces"]),
-
     // date formatters
     prependUnderTen(day) {
       return day < 10 ? `0${day}` : day;
     },
-
     buildDate(day) {
       // format month to num
       const selMonth = moment()
@@ -123,15 +115,6 @@ export default {
       const fullDate = `${this.year}-${selMonth}-${selDay}`;
       return fullDate;
     },
-
-    // race date formatteres
-    buildRaceDateArr() {
-      this.allRaces.forEach(race => {
-        this.raceDatesArr.push(race.date);
-      }),
-        console.log(this.raceDatesArr);
-    },
-
     // change month view
     addMonth() {
       const t = this;

@@ -9,6 +9,7 @@ const state = {
 
 const getters = {
   allRaces: state => state.races,
+  raceDates: state => state.races.map(race => race.date),
 };
 
 

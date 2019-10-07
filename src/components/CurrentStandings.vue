@@ -2,6 +2,7 @@
   <section class="module">
     <div class="module-header">
       <h3 class="module-heading">Current Standings</h3>
+      <!-- {{standings}} -->
       <input
         type="text"
         :value="standings.search"
