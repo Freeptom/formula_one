@@ -70,6 +70,7 @@ export default {
   overflow-x: auto;
   display: flex;
   flex-direction: column;
+  border-radius: 15px;
 }
 
 .modal-header,
