@@ -95,7 +95,7 @@ export default {
 }
 
 .btn-close {
-  color: $gray4;
+  color: #3a47d5;
   background: none;
   padding: 0.4rem 1rem;
   border: 1px solid #3a47d5;
