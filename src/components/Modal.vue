@@ -58,7 +58,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(-45deg, #00d0ffde 0%, #3a47d5de 100%);
+  background: linear-gradient(-160deg, #00d0ffde 0%, #3a47d5de 100%);
   display: flex;
   justify-content: center;
   align-items: center;

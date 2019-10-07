@@ -259,7 +259,7 @@ export default {
     margin-left: -25px;
     margin-top: -25px;
     border-radius: 50%;
-    background: linear-gradient(-45deg, #00d2ff 0%, #3a47d5 100%);
+    background: linear-gradient(-160deg, #00d2ff 0%, #3a47d5 100%);
     z-index: -1;
   }
 }
