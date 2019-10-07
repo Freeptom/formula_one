@@ -22,6 +22,7 @@
           v-for="(date, index) in daysInMonth"
           :key="index"
           :class="{'current-day' : raceDates.includes(buildDate(date)) }"
+          @click="getRaceInfo(buildDate(date))"
         >
           <span>{{date}}</span>
         </li>
@@ -114,6 +115,14 @@ export default {
       // build date
       const fullDate = `${this.year}-${selMonth}-${selDay}`;
       return fullDate;
+    },
+
+    getRaceInfo(date) {
+      this.allRaces.forEach(function(el) {
+        if (el.date == date) {
+          console.log(el.raceName);
+        }
+      });
     },
     // change month view
     addMonth() {
