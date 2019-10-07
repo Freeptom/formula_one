@@ -29,7 +29,11 @@
       </ol>
       <modal v-show="isModalVisible" @close="closeModal">
         <template v-slot:header>
-          <h2>{{raceName}}</h2>
+          <h2 class="modal__title">{{raceName}}</h2>
+          <span class="modal__round-num">Round {{roundNum}}</span>
+        </template>
+        <template v-slot:body>
+          <p>{{circuitName}}</p>
         </template>
       </modal>
     </div>
@@ -51,6 +55,9 @@ export default {
   data() {
     return {
       raceName: "",
+      circuitName: "",
+      roundNum: "",
+
       loading: true,
       isModalVisible: false,
       isSameVar: "",
@@ -132,14 +139,19 @@ export default {
     getRaceInfo(date) {
       let showModal = false;
       let findRaceName = "";
+      let findCircuitName = "";
+      let findRound = "";
       this.allRaces.forEach(function(el) {
         if (el.date == date) {
-          console.log(el.raceName);
-          showModal = true;
           findRaceName = el.raceName;
+          findCircuitName = el.Circuit.circuitName;
+          findRound = el.round;
+          showModal = true;
         }
       });
       this.raceName = findRaceName;
+      this.circuitName = findCircuitName;
+      this.roundNum = findRound;
       return showModal ? (this.isModalVisible = true) : "";
     },
     // change month view
@@ -221,6 +233,7 @@ export default {
   padding: 0 2rem 2rem 2rem;
   align-content: center;
   color: $gray4;
+
   h4 {
     margin: 0;
     text-transform: uppercase;
@@ -234,6 +247,7 @@ export default {
   position: relative;
   z-index: 1;
   color: white;
+  cursor: pointer;
   &::before {
     @include box_shadow(2);
     content: "";
@@ -247,6 +261,18 @@ export default {
     border-radius: 50%;
     background: linear-gradient(-45deg, #00d2ff 0%, #3a47d5 100%);
     z-index: -1;
+  }
+}
+
+/* modal */
+.modal {
+  &__round-num {
+    position: absolute;
+  }
+
+  &__title {
+    margin: 1.5rem 0 1rem 0rem;
+    text-align: center;
   }
 }
 </style>

@@ -10,7 +10,7 @@
         aria-describedby="modalDescription"
       >
         <header class="modal-header" id="modalTitle">
-          <slot name="header">
+          <slot name="header" class="title">
             {{title}}
             <button
               type="button"
@@ -24,15 +24,7 @@
           <slot name="body" id="modalDescription">I'm the default body!</slot>
         </section>
         <footer class="modal-footer">
-          <slot name="footer">
-            I'm the default footer!
-            <button
-              type="button"
-              class="btn-green"
-              @click="close"
-              aria-label="Close modal"
-            >Close me!</button>
-          </slot>
+          <button type="button" class="btn-close" @click="close" aria-label="Close modal">Close</button>
         </footer>
       </div>
     </div>
@@ -56,7 +48,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
+@import "@/styles/variables/colors.scss";
+@import "../mixins/drop-shadows.scss";
 .modal-backdrop {
   z-index: 1;
   position: fixed;
@@ -64,7 +58,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background: linear-gradient(-45deg, #00d0ffde 0%, #3a47d5de 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,7 +66,7 @@ export default {
 
 .modal {
   background: #ffffff;
-  box-shadow: 2px 2px 20px 1px;
+  @include box_shadow(4);
   overflow-x: auto;
   display: flex;
   flex-direction: column;
@@ -86,7 +80,7 @@ export default {
 
 .modal-header {
   border-bottom: 1px solid #eeeeee;
-  color: #4aae9b;
+  color: $gray4;
   justify-content: space-between;
 }
 
@@ -101,20 +95,12 @@ export default {
 }
 
 .btn-close {
-  border: none;
-  font-size: 20px;
-  padding: 20px;
+  color: $gray4;
+  background: none;
+  padding: 0.4rem 1rem;
+  border: 1px solid #3a47d5;
+  border-radius: 20px;
   cursor: pointer;
-  font-weight: bold;
-  color: #4aae9b;
-  background: transparent;
-}
-
-.btn-green {
-  color: white;
-  background: #4aae9b;
-  border: 1px solid #4aae9b;
-  border-radius: 2px;
 }
 
 /* transition */
