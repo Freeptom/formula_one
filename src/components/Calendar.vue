@@ -285,13 +285,19 @@ export default {
     border-radius: 50%;
     background: linear-gradient(-160deg, #00d2ff 0%, #3a47d5 100%);
     z-index: -1;
+    @media screen and (min-width: 300px) {
+    left: 100%;
+    }
     @media screen and (min-width: 400px) {
     left: 78%;
+    }
+    @media screen and (min-width: 450px) {
+    left: 76%;
     }
     @media screen and (min-width: 500px) {
     left: 73%;
     }
-     @media screen and (min-width: 550px) {
+     @media screen and (min-width: 540px) {
     left: 68%;
     }
     @media screen and (min-width: 600px) {
