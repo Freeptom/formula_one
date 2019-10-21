@@ -8,9 +8,15 @@
     </div>
 
     <div class="current-month">
-      <div @click="subtractMonth">
+      <div
+        @click="subtractMonth"
+        class="arrow-selector"
+      >
         <-</div> <h4>{{month + ' - ' + year}}</h4>
-          <div @click="addMonth">-></div>
+          <div
+            @click="addMonth"
+            class="arrow-selector"
+          >-></div>
       </div>
 
       <div class="calendar">
@@ -63,7 +69,7 @@ export default {
   components: {
     modal,
   },
-  data () {
+  data() {
     return {
       raceName: '',
       circuitName: '',
@@ -79,7 +85,7 @@ export default {
     };
   },
 
-  mounted () {
+  mounted() {
     this.fetchRaces().then(() => (this.loading = false));
   },
 
@@ -87,25 +93,25 @@ export default {
     ...mapGetters(['allRaces', 'raceDates']),
 
     // view items
-    year () {
+    year() {
       const t = this;
       return t.dateContext.format('Y');
     },
-    month () {
+    month() {
       const t = this;
       return t.dateContext.format('MMMM');
     },
 
     // work out info for each month
-    daysInMonth () {
+    daysInMonth() {
       const t = this;
       return t.dateContext.daysInMonth();
     },
-    currentDate () {
+    currentDate() {
       const t = this;
       return t.dateContext.get('date');
     },
-    firstDayOfMonth () {
+    firstDayOfMonth() {
       const t = this;
       const firstDay = moment(t.dateContext).subtract(
         t.currentDate - 1,
@@ -115,15 +121,15 @@ export default {
     },
 
     // set init
-    initialDate () {
+    initialDate() {
       const t = this;
       return t.today.get('date');
     },
-    initialMonth () {
+    initialMonth() {
       const t = this;
       return t.today.format('MMMM');
     },
-    initialYear () {
+    initialYear() {
       const t = this;
       return t.today.format('Y');
     },
@@ -132,10 +138,10 @@ export default {
   methods: {
     ...mapActions(['fetchRaces']),
     // date formatters
-    prependUnderTen (day) {
+    prependUnderTen(day) {
       return day < 10 ? `0${day}` : day;
     },
-    buildDate (day) {
+    buildDate(day) {
       // format month to num
       const selMonth = moment()
         .month(this.month)
@@ -147,7 +153,7 @@ export default {
       return fullDate;
     },
 
-    getRaceInfo (date) {
+    getRaceInfo(date) {
       let showModal = false;
       let findRaceName = '';
       let findCircuitName = '';
@@ -166,17 +172,17 @@ export default {
       return showModal ? (this.isModalVisible = true) : '';
     },
     // change month view
-    addMonth () {
+    addMonth() {
       const t = this;
       t.dateContext = moment(t.dateContext).add(1, 'month');
     },
-    subtractMonth () {
+    subtractMonth() {
       const t = this;
       t.dateContext = moment(t.dateContext).subtract(1, 'month');
     },
 
     // modal
-    closeModal () {
+    closeModal() {
       this.isModalVisible = false;
     },
   },
@@ -240,8 +246,14 @@ export default {
 
 .current-month {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 0 2rem 2rem 2rem;
+   @media screen and (min-width: 750px) {
+        justify-content: center;
+      .arrow-selector {
+        padding: 0 2rem;
+      }
+    }
   align-content: center;
   color: $gray4;
 
@@ -251,6 +263,7 @@ export default {
     font-weight: 400;
     letter-spacing: 1px;
     color: $gray4;
+    min-width: 180px;
   }
 }
 
