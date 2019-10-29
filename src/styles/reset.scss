@@ -1,16 +1,17 @@
-@import "variables/colors";
+@import 'variables/colors';
 * {
   box-sizing: border-box;
 }
 
 body,
 html {
+  height: 100%;
   padding: 0;
   margin: 0;
   width: 100%;
 }
 
 body {
+  min-height: 100%;
   background: $gray1;
-  padding: 0 1rem;
 }

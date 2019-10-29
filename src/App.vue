@@ -1,24 +1,34 @@
 <template>
   <div id="app">
-    <CurrentStandings></CurrentStandings>
-    <Calendar></Calendar>
+    <Nav></Nav>
+    <main>
+      <CurrentStandings></CurrentStandings>
+      <Calendar></Calendar>
+    </main>
   </div>
 </template>
 
 <script>
-import CurrentStandings from "./components/CurrentStandings.vue";
-import Calendar from "./components/Calendar.vue";
+import Nav from './components/Nav.vue';
+import CurrentStandings from './components/CurrentStandings.vue';
+import Calendar from './components/Calendar.vue';
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
+    Nav,
     CurrentStandings,
-    Calendar
-  }
+    Calendar,
+  },
 };
 </script>
 
 <style>
 #app {
+  height: 100%;
+  margin: 0;
+}
+main {
+  padding: 0 1rem;
 }
 </style>
