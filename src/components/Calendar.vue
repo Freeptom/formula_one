@@ -69,7 +69,7 @@ export default {
   components: {
     modal,
   },
-  data () {
+  data() {
     return {
       raceName: '',
       circuitName: '',
@@ -85,7 +85,7 @@ export default {
     };
   },
 
-  mounted () {
+  mounted() {
     this.fetchRaces().then(() => (this.loading = false));
   },
 
@@ -93,25 +93,25 @@ export default {
     ...mapGetters(['allRaces', 'raceDates']),
 
     // view items
-    year () {
+    year() {
       const t = this;
       return t.dateContext.format('Y');
     },
-    month () {
+    month() {
       const t = this;
       return t.dateContext.format('MMMM');
     },
 
     // work out info for each month
-    daysInMonth () {
+    daysInMonth() {
       const t = this;
       return t.dateContext.daysInMonth();
     },
-    currentDate () {
+    currentDate() {
       const t = this;
       return t.dateContext.get('date');
     },
-    firstDayOfMonth () {
+    firstDayOfMonth() {
       const t = this;
       const firstDay = moment(t.dateContext).subtract(
         t.currentDate - 1,
@@ -121,15 +121,15 @@ export default {
     },
 
     // set init
-    initialDate () {
+    initialDate() {
       const t = this;
       return t.today.get('date');
     },
-    initialMonth () {
+    initialMonth() {
       const t = this;
       return t.today.format('MMMM');
     },
-    initialYear () {
+    initialYear() {
       const t = this;
       return t.today.format('Y');
     },
@@ -138,10 +138,10 @@ export default {
   methods: {
     ...mapActions(['fetchRaces']),
     // date formatters
-    prependUnderTen (day) {
+    prependUnderTen(day) {
       return day < 10 ? `0${day}` : day;
     },
-    buildDate (day) {
+    buildDate(day) {
       // format month to num
       const selMonth = moment()
         .month(this.month)
@@ -153,7 +153,7 @@ export default {
       return fullDate;
     },
 
-    getRaceInfo (date) {
+    getRaceInfo(date) {
       let showModal = false;
       let findRaceName = '';
       let findCircuitName = '';
@@ -172,17 +172,17 @@ export default {
       return showModal ? (this.isModalVisible = true) : '';
     },
     // change month view
-    addMonth () {
+    addMonth() {
       const t = this;
       t.dateContext = moment(t.dateContext).add(1, 'month');
     },
-    subtractMonth () {
+    subtractMonth() {
       const t = this;
       t.dateContext = moment(t.dateContext).subtract(1, 'month');
     },
 
     // modal
-    closeModal () {
+    closeModal() {
       this.isModalVisible = false;
     },
   },
@@ -206,6 +206,7 @@ export default {
   padding: 0;
   display: grid;
   justify-content: space-between;
+  align-content: center;
   grid-template-columns: repeat(7, 1fr);
   li {
     list-style-type: none;
@@ -236,10 +237,12 @@ export default {
 .dates {
   list-style: none;
   li {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin: 2rem auto 2rem auto;
+    padding: 2rem;
     @media screen and (max-width: 900px) {
-      margin: 0 0.5rem 0.5rem 0.5rem;
+      padding: 0.5rem;
     }
   }
 }
@@ -278,54 +281,20 @@ export default {
     position: absolute;
     height: 30px;
     width: 30px;
-    top: 100%;
-    left: 100%;
-    margin-left: -25px;
-    margin-top: -25px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 50%;
     background: linear-gradient(-160deg, #00d2ff 0%, #3a47d5 100%);
     z-index: -1;
-    @media screen and (min-width: 300px) {
-    left: 100%;
+    @media screen and (min-width: 750px) {
+      height: 40px;
+      width: 40px;
+      }
     }
-    @media screen and (min-width: 350px) {
-    left: 92%;
-    }
-    @media screen and (min-width: 360px) {
-    left: 90%;
-    }
-    @media screen and (min-width: 400px) {
-    left: 78%;
-    }
-    @media screen and (min-width: 450px) {
-    left: 76%;
-    }
-    @media screen and (min-width: 500px) {
-    left: 73%;
-    }
-     @media screen and (min-width: 540px) {
-    left: 68%;
-    }
-    @media screen and (min-width: 600px) {
-    left: 66%;
-    }
-
-    @media screen and (min-width: 700px) {
-    left: 64%;
-    }
-    @media screen and (min-width: 800px) {
-    left: 61%;
-    }
-    @media screen and (min-width: 900px) {
-    height: 50px;
-    width: 50px;
-    top: 50%;
-    left: 50%;
-    }
-
   }
 
-}
 
 /* modal */
 .modal {
