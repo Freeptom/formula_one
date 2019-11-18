@@ -8,7 +8,7 @@
         :value="standings.search"
         @input="filterStandings"
         placeholder="Search Driver"
-        class="search"
+        class="form-input"
       />
     </div>
 

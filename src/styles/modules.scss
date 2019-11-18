@@ -1,12 +1,12 @@
-@import '../mixins/drop-shadows.scss';
+@import "../mixins/drop-shadows.scss";
 
 .module {
   max-width: 800px;
-  margin: 4rem auto 4rem auto;
+  margin: 4rem 0;
   border-radius: 10px;
   background: white;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   @include box_shadow(1);
   .module-header {
     padding: 2rem 0 1rem 2rem;
@@ -22,11 +22,11 @@
   }
 }
 
-.search {
-  background: $gray2;
-  border: none;
-  padding: 0.4rem;
-  border-radius: 3px;
+.form-input {
+  background: white;
+  border: 1px solid $primary-color;
+  padding: 0.4rem 0.4rem 0.4rem 0.8rem;
+  border-radius: 4px;
   font-size: 1rem;
   color: $black;
 }

@@ -9,17 +9,14 @@
 </template>
 
 <script>
-
-import styles from '../styles/styles.scss';
+import styles from "../styles/styles.scss";
 
 export default {
-  name: 'Nav',
+  name: "Nav",
 
   data() {
-    return {
-
-    };
-  },
+    return {};
+  }
 };
 </script>
 
@@ -27,15 +24,14 @@ export default {
 @import "@/styles/variables/colors.scss";
 
 .main-nav {
-    background: white;
-    margin: 0;
-    width: 8rem;
-    position:fixed;
-    top: 0;
-    left: 0;
-    border-right: 1px solid $gray2;
-    height: 100%;
-     height: 100%;
+  background: white;
+  margin: 0;
+  width: 8rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-right: 1px solid $gray2;
+  height: 100%;
 
   ul {
     list-style: none;
@@ -46,7 +42,5 @@ export default {
     padding: 2rem 0;
     border-bottom: 1px solid $gray2;
   }
-
 }
-
 </style>

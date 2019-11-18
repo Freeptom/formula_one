@@ -8,6 +8,7 @@ const state = {
 };
 
 const getters = {
+  // eslint-disable-next-line max-len
   filteredStandings: state => state.standings.filter(standing => standing.Driver.familyName.toLowerCase().includes(state.search.toLowerCase())),
 };
 
