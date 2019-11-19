@@ -1,6 +1,6 @@
 <template>
   <section
-    class="module"
+    class="module calendar-module"
     v-if="!loading"
   >
     <div class="module-header">

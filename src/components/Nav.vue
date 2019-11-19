@@ -9,14 +9,14 @@
 </template>
 
 <script>
-import styles from "../styles/styles.scss";
+import styles from '../styles/styles.scss';
 
 export default {
-  name: "Nav",
+  name: 'Nav',
 
   data() {
     return {};
-  }
+  },
 };
 </script>
 

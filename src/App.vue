@@ -7,17 +7,17 @@
 </template>
 
 <script>
-import Nav from "./components/Nav.vue";
-import CurrentStandings from "./components/CurrentStandings.vue";
-import Calendar from "./components/Calendar.vue";
+import Nav from './components/Nav.vue';
+import CurrentStandings from './components/CurrentStandings.vue';
+import Calendar from './components/Calendar.vue';
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     Nav,
     CurrentStandings,
-    Calendar
-  }
+    Calendar,
+  },
 };
 </script>
 
@@ -27,19 +27,25 @@ export default {
   margin: 0;
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: 8rem;
-  grid-auto-flow: row;
-  grid-auto-columns: min-content;
-  grid-template-areas:
-    "main-nav module module"
-    "main-nav module module";
+  grid-template-columns: 8rem repeat( auto-fit, minmax(250px, 800px) );
+
+
 }
+
 .main-nav {
-  grid-area: main-nav;
+  grid-column: 1 ;
+  grid-row: 1 / -1;
 }
-.module {
-  grid-area: module;
+
+.standings-module {
+  grid-column: 2;
+
 }
+.calendar-module {
+  grid-column: 3;
+
+}
+
 main {
   padding: 0 1rem;
 }
