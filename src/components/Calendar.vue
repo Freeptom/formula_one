@@ -1,87 +1,70 @@
 <template>
-  <section
-    class="module calendar-module"
-    v-if="!loading"
-  >
+  <section class="module" v-if="!loading">
     <div class="module-header">
       <h3 class="module-heading">Race Calendar</h3>
     </div>
 
     <div class="current-month">
-      <div
-        @click="subtractMonth"
-        class="arrow-selector"
-      >
-        <-</div> <h4>{{month + ' - ' + year}}</h4>
-          <div
-            @click="addMonth"
-            class="arrow-selector"
-          >-></div>
-      </div>
+      <div @click="subtractMonth" class="arrow-selector"><-</div>
+      <h4>{{month + ' - ' + year}}</h4>
+      <div @click="addMonth" class="arrow-selector">-></div>
+    </div>
 
-      <div class="calendar">
-        <ol class="weekdays">
-          <li
-            v-for="day in days"
-            class="weekday"
-          >{{day}}</li>
-        </ol>
+    <div class="calendar">
+      <ol class="weekdays">
+        <li v-for="day in days" class="weekday">{{day}}</li>
+      </ol>
 
-        <ol class="dates">
-          <li v-for="empty in firstDayOfMonth">&nbsp;</li>
-          {{empty}}
-          <li
-            v-for="(date, index) in daysInMonth"
-            :key="index"
-            :class="{'current-day' : raceDates.includes(buildDate(date)) }"
-            @click="getRaceInfo(buildDate(date))"
-          >
-            <span>{{date}}</span>
-          </li>
-        </ol>
-        <modal
-          v-show="isModalVisible"
-          @close="closeModal"
+      <ol class="dates">
+        <li v-for="empty in firstDayOfMonth">&nbsp;</li>
+        {{empty}}
+        <li
+          v-for="(date, index) in daysInMonth"
+          :key="index"
+          :class="{'current-day' : raceDates.includes(buildDate(date)) }"
+          @click="getRaceInfo(buildDate(date))"
         >
-          <template v-slot:header>
-            <h2 class="modal__title">{{raceName}}</h2>
-            <span class="modal__round-num">Round {{roundNum}}</span>
-          </template>
-          <template v-slot:body>
-            <p>{{circuitName}}</p>
-          </template>
-        </modal>
-      </div>
+          <span>{{date}}</span>
+        </li>
+      </ol>
+      <modal v-show="isModalVisible" @close="closeModal">
+        <template v-slot:header>
+          <h2 class="modal__title">{{raceName}}</h2>
+          <span class="modal__round-num">Round {{roundNum}}</span>
+        </template>
+        <template v-slot:body>
+          <p>{{circuitName}}</p>
+        </template>
+      </modal>
+    </div>
   </section>
 </template>
 
 <script>
-import {
-  mapState, mapGetters, mapActions, mapMutations, around,
-} from 'vuex';
-import modal from '@/components/Modal.vue';
-import moment from 'moment';
-import { race } from 'q';
-import styles from '../styles/styles.scss';
+import { mapState, mapGetters, mapActions, mapMutations, around } from "vuex";
+import modal from "@/components/Modal.vue";
+import moment from "moment";
+import { race } from "q";
+import styles from "../styles/styles.scss";
 
 export default {
-  name: 'RaceCalendar',
+  name: "RaceCalendar",
   components: {
-    modal,
+    modal
   },
   data() {
     return {
-      raceName: '',
-      circuitName: '',
-      roundNum: '',
+      raceName: "",
+      circuitName: "",
+      roundNum: "",
 
       loading: true,
       isModalVisible: false,
-      isSameVar: '',
+      isSameVar: "",
       empty: null,
       today: moment(),
       dateContext: moment(),
-      days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+      days: ["S", "M", "T", "W", "T", "F", "S"]
     };
   },
 
@@ -90,16 +73,16 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['allRaces', 'raceDates']),
+    ...mapGetters(["allRaces", "raceDates"]),
 
     // view items
     year() {
       const t = this;
-      return t.dateContext.format('Y');
+      return t.dateContext.format("Y");
     },
     month() {
       const t = this;
-      return t.dateContext.format('MMMM');
+      return t.dateContext.format("MMMM");
     },
 
     // work out info for each month
@@ -109,13 +92,13 @@ export default {
     },
     currentDate() {
       const t = this;
-      return t.dateContext.get('date');
+      return t.dateContext.get("date");
     },
     firstDayOfMonth() {
       const t = this;
       const firstDay = moment(t.dateContext).subtract(
         t.currentDate - 1,
-        'days',
+        "days"
       );
       return firstDay.weekday();
     },
@@ -123,20 +106,20 @@ export default {
     // set init
     initialDate() {
       const t = this;
-      return t.today.get('date');
+      return t.today.get("date");
     },
     initialMonth() {
       const t = this;
-      return t.today.format('MMMM');
+      return t.today.format("MMMM");
     },
     initialYear() {
       const t = this;
-      return t.today.format('Y');
-    },
+      return t.today.format("Y");
+    }
   },
 
   methods: {
-    ...mapActions(['fetchRaces']),
+    ...mapActions(["fetchRaces"]),
     // date formatters
     prependUnderTen(day) {
       return day < 10 ? `0${day}` : day;
@@ -145,7 +128,7 @@ export default {
       // format month to num
       const selMonth = moment()
         .month(this.month)
-        .format('MM');
+        .format("MM");
       // format day to include '0' if under 10
       const selDay = this.prependUnderTen(day);
       // build date
@@ -155,10 +138,10 @@ export default {
 
     getRaceInfo(date) {
       let showModal = false;
-      let findRaceName = '';
-      let findCircuitName = '';
-      let findRound = '';
-      this.allRaces.forEach((el) => {
+      let findRaceName = "";
+      let findCircuitName = "";
+      let findRound = "";
+      this.allRaces.forEach(el => {
         if (el.date == date) {
           findRaceName = el.raceName;
           findCircuitName = el.Circuit.circuitName;
@@ -169,23 +152,23 @@ export default {
       this.raceName = findRaceName;
       this.circuitName = findCircuitName;
       this.roundNum = findRound;
-      return showModal ? (this.isModalVisible = true) : '';
+      return showModal ? (this.isModalVisible = true) : "";
     },
     // change month view
     addMonth() {
       const t = this;
-      t.dateContext = moment(t.dateContext).add(1, 'month');
+      t.dateContext = moment(t.dateContext).add(1, "month");
     },
     subtractMonth() {
       const t = this;
-      t.dateContext = moment(t.dateContext).subtract(1, 'month');
+      t.dateContext = moment(t.dateContext).subtract(1, "month");
     },
 
     // modal
     closeModal() {
       this.isModalVisible = false;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -251,12 +234,12 @@ export default {
   display: flex;
   justify-content: space-around;
   padding: 0 2rem 2rem 2rem;
-   @media screen and (min-width: 750px) {
-        justify-content: center;
-      .arrow-selector {
-        padding: 0 2rem;
-      }
+  @media screen and (min-width: 750px) {
+    justify-content: center;
+    .arrow-selector {
+      padding: 0 2rem;
     }
+  }
   align-content: center;
   color: $gray4;
 
@@ -291,10 +274,9 @@ export default {
     @media screen and (min-width: 750px) {
       height: 40px;
       width: 40px;
-      }
     }
   }
-
+}
 
 /* modal */
 .modal {

@@ -1,29 +1,44 @@
 <template>
-  <nav class="main-nav">
-    <ul>
-      <li>test</li>
-      <li>test</li>
-      <li>test</li>
+  <nav>
+    <ul class="menu">
+      <li class="menu__item">
+        <a class="menu__link" href="#">Dashboard</a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__link" href="#">Sales</a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__link" href="#">Campagins</a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__link" href="#">Servers</a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__link" href="#">Foobars</a>
+      </li>
+      <li class="menu__item">
+        <a class="menu__link" href="#">Plumbuses</a>
+      </li>
     </ul>
   </nav>
 </template>
 
 <script>
-import styles from '../styles/styles.scss';
+import styles from "../styles/styles.scss";
 
 export default {
-  name: 'Nav',
+  name: "Nav",
 
   data() {
     return {};
-  },
+  }
 };
 </script>
 
 <style scoped lang="scss">
 @import "@/styles/variables/colors.scss";
 
-.main-nav {
+nav {
   background: white;
   margin: 0;
   width: 8rem;
@@ -33,14 +48,23 @@ export default {
   border-right: 1px solid $gray2;
   height: 100%;
 
-  ul {
+  .menu {
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  li {
-    padding: 2rem 0;
-    border-bottom: 1px solid $gray2;
+    &__item {
+      padding: 2rem 0;
+      border-bottom: 1px solid $gray2;
+    }
+    &__link {
+      color: $gray4;
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        color: $gray4;
+      }
+    }
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <section class="module standings-module">
+  <section class="module">
     <div class="module-header">
       <h3 class="module-heading">Current Standings</h3>
       <!-- {{standings}} -->
@@ -15,10 +15,7 @@
     <table class="standings">
       <thead>
         <th class="limiter"></th>
-        <th
-          @click="sortBy('position'); flipIcon()"
-          class="number"
-        >
+        <th @click="sortBy('position'); flipIcon()" class="number">
           Pos
           <span>
             <img
@@ -27,12 +24,7 @@
               src="../assets/chevron-down.svg"
               alt="chevron-down"
             />
-            <img
-              v-else
-              class="icon-arrow"
-              src="../assets/chevron-up.svg"
-              alt="chevron-up"
-            />
+            <img v-else class="icon-arrow" src="../assets/chevron-up.svg" alt="chevron-up" />
           </span>
         </th>
         <th>Driver</th>
@@ -43,11 +35,7 @@
         <th class="limiter"></th>
       </thead>
       <tbody>
-        <tr
-          v-for="standing in filteredStandings"
-          :key="standing.position"
-          class="standing"
-        >
+        <tr v-for="standing in filteredStandings" :key="standing.position" class="standing">
           <td class="limiter"></td>
           <td class="number">{{standing.position }}</td>
           <td>
@@ -65,17 +53,15 @@
 </template>
 
 <script>
-import {
-  mapState, mapGetters, mapActions, mapMutations,
-} from 'vuex';
-import styles from '../styles/styles.scss';
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
+import styles from "../styles/styles.scss";
 
 export default {
-  name: 'CurrentStandings',
+  name: "CurrentStandings",
 
   data() {
     return {
-      numericalOrder: true,
+      numericalOrder: true
     };
   },
 
@@ -84,26 +70,26 @@ export default {
   },
 
   computed: {
-    ...mapState(['standings']),
-    ...mapGetters(['filteredStandings']),
+    ...mapState(["standings"]),
+    ...mapGetters(["filteredStandings"])
   },
 
   methods: {
-    ...mapActions(['fetchStandings']),
-    ...mapMutations(['set_search']),
+    ...mapActions(["fetchStandings"]),
+    ...mapMutations(["set_search"]),
 
     flipIcon() {
       this.numericalOrder = !this.numericalOrder;
     },
 
     filterStandings({ type, target }) {
-      this.$store.commit('set_search', target.value);
+      this.$store.commit("set_search", target.value);
     },
     sortBy(prop) {
       const sort = this.filteredStandings.reverse();
-      this.$store.commit('set_standings', sort);
-    },
-  },
+      this.$store.commit("set_standings", sort);
+    }
+  }
 };
 </script>
 
