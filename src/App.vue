@@ -6,9 +6,7 @@
           <h1>Drive</h1>
         </a>
       </header>
-
       <Nav class="drive__nav"></Nav>
-
       <main class="drive__main">
         <h2>Dashboard</h2>
         <div class="dashboard">
