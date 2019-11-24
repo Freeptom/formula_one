@@ -1,5 +1,5 @@
 <template>
-  <section class="module" v-if="!loading">
+  <section class="module calendar-module" v-if="!loading">
     <div class="module-header">
       <h3 class="module-heading">Race Calendar</h3>
     </div>

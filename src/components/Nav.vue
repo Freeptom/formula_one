@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="app__nav">
     <ul class="menu">
       <li class="menu__item">
         <a class="menu__link" href="#">Dashboard</a>
@@ -40,13 +40,7 @@ export default {
 
 nav {
   background: white;
-  margin: 0;
-  width: 8rem;
-  position: fixed;
-  top: 0;
-  left: 0;
   border-right: 1px solid $gray2;
-  height: 100%;
 
   .menu {
     list-style: none;

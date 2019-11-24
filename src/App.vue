@@ -1,30 +1,33 @@
 <template>
   <div id="app">
-    <header class="app__header">
-      <a href="#" class="logo">
-        <h1>Drive</h1>
-      </a>
-    </header>
-    <Nav class="app__nav"></Nav>
+    <div class="drive">
+      <header class="drive__header">
+        <a href="#" class="logo">
+          <h1>Drive</h1>
+        </a>
+      </header>
 
-    <main class="app__main">
-      <h2>Dashboard</h2>
-      <div class="dashboard">
-        <div class="dashboard__item">
-          <div class="card">
-            <CurrentStandings></CurrentStandings>
+      <Nav class="drive__nav"></Nav>
+
+      <main class="drive__main">
+        <h2>Dashboard</h2>
+        <div class="dashboard">
+          <div class="dashboard__item">
+            <div class="card">
+              <CurrentStandings></CurrentStandings>
+            </div>
+          </div>
+          <div class="dashboard__item">
+            <div class="card">
+              <Calendar></Calendar>
+            </div>
           </div>
         </div>
-        <div class="dashboard__item">
-          <div class="card">
-            <Calendar></Calendar>
-          </div>
-        </div>
-      </div>
-    </main>
-    <footer class="app__footer">
-      <span>&copy; 2019 Drive Inc.</span>
-    </footer>
+      </main>
+      <!-- <footer class="drive__footer">
+        <span>&copy; 2019 Drive Inc.</span>
+      </footer>-->
+    </div>
   </div>
 </template>
 
@@ -44,28 +47,29 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/styles/variables/colors.scss";
 #app {
+}
+
+.drive {
   // variables
   $app-header-height: 70px;
   $app-footer-height: 70px;
   $app-nav-width: 8rem;
 
   --spacing: 1rem;
-  width: 100%;
-  height: 100%;
-  margin: 0;
+
   // flex fallback
   display: flex;
   flex-wrap: wrap;
   // Grid
   display: grid;
   height: 100vh;
-  grid-gap: 2rem;
+  grid-template-rows: $app-header-height 1fr;
   grid-template-columns: $app-nav-width 1fr;
   grid-template-areas:
-    "header header"
-    "nav    main"
-    "footer footer";
+    "header main"
+    "nav    main";
 
   &__header {
     display: flex;
@@ -73,14 +77,15 @@ export default {
     grid-area: header;
     height: $app-header-height;
     background-color: #fff;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    border-bottom: 1px solid $gray2;
+    border-right: 1px solid $gray2;
     position: relative;
+    width: $app-nav-width;
   }
 
   &__nav {
     flex: 0 0 $app-nav-width;
     grid-area: nav;
-    background-color: #313541;
   }
 
   &__main {
@@ -121,6 +126,7 @@ export default {
 
   // Grid
   display: grid;
+  height: 100vh;
   grid-template-columns: repeat(var(--column-count), 1fr);
   grid-gap: var(--spacing);
 
