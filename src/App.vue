@@ -2,7 +2,10 @@
   <div id="app">
     <div class="drive">
       <header class="drive__header">
-        <a href="#" class="logo">
+        <a
+          href="#"
+          class="logo"
+        >
           <h1>Drive</h1>
         </a>
       </header>
@@ -30,30 +33,32 @@
 </template>
 
 <script>
-import Nav from "./components/Nav.vue";
-import CurrentStandings from "./components/CurrentStandings.vue";
-import Calendar from "./components/Calendar.vue";
+import Nav from './components/Nav.vue';
+import CurrentStandings from './components/CurrentStandings.vue';
+import Calendar from './components/Calendar.vue';
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     Nav,
     CurrentStandings,
-    Calendar
-  }
+    Calendar,
+  },
 };
 </script>
 
 <style scoped lang="scss">
 @import "@/styles/variables/colors.scss";
-#app {
-}
-
-.drive {
   // variables
   $app-header-height: 70px;
   $app-footer-height: 70px;
   $app-nav-width: 8rem;
+:root {}
+#app {
+}
+
+.drive {
+
 
   --spacing: 1rem;
 
@@ -110,6 +115,24 @@ export default {
   @media screen and (min-width: 48rem) {
     --spacing: 2rem;
   }
+
+  .logo {
+  display: flex;
+  flex: 0 0 $app-nav-width;
+  height: $app-header-height;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0;
+  color: #fff;
+  background-color: $primary-color;
+  font-size: 1rem;
+
+  h1 {
+    margin: 0;
+  }
+}
+
 }
 
 // Dashboard Overview Grid
@@ -161,7 +184,14 @@ export default {
       padding: 0;
     }
   }
+
 }
+
+a {
+  color: #dc5a60;
+  text-decoration: none;
+}
+
 
 main {
   padding: var(--spacing);
