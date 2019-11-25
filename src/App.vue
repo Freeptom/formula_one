@@ -71,8 +71,14 @@ export default {
   grid-template-rows: $app-header-height 1fr;
   grid-template-columns: $app-nav-width 1fr;
   grid-template-areas:
+    "header header"
+    "main main"
+    "nav nav";
+     @media screen and (min-width: 400px) {
+      grid-template-areas:
     "header main"
     "nav    main";
+  }
 
   &__header {
     display: flex;
