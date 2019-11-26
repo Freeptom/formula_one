@@ -15,9 +15,15 @@
     <table class="standings">
       <thead>
         <th class="limiter"></th>
-        <th @click="sortBy('position'); flipIcon()" class="number">
+        <th
+          @click="
+            sortBy('position');
+            flipIcon();
+          "
+          class="number"
+        >
           Pos
-          <span>
+          <span class="icon-holder">
             <img
               v-if="numericalOrder"
               class="icon-arrow"
@@ -37,14 +43,14 @@
       <tbody>
         <tr v-for="standing in filteredStandings" :key="standing.position" class="standing">
           <td class="limiter"></td>
-          <td class="number">{{standing.position }}</td>
+          <td class="number">{{ standing.position }}</td>
           <td>
-            <strong>{{standing.Driver.familyName | to-uppercase | abrv}}</strong>
+            <strong>{{ standing.Driver.familyName | (to - uppercase) | abrv }}</strong>
           </td>
           <td class="nat">{{standing.Driver.nationality | to-title-case}}</td>
           <td>{{standing.Constructors[0].constructorId | to-title-case}}</td>
-          <td class="number">{{standing.wins }}</td>
-          <td class="number">{{standing.points}}</td>
+          <td class="number">{{ standing.wins }}</td>
+          <td class="number">{{ standing.points }}</td>
           <td class="limiter"></td>
         </tr>
       </tbody>

@@ -6,34 +6,36 @@
 
     <div class="current-month">
       <div @click="subtractMonth" class="arrow-selector"><-</div>
-      <h4>{{month + ' - ' + year}}</h4>
+      <h4>{{ month + " - " + year }}</h4>
       <div @click="addMonth" class="arrow-selector">-></div>
     </div>
 
     <div class="calendar">
       <ol class="weekdays">
-        <li v-for="day in days" class="weekday">{{day}}</li>
+        <li v-for="day in days" class="weekday">{{ day }}</li>
       </ol>
 
       <ol class="dates">
         <li v-for="empty in firstDayOfMonth">&nbsp;</li>
-        {{empty}}
+        {{
+          empty
+        }}
         <li
           v-for="(date, index) in daysInMonth"
           :key="index"
-          :class="{'current-day' : raceDates.includes(buildDate(date)) }"
+          :class="{ 'current-day': raceDates.includes(buildDate(date)) }"
           @click="getRaceInfo(buildDate(date))"
         >
-          <span>{{date}}</span>
+          <span>{{ date }}</span>
         </li>
       </ol>
       <modal v-show="isModalVisible" @close="closeModal">
         <template v-slot:header>
-          <h2 class="modal__title">{{raceName}}</h2>
-          <span class="modal__round-num">Round {{roundNum}}</span>
+          <h2 class="modal__title">{{ raceName }}</h2>
+          <span class="modal__round-num">Round {{ roundNum }}</span>
         </template>
         <template v-slot:body>
-          <p>{{circuitName}}</p>
+          <p>{{ circuitName }}</p>
         </template>
       </modal>
     </div>
@@ -96,10 +98,7 @@ export default {
     },
     firstDayOfMonth() {
       const t = this;
-      const firstDay = moment(t.dateContext).subtract(
-        t.currentDate - 1,
-        "days"
-      );
+      const firstDay = moment(t.dateContext).subtract(t.currentDate - 1, "days");
       return firstDay.weekday();
     },
 
@@ -219,11 +218,12 @@ export default {
 
 .dates {
   list-style: none;
+  padding: 0 0 2rem 0;
   li {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 1rem;
     @media screen and (max-width: 900px) {
       padding: 0.5rem;
     }

@@ -92,7 +92,6 @@ export default {
     padding: var(--spacing);
     overflow-y: auto;
     overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
   }
 
   &__footer {
@@ -125,7 +124,7 @@ export default {
   // Grid
   display: grid;
   height: 100vh;
-  grid-template-columns: repeat(var(--column-count), 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: var(--spacing);
 
   &__item {
