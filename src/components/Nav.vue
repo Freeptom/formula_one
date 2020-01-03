@@ -5,15 +5,6 @@
         <a class="menu__link" href="#">Dashboard</a>
       </li>
       <li class="menu__item">
-        <a class="menu__link" href="#">Sales</a>
-      </li>
-      <li class="menu__item">
-        <a class="menu__link" href="#">Campagins</a>
-      </li>
-      <li class="menu__item">
-        <a class="menu__link" href="#">Servers</a>
-      </li>
-      <li class="menu__item">
         <a class="menu__link" href="#">Foobars</a>
       </li>
       <li class="menu__item">
@@ -24,19 +15,19 @@
 </template>
 
 <script>
-import styles from "../styles/styles.scss";
+import styles from '../styles/styles.scss';
 
 export default {
-  name: "Nav",
+  name: 'Nav',
 
   data() {
     return {};
-  }
+  },
 };
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/variables/colors.scss";
+@import '@/styles/variables/colors.scss';
 
 nav {
   background: white;
@@ -46,9 +37,16 @@ nav {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: space-around;
+    @media screen and (min-width: 400px) {
+      display: block;
+    }
     &__item {
       padding: 2rem 0;
-      border-bottom: 1px solid $gray2;
+      @media screen and (min-width: 400px) {
+        border-bottom: 1px solid $gray2;
+      }
     }
     &__link {
       color: $gray4;
