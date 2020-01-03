@@ -6,9 +6,9 @@
       <input
         type="text"
         :value="standings.search"
-        @input="filterStandings"
         placeholder="Search Driver"
         class="form-input"
+        @input="filterStandings"
       />
     </div>
 
@@ -16,11 +16,11 @@
       <thead>
         <th class="limiter"></th>
         <th
+          class="number"
           @click="
             sortBy('position');
             flipIcon();
           "
-          class="number"
         >
           Pos
           <span class="icon-holder">
@@ -45,10 +45,10 @@
           <td class="limiter"></td>
           <td class="number">{{ standing.position }}</td>
           <td>
-            <strong>{{ standing.Driver.familyName | (to - uppercase) | abrv }}</strong>
+            <strong>{{ standing.Driver.familyName | toUppercase | abrv }}</strong>
           </td>
-          <td class="nat">{{standing.Driver.nationality | to-title-case}}</td>
-          <td>{{standing.Constructors[0].constructorId | to-title-case}}</td>
+          <td class="nat">{{ standing.Driver.nationality | toTitleCase }}</td>
+          <td>{{ standing.Constructors[0].constructorId | toTitleCase }}</td>
           <td class="number">{{ standing.wins }}</td>
           <td class="number">{{ standing.points }}</td>
           <td class="limiter"></td>
@@ -59,43 +59,44 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
-import styles from "../styles/styles.scss";
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
+// eslint-disable-next-line no-unused-vars
+import styles from '../styles/styles.scss';
 
 export default {
-  name: "CurrentStandings",
+  name: 'CurrentStandings',
 
   data() {
     return {
-      numericalOrder: true
+      numericalOrder: true,
     };
+  },
+
+  computed: {
+    ...mapState(['standings']),
+    ...mapGetters(['filteredStandings']),
   },
 
   mounted() {
     this.fetchStandings();
   },
 
-  computed: {
-    ...mapState(["standings"]),
-    ...mapGetters(["filteredStandings"])
-  },
-
   methods: {
-    ...mapActions(["fetchStandings"]),
-    ...mapMutations(["set_search"]),
+    ...mapActions(['fetchStandings']),
+    ...mapMutations(['set_search']),
 
     flipIcon() {
       this.numericalOrder = !this.numericalOrder;
     },
 
-    filterStandings({ type, target }) {
-      this.$store.commit("set_search", target.value);
+    filterStandings({ target }) {
+      this.$store.commit('set_search', target.value);
     },
-    sortBy(prop) {
+    sortBy() {
       const sort = this.filteredStandings.reverse();
-      this.$store.commit("set_standings", sort);
-    }
-  }
+      this.$store.commit('set_standings', sort);
+    },
+  },
 };
 </script>
 

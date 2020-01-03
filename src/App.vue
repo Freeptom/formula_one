@@ -30,28 +30,23 @@
 </template>
 
 <script>
-import Nav from "./components/Nav.vue";
-import CurrentStandings from "./components/CurrentStandings.vue";
-import Calendar from "./components/Calendar.vue";
+import Nav from './components/Nav.vue';
+import CurrentStandings from './components/CurrentStandings.vue';
+import Calendar from './components/Calendar.vue';
 
 export default {
-  name: "app",
+  name: 'App',
   components: {
     Nav,
     CurrentStandings,
-    Calendar
-  }
+    Calendar,
+  },
 };
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/variables/colors.scss";
+@import '@/styles/variables/colors.scss';
 // variables
-:root {
-}
-
-#app {
-}
 
 .drive {
   --spacing: 1rem;
@@ -63,20 +58,20 @@ export default {
   flex-wrap: wrap;
   // Grid
   display: grid;
-  height: 100vh;
-  grid-template-rows: var(--app-header-height), 1fr;
+  // height: 100vh;
+  grid-template-rows: var(--app-header-height) 1fr;
   grid-template-columns: 1fr;
   grid-template-areas:
-    "header"
-    "main"
-    "nav";
+    'header'
+    'nav'
+    'main';
   @media screen and (min-width: 400px) {
     --app-nav-width: 8rem;
-    grid-template-rows: var(--app-header-height), 1fr;
+    grid-template-rows: var(--app-header-height) 1fr;
     grid-template-columns: var(--app-nav-width) 1fr;
     grid-template-areas:
-      "header main"
-      "nav    main";
+      'header main'
+      'nav    main';
   }
 
   &__header {

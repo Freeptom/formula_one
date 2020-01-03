@@ -6,22 +6,23 @@ Vue.config.productionTip = false;
 
 // filters
 
-Vue.filter('last-name', (value) => {
+Vue.filter('last-name', value => {
   const splitString = value.split('_');
   return splitString.pop();
 });
 
 Vue.filter('abrv', value => value.slice(0, 3));
 
-Vue.filter('to-uppercase', value => value.toUpperCase());
+Vue.filter('toUppercase', value => value.toUpperCase());
 
-
-Vue.filter('to-title-case', value => value
-  .replace(/_/gi, ' ')
-  .toLowerCase()
-  .split(' ')
-  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-  .join(' '));
+Vue.filter('toTitleCase', value =>
+  value
+    .replace(/_/gi, ' ')
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+);
 
 new Vue({
   store,
