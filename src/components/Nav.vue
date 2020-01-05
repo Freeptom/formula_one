@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import styles from '../styles/styles.scss';
-
 export default {
   name: 'Nav',
 
@@ -32,12 +30,13 @@ export default {
 nav {
   background: white;
   border-right: 1px solid $gray2;
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 450px) {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
     z-index: 3;
+    border-top: 4px solid $gray2;
   }
   .menu {
     list-style: none;
@@ -46,12 +45,13 @@ nav {
     display: flex;
     justify-content: space-around;
 
-    @media screen and (min-width: 400px) {
+    @media screen and (min-width: 450px) {
       display: block;
     }
     &__item {
+      text-align: center;
       padding: 2rem 0;
-      @media screen and (min-width: 400px) {
+      @media screen and (min-width: 450px) {
         border-bottom: 1px solid $gray2;
       }
     }

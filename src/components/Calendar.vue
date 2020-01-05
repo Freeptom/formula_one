@@ -1,13 +1,14 @@
 <template>
-  <section class="module calendar-module" v-if="!loading">
+  <section v-if="!loading" class="module calendar-module">
     <div class="module-header">
       <h3 class="module-heading">Race Calendar</h3>
     </div>
 
     <div class="current-month">
-      <div @click="subtractMonth" class="arrow-selector"><-</div>
-      <h4>{{ month + " - " + year }}</h4>
-      <div @click="addMonth" class="arrow-selector">-></div>
+      <!--eslint-disable-next-line vue/no-parsing-error -->
+      <div class="arrow-selector" @click="subtractMonth"><-</div>
+      <h4>{{ month + ' - ' + year }}</h4>
+      <div class="arrow-selector" @click="addMonth">-></div>
     </div>
 
     <div class="calendar">
@@ -43,48 +44,42 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions, mapMutations, around } from "vuex";
-import modal from "@/components/Modal.vue";
-import moment from "moment";
-import { race } from "q";
-import styles from "../styles/styles.scss";
+import { mapGetters, mapActions } from 'vuex';
+import modal from '@/components/Modal.vue';
+import moment from 'moment';
 
 export default {
-  name: "RaceCalendar",
+  name: 'RaceCalendar',
   components: {
-    modal
+    modal,
   },
   data() {
     return {
-      raceName: "",
-      circuitName: "",
-      roundNum: "",
+      raceName: '',
+      circuitName: '',
+      roundNum: '',
 
       loading: true,
       isModalVisible: false,
-      isSameVar: "",
+      isSameVar: '',
       empty: null,
       today: moment(),
       dateContext: moment(),
-      days: ["S", "M", "T", "W", "T", "F", "S"]
+      days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
     };
   },
 
-  mounted() {
-    this.fetchRaces().then(() => (this.loading = false));
-  },
-
   computed: {
-    ...mapGetters(["allRaces", "raceDates"]),
+    ...mapGetters(['allRaces', 'raceDates']),
 
     // view items
     year() {
       const t = this;
-      return t.dateContext.format("Y");
+      return t.dateContext.format('Y');
     },
     month() {
       const t = this;
-      return t.dateContext.format("MMMM");
+      return t.dateContext.format('MMMM');
     },
 
     // work out info for each month
@@ -94,31 +89,35 @@ export default {
     },
     currentDate() {
       const t = this;
-      return t.dateContext.get("date");
+      return t.dateContext.get('date');
     },
     firstDayOfMonth() {
       const t = this;
-      const firstDay = moment(t.dateContext).subtract(t.currentDate - 1, "days");
+      const firstDay = moment(t.dateContext).subtract(t.currentDate - 1, 'days');
       return firstDay.weekday();
     },
 
     // set init
     initialDate() {
       const t = this;
-      return t.today.get("date");
+      return t.today.get('date');
     },
     initialMonth() {
       const t = this;
-      return t.today.format("MMMM");
+      return t.today.format('MMMM');
     },
     initialYear() {
       const t = this;
-      return t.today.format("Y");
-    }
+      return t.today.format('Y');
+    },
+  },
+
+  mounted() {
+    this.fetchRaces().then(() => (this.loading = false));
   },
 
   methods: {
-    ...mapActions(["fetchRaces"]),
+    ...mapActions(['fetchRaces']),
     // date formatters
     prependUnderTen(day) {
       return day < 10 ? `0${day}` : day;
@@ -127,7 +126,7 @@ export default {
       // format month to num
       const selMonth = moment()
         .month(this.month)
-        .format("MM");
+        .format('MM');
       // format day to include '0' if under 10
       const selDay = this.prependUnderTen(day);
       // build date
@@ -137,9 +136,9 @@ export default {
 
     getRaceInfo(date) {
       let showModal = false;
-      let findRaceName = "";
-      let findCircuitName = "";
-      let findRound = "";
+      let findRaceName = '';
+      let findCircuitName = '';
+      let findRound = '';
       this.allRaces.forEach(el => {
         if (el.date == date) {
           findRaceName = el.raceName;
@@ -151,29 +150,29 @@ export default {
       this.raceName = findRaceName;
       this.circuitName = findCircuitName;
       this.roundNum = findRound;
-      return showModal ? (this.isModalVisible = true) : "";
+      return showModal ? (this.isModalVisible = true) : '';
     },
     // change month view
     addMonth() {
       const t = this;
-      t.dateContext = moment(t.dateContext).add(1, "month");
+      t.dateContext = moment(t.dateContext).add(1, 'month');
     },
     subtractMonth() {
       const t = this;
-      t.dateContext = moment(t.dateContext).subtract(1, "month");
+      t.dateContext = moment(t.dateContext).subtract(1, 'month');
     },
 
     // modal
     closeModal() {
       this.isModalVisible = false;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/variables/colors.scss";
-@import "../mixins/drop-shadows.scss";
+@import '@/styles/variables/colors.scss';
+@import '../mixins/drop-shadows.scss';
 .fade-enter {
   opacity: 0;
 }
@@ -206,7 +205,7 @@ export default {
   position: relative;
   z-index: 1;
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     left: 5%;
     top: 30px;
@@ -214,6 +213,10 @@ export default {
     width: 90%; /* or 100px */
     border-bottom: 1px solid rgba(221, 226, 229, 0.4);
   }
+}
+
+.weekday {
+  text-align: center;
 }
 
 .dates {
@@ -231,6 +234,7 @@ export default {
 }
 
 .current-month {
+  text-align: center;
   display: flex;
   justify-content: space-around;
   padding: 0 2rem 2rem 2rem;
@@ -260,7 +264,7 @@ export default {
   cursor: pointer;
   &::before {
     @include box_shadow(2);
-    content: "";
+    content: '';
     position: absolute;
     height: 30px;
     width: 30px;

@@ -65,7 +65,7 @@ export default {
     'header'
     'nav'
     'main';
-  @media screen and (min-width: 400px) {
+  @media screen and (min-width: 440px) {
     --app-nav-width: 8rem;
     grid-template-rows: var(--app-header-height) 1fr;
     grid-template-columns: var(--app-nav-width) 1fr;
@@ -111,7 +111,7 @@ export default {
     background-color: #1d2127;
   }
 
-  @media screen and (min-width: 48rem) {
+  @media screen and (min-width: 450px) {
     --spacing: 2rem;
   }
 
@@ -169,7 +169,7 @@ export default {
   }
 
   // Switch to 4-col grid on larger screens
-  @media screen and (min-width: 48rem) {
+  @media screen and (min-width: 450px) {
     --column-count: 4;
   }
 
