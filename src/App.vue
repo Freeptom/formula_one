@@ -154,7 +154,9 @@ export default {
     flex: 1 1 50%;
     grid-column-end: span 2;
     padding: calc(var(--spacing) / 2);
-
+    &:last-of-type {
+      margin-bottom: 8vh;
+    }
     // these span the full width
     &--full-width {
       flex-basis: 100%;

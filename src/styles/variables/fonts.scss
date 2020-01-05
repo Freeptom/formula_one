@@ -1,17 +1,13 @@
 $line-height: 1.5;
-
-
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+html, body {
+  font-family: 'Roboto Condensed', sans-serif;
+}
 body {
   font-size: 16px;
   box-sizing: border-box;
   line-height: $line-height;
 }
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
-
-html, body {
-  font-family: 'Roboto Condensed', sans-serif;
-}
-
 #app {
   font-family: 'Roboto Condensed', sans-serif;
 }

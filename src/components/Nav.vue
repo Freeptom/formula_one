@@ -37,6 +37,7 @@ nav {
     width: 100%;
     z-index: 3;
     border-top: 4px solid $gray2;
+    height: 8vh;
   }
   .menu {
     list-style: none;
@@ -44,15 +45,17 @@ nav {
     padding: 0;
     display: flex;
     justify-content: space-around;
-
+    height: 100%;
+    align-items: center;
     @media screen and (min-width: 450px) {
       display: block;
     }
     &__item {
       text-align: center;
-      padding: 2rem 0;
+      padding: 0;
       @media screen and (min-width: 450px) {
         border-bottom: 1px solid $gray2;
+        padding: 2rem 0;
       }
     }
     &__link {
