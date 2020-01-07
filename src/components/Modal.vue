@@ -1,5 +1,3 @@
-
-
 <template>
   <transition name="modal-fade">
     <div class="modal-backdrop">
@@ -9,22 +7,21 @@
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
       >
-        <header class="modal-header" id="modalTitle">
+        <header id="modalTitle" class="modal-header">
           <slot name="header" class="title">
-            {{title}}
-            <button
-              type="button"
-              class="btn-close"
-              @click="close"
-              aria-label="Close modal"
-            >x</button>
+            {{ title }}
+            <button type="button" class="btn-close" aria-label="Close modal" @click="close">
+              x
+            </button>
           </slot>
         </header>
         <section class="modal-body">
-          <slot name="body" id="modalDescription">I'm the default body!</slot>
+          <slot id="modalDescription" name="body">I'm the default body!</slot>
         </section>
         <footer class="modal-footer">
-          <button type="button" class="btn-close" @click="close" aria-label="Close modal">Close</button>
+          <button type="button" class="btn-close" aria-label="Close modal" @click="close">
+            Close
+          </button>
         </footer>
       </div>
     </div>
@@ -33,24 +30,24 @@
 
 <script>
 export default {
-  name: "modal",
+  name: 'Modal',
 
   data() {
     return {
-      title: "I am a dynamic title"
+      title: 'I am a dynamic title',
     };
   },
   methods: {
     close() {
-      this.$emit("close");
-    }
-  }
+      this.$emit('close');
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/variables/colors.scss";
-@import "../mixins/drop-shadows.scss";
+@import '@/styles/variables/colors.scss';
+@import '../mixins/drop-shadows.scss';
 .modal-backdrop {
   z-index: 1;
   position: fixed;
