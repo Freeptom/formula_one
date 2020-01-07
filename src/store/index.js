@@ -10,13 +10,7 @@ export default new Vuex.Store({
     standings,
     raceCalendar,
   },
-  state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
-  },
+  state: {},
+  mutations: {},
+  actions: {},
 });

@@ -20,11 +20,9 @@
       </ol>
 
       <ol class="dates">
-        <!-- eslint-disable-next-line vue/require-v-for-key -->
+        <!-- eslint-disable-next-line vue/no-unused-vars eslint-disable-next-line vue/require-v-for-key -->
         <li v-for="empty in firstDayOfMonth">&nbsp;</li>
-        {{
-          empty
-        }}
+
         <li
           v-for="(date, index) in daysInMonth"
           :key="index"
