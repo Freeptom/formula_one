@@ -5,8 +5,8 @@
     </div>
 
     <div class="current-month">
-      <!--eslint-disable-next-line vue/no-parsing-error -->
       <div class="arrow-selector" @click="subtractMonth">
+        <!-- eslint-disable-next-line vue/no-parsing-error -->
         <-
       </div>
       <h4>{{ month + ' - ' + year }}</h4>
@@ -15,10 +15,12 @@
 
     <div class="calendar">
       <ol class="weekdays">
+        <!-- eslint-disable-next-line vue/require-v-for-key -->
         <li v-for="day in days" class="weekday">{{ day }}</li>
       </ol>
 
       <ol class="dates">
+        <!-- eslint-disable-next-line vue/require-v-for-key -->
         <li v-for="empty in firstDayOfMonth">&nbsp;</li>
         {{
           empty
