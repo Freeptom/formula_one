@@ -4,18 +4,17 @@ import axios from 'axios';
 
 const state = {
   races: '',
-
+  raceCount: '',
 };
 
 const getters = {
   allRaces: state => state.races,
   raceDates: state => state.races.map(race => race.date),
+  raceCount: state => state.races.length,
 };
-
 
 const mutations = {
   set_races: (state, races) => (state.races = races),
-
 };
 
 const actions = {
@@ -27,8 +26,6 @@ const actions = {
       console.log(e);
     }
   },
-
-
 };
 
 export default {
