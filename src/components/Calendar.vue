@@ -5,18 +5,22 @@
     </div>
 
     <div class="current-month">
-      <!--eslint-disable-next-line vue/no-parsing-error -->
-      <div class="arrow-selector" @click="subtractMonth"><-</div>
+      <div class="arrow-selector" @click="subtractMonth">
+        <!-- eslint-disable-next-line vue/no-parsing-error -->
+        <-
+      </div>
       <h4>{{ month + ' - ' + year }}</h4>
       <div class="arrow-selector" @click="addMonth">-></div>
     </div>
 
     <div class="calendar">
       <ol class="weekdays">
+        <!-- eslint-disable-next-line vue/require-v-for-key -->
         <li v-for="day in days" class="weekday">{{ day }}</li>
       </ol>
 
       <ol class="dates">
+        <!-- eslint-disable-next-line vue/require-v-for-key -->
         <li v-for="empty in firstDayOfMonth">&nbsp;</li>
         {{
           empty
@@ -55,17 +59,21 @@ export default {
   },
   data() {
     return {
+      // race vars
       raceName: '',
       circuitName: '',
       roundNum: '',
 
-      loading: true,
-      isModalVisible: false,
+      // date vars
       isSameVar: '',
       empty: null,
       today: moment(),
       dateContext: moment(),
       days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+
+      // general vars
+      loading: true,
+      isModalVisible: false,
     };
   },
 
@@ -122,6 +130,7 @@ export default {
     prependUnderTen(day) {
       return day < 10 ? `0${day}` : day;
     },
+
     buildDate(day) {
       // format month to num
       const selMonth = moment()
@@ -139,19 +148,23 @@ export default {
       let findRaceName = '';
       let findCircuitName = '';
       let findRound = '';
+      // iterate through each race to match date of current
       this.allRaces.forEach(el => {
         if (el.date == date) {
+          // if date match then give variables above values
           findRaceName = el.raceName;
           findCircuitName = el.Circuit.circuitName;
           findRound = el.round;
           showModal = true;
         }
       });
+      // assign the variables just assigned to data properties
       this.raceName = findRaceName;
       this.circuitName = findCircuitName;
       this.roundNum = findRound;
       return showModal ? (this.isModalVisible = true) : '';
     },
+
     // change month view
     addMonth() {
       const t = this;
@@ -162,7 +175,6 @@ export default {
       t.dateContext = moment(t.dateContext).subtract(1, 'month');
     },
 
-    // modal
     closeModal() {
       this.isModalVisible = false;
     },
