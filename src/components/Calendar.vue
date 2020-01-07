@@ -76,7 +76,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['allRaces', 'raceDates']),
+    ...mapGetters(['allRaces', 'raceDates', 'raceCount']),
 
     // view items
     year() {
@@ -119,11 +119,13 @@ export default {
   },
 
   mounted() {
+    let a = 2;
+    this.fetchResults(a);
     this.fetchRaces().then(() => (this.loading = false));
   },
 
   methods: {
-    ...mapActions(['fetchRaces']),
+    ...mapActions(['fetchRaces', 'fetchResults']),
     // date formatters
     prependUnderTen(day) {
       return day < 10 ? `0${day}` : day;
@@ -156,7 +158,7 @@ export default {
           showModal = true;
         }
       });
-      // assign the variables just assigned to data properties
+      // assign the variables just assigned to corresponding data properties
       this.raceName = findRaceName;
       this.circuitName = findCircuitName;
       this.roundNum = findRound;

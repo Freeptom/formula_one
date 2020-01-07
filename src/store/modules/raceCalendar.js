@@ -26,6 +26,16 @@ const actions = {
       console.log(e);
     }
   },
+  async fetchResults(round) {
+    try {
+      console.log(round);
+
+      const response = await axios.get(`http://ergast.com/api/f1/current/${round}/results`);
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };
 
 export default {
