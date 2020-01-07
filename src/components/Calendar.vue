@@ -5,6 +5,7 @@
     </div>
 
     <div class="current-month">
+
       <div class="arrow-selector" @click="subtractMonth">
         <!-- eslint-disable-next-line vue/no-parsing-error -->
         <-
