@@ -48,6 +48,10 @@ export default {
 <style scoped lang="scss">
 @import '@/styles/variables/colors.scss';
 @import '../mixins/drop-shadows.scss';
+
+$modal-lr-padding: 60px;
+$modal-tb-padding: 30px;
+
 .modal-backdrop {
   z-index: 1;
   position: fixed;
@@ -62,34 +66,35 @@ export default {
 }
 
 .modal {
+  padding: $modal-tb-padding 0;
   background: #ffffff;
   @include box_shadow(4);
   overflow-x: auto;
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   border-radius: 15px;
 }
 
-.modal-header,
-.modal-footer {
-  padding: 15px;
-  display: flex;
-}
-
 .modal-header {
+  padding: 0 $modal-lr-padding;
   border-bottom: 1px solid #eeeeee;
   color: $gray4;
   justify-content: space-between;
 }
 
-.modal-footer {
-  border-top: 1px solid #eeeeee;
-  justify-content: flex-end;
+.modal-body {
+  padding: 0 $modal-lr-padding;
+  position: relative;
+  width: 100%;
 }
 
-.modal-body {
-  position: relative;
-  padding: 20px 10px;
+.modal-footer {
+  padding: $modal-tb-padding $modal-lr-padding 0 $modal-lr-padding;
+  display: flex;
+  width: 100%;
+  border-top: 1px solid #eeeeee;
+  justify-content: flex-end;
 }
 
 .btn-close {
@@ -97,8 +102,12 @@ export default {
   background: none;
   padding: 0.4rem 1rem;
   border: 1px solid #3a47d5;
-  border-radius: 20px;
+  border-radius: 24px;
   cursor: pointer;
+  &:hover {
+    background: #3a47d5;
+    color: white;
+  }
 }
 
 /* transition */

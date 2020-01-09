@@ -9,9 +9,11 @@ const state = {
 
 const getters = {
   // eslint-disable-next-line max-len
-  filteredStandings: state => state.standings.filter(standing => standing.Driver.familyName.toLowerCase().includes(state.search.toLowerCase())),
+  filteredStandings: state =>
+    state.standings.filter(standing =>
+      standing.Driver.familyName.toLowerCase().includes(state.search.toLowerCase())
+    ),
 };
-
 
 const mutations = {
   set_standings: (state, standings) => (state.standings = standings),

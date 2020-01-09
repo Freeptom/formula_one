@@ -4,15 +4,13 @@ import axios from 'axios';
 
 const state = {
   races: '',
-  raceCount: '',
   results: '',
 };
 
 const getters = {
   allRaces: state => state.races,
   raceDates: state => state.races.map(race => race.date),
-  raceCount: state => state.races.length,
-  // lapNumber: state => state.results
+  lapNumber: state => state.results.Results[0].laps,
 };
 
 const mutations = {
@@ -29,10 +27,10 @@ const actions = {
       console.log(e);
     }
   },
-  async fetchResults({ commit }) {
+  async fetchRoundResults({ commit }, roundNum) {
     try {
-      const response = await axios.get(`http://ergast.com/api/f1/current/2/results`);
-      console.log(response.data.MRData);
+      const response = await axios.get(`http://ergast.com/api/f1/current/${roundNum}/results.json`);
+      commit('set_results', response.data.MRData.RaceTable.Races[0]);
     } catch (e) {
       console.log(e);
     }
