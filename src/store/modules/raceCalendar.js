@@ -29,7 +29,9 @@ const actions = {
   },
   async fetchRoundResults({ commit }, roundNum) {
     try {
-      const response = await axios.get(`http://ergast.com/api/f1/current/${roundNum}/results.json`);
+      const response = await axios.get(
+        `https://ergast.com/api/f1/current/${roundNum}/results.json`
+      );
       commit('set_results', response.data.MRData.RaceTable.Races[0]);
     } catch (e) {
       console.log(e);
