@@ -1,12 +1,16 @@
 <template>
   <nav class="app__nav">
     <ul class="menu">
-      <li class="menu__item">
-        <a class="menu__link" href="#">Dashboard</a>
-      </li>
-      <li class="menu__item">
-        <a class="menu__link" href="#">Foobars</a>
-      </li>
+      <router-link class="menu__link" to="/">
+        <li class="menu__item">
+          Dashboard
+        </li>
+      </router-link>
+      <router-link class="menu__link" to="/drivers">
+        <li class="menu__item">
+          Drivers
+        </li>
+      </router-link>
       <li class="menu__item">
         <a class="menu__link" href="#">Plumbuses</a>
       </li>

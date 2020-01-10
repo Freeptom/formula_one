@@ -20,7 +20,7 @@
       </ol>
 
       <ol class="dates">
-        <!-- eslint-disable-next-line vue/no-unused-vars eslint-disable-next-line vue/require-v-for-key -->
+        <!-- eslint-disable-next-line vue/require-v-for-key eslint-disable-next-line vue/no-unused-vars -->
         <li v-for="empty in firstDayOfMonth">&nbsp;</li>
 
         <li
@@ -34,8 +34,9 @@
       </ol>
       <modal v-show="isModalVisible" @close="closeModal">
         <template v-slot:header>
-          <h2 class="modal__title">{{ raceName }}</h2>
           <span class="modal__round-num">Round {{ roundNum }}</span>
+          <h2 class="modal__title">{{ raceName }}</h2>
+          <p>{{ lapNum }} Laps</p>
         </template>
         <template v-slot:body>
           <p>{{ circuitName }}</p>
@@ -61,6 +62,7 @@ export default {
       raceName: '',
       circuitName: '',
       roundNum: '',
+      lapNum: '',
 
       // date vars
       isSameVar: '',
@@ -76,7 +78,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['allRaces', 'raceDates']),
+    ...mapGetters(['allRaces', 'raceDates', 'lapNumber']),
 
     // view items
     year() {
@@ -119,11 +121,12 @@ export default {
   },
 
   mounted() {
+    this.fetchRoundResults(3);
     this.fetchRaces().then(() => (this.loading = false));
   },
 
   methods: {
-    ...mapActions(['fetchRaces']),
+    ...mapActions(['fetchRaces', 'fetchRoundResults']),
     // date formatters
     prependUnderTen(day) {
       return day < 10 ? `0${day}` : day;
@@ -146,6 +149,7 @@ export default {
       let findRaceName = '';
       let findCircuitName = '';
       let findRound = '';
+      let findLapNum = '';
       // iterate through each race to match date of current
       this.allRaces.forEach(el => {
         if (el.date == date) {
@@ -153,13 +157,16 @@ export default {
           findRaceName = el.raceName;
           findCircuitName = el.Circuit.circuitName;
           findRound = el.round;
+          this.fetchRoundResults(findRound);
+          findLapNum = this.lapNumber;
           showModal = true;
         }
       });
-      // assign the variables just assigned to data properties
+      // assign the variables just assigned to corresponding data properties
       this.raceName = findRaceName;
       this.circuitName = findCircuitName;
       this.roundNum = findRound;
+      this.lapNum = findLapNum;
       return showModal ? (this.isModalVisible = true) : '';
     },
 
@@ -248,6 +255,9 @@ export default {
   display: flex;
   justify-content: space-around;
   padding: 0 2rem 2rem 2rem;
+  .arrow-selector {
+    cursor: pointer;
+  }
   @media screen and (min-width: 750px) {
     justify-content: center;
     .arrow-selector {
