@@ -6,11 +6,19 @@
 
     <div class="current-month">
       <div class="arrow-selector" @click="subtractMonth">
-        <img class="icon-arrow icon-arrow--nav" src="../assets/chevron-left-solid.svg" alt="chevron-left" />
+        <img
+          class="icon-arrow icon-arrow--nav"
+          src="../assets/chevron-left-solid.svg"
+          alt="chevron-left"
+        />
       </div>
       <h4>{{ month + ' - ' + year }}</h4>
       <div class="arrow-selector" @click="addMonth">
-        <img class="icon-arrow icon-arrow--nav" src="../assets/chevron-right-solid.svg" alt="chevron-right" />
+        <img
+          class="icon-arrow icon-arrow--nav"
+          src="../assets/chevron-right-solid.svg"
+          alt="chevron-right"
+        />
       </div>
     </div>
 
@@ -21,7 +29,7 @@
       </ol>
 
       <ol class="dates">
-        <!-- eslint-disable-next-line vue/require-v-for-key eslint-disable-next-line vue/no-unused-vars -->
+        <!-- eslint-disable-next-line vue/require-v-for-key -->
         <li v-for="empty in firstDayOfMonth">&nbsp;</li>
 
         <li
