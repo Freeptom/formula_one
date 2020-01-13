@@ -6,11 +6,12 @@
 
     <div class="current-month">
       <div class="arrow-selector" @click="subtractMonth">
-        <!-- eslint-disable-next-line vue/no-parsing-error -->
-        <-
+        <img class="icon-arrow icon-arrow--nav" src="../assets/chevron-left-solid.svg" alt="chevron-left" />
       </div>
       <h4>{{ month + ' - ' + year }}</h4>
-      <div class="arrow-selector" @click="addMonth">-></div>
+      <div class="arrow-selector" @click="addMonth">
+        <img class="icon-arrow icon-arrow--nav" src="../assets/chevron-right-solid.svg" alt="chevron-right" />
+      </div>
     </div>
 
     <div class="calendar">

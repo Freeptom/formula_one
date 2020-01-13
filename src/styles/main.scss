@@ -1,9 +1,18 @@
 .icon-arrow {
   padding: 0 0 0 2px;
-  position: absolute;
+  cursor: pointer;
   height: 20px;
   width: 20px;
   fill: #495057;
+  &--sort {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+  }
+  &--nav {
+    height: 15px;
+    width: 15px;
+  }
 }
 
 h3 {
