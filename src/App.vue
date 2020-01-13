@@ -2,25 +2,15 @@
   <div id="app">
     <div class="drive">
       <header class="drive__header">
-        <a href="#" class="logo">
+        <router-link class="menu__link logo" to="/">
           <h1>Drive</h1>
-        </a>
+        </router-link>
       </header>
       <Nav class="drive__nav"></Nav>
       <main class="drive__main">
-        <h2>Dashboard</h2>
-        <div class="dashboard">
-          <div class="dashboard__item">
-            <div class="card">
-              <CurrentStandings></CurrentStandings>
-            </div>
-          </div>
-          <div class="dashboard__item">
-            <div class="card">
-              <Calendar></Calendar>
-            </div>
-          </div>
-        </div>
+        <transition name="fade">
+          <router-view></router-view>
+        </transition>
       </main>
       <!-- <footer class="drive__footer">
         <span>&copy; 2019 Drive Inc.</span>
@@ -31,15 +21,11 @@
 
 <script>
 import Nav from './components/Nav.vue';
-import CurrentStandings from './components/CurrentStandings.vue';
-import Calendar from './components/Calendar.vue';
 
 export default {
   name: 'App',
   components: {
     Nav,
-    CurrentStandings,
-    Calendar,
   },
 };
 </script>
@@ -84,6 +70,10 @@ export default {
     border-right: 1px solid $gray2;
     position: relative;
     width: var(--app-nav-width);
+    a {
+      color: #dc5a60;
+      text-decoration: none;
+    }
   }
 
   &__nav {
@@ -133,65 +123,25 @@ export default {
   }
 }
 
-// Dashboard Overview Grid
+// transitions
 
-.dashboard {
-  --column-count: 2;
+$transition-speed: 0.5s;
 
-  // Flexbox Fallback
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 calc(var(--spacing) * -0.5);
-
-  // Grid
-  display: grid;
-  height: 100vh;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: var(--spacing);
-
-  &__item {
-    // By default, items span 2 columns
-    flex: 1 1 50%;
-    grid-column-end: span 2;
-    padding: calc(var(--spacing) / 2);
-    &:last-of-type {
-      margin-bottom: 8vh;
-    }
-    // these span the full width
-    &--full-width {
-      flex-basis: 100%;
-      grid-column: 1 / -1;
-    }
-
-    // these span only one column
-    &--col {
-      flex-basis: calc(100% / var(--column-count));
-      grid-column-end: span 1;
-    }
-  }
-
-  // Switch to 4-col grid on larger screens
-  @media screen and (min-width: 450px) {
-    --column-count: 4;
-  }
-
-  // If we have grid support, reset the margins and paddings;
-  // grid-gap handles the spacing for us.
-  @supports (display: grid) {
-    margin: 0;
-
-    &__item {
-      padding: 0;
-    }
-  }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity $transition-speed ease-in-out;
 }
 
-a {
-  color: #dc5a60;
-  text-decoration: none;
+.fade-enter-active {
+  transition-delay: $transition-speed;
 }
 
-main {
-  padding: var(--spacing);
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
 }
 </style>
