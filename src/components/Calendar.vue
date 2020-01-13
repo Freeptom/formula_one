@@ -24,13 +24,11 @@
 
     <div class="calendar">
       <ol class="weekdays">
-        <!-- eslint-disable-next-line vue/require-v-for-key -->
-        <li v-for="day in days" class="weekday">{{ day }}</li>
+        <li v-for="(day, index) in days" :key="index" class="weekday">{{ day }}</li>
       </ol>
 
       <ol class="dates">
-        <!-- eslint-disable-next-line vue/require-v-for-key eslint-disable-next-line vue/no-unused-vars -->
-        <li v-for="empty in firstDayOfMonth">&nbsp;</li>
+        <li v-for="(empty, index) in firstDayOfMonth" :key="index">&nbsp;</li>
 
         <li
           v-for="(date, index) in daysInMonth"
@@ -75,7 +73,6 @@ export default {
 
       // date vars
       isSameVar: '',
-      empty: null,
       today: moment(),
       dateContext: moment(),
       days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
