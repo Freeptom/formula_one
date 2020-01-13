@@ -34,7 +34,7 @@
               v-else
               class="icon-arrow icon-arrow--sort"
               src="../assets/chevron-up.svg"
-              alt="chevron-up" 
+              alt="chevron-up"
             />
           </span>
         </th>
