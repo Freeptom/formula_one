@@ -30,7 +30,11 @@
               src="../assets/chevron-down.svg"
               alt="chevron-down"
             />
-            <img v-else class="icon-arrow icon-arrow--sort" src="../assets/chevron-up.svg" alt="chevron-up" />
+            <img 
+              v-else 
+              class="icon-arrow icon-arrow--sort" 
+              src="../assets/chevron-up.svg" 
+              alt="chevron-up" />
           </span>
         </th>
         <th>Driver</th>

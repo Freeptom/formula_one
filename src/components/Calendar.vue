@@ -29,7 +29,7 @@
       </ol>
 
       <ol class="dates">
-        <!-- eslint-disable-next-line vue/require-v-for-key -->
+        <!-- eslint-disable-next-line vue/require-v-for-key eslint-disable-next-line vue/no-unused-vars -->
         <li v-for="empty in firstDayOfMonth">&nbsp;</li>
 
         <li
