@@ -126,8 +126,7 @@ export default {
     },
   },
 
-  mounted() {
-    this.fetchRoundResults(3);
+  created() {
     this.fetchRaces().then(() => (this.loading = false));
   },
 

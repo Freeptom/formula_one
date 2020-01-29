@@ -33,6 +33,7 @@ const actions = {
         `https://ergast.com/api/f1/current/${roundNum}/results.json`
       );
       commit('set_results', response.data.MRData.RaceTable.Races[0]);
+      console.log('got result');
     } catch (e) {
       console.log(e);
     }

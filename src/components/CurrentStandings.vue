@@ -82,7 +82,7 @@ export default {
     ...mapGetters(['filteredStandings']),
   },
 
-  mounted() {
+  created() {
     this.fetchStandings();
   },
 
