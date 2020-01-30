@@ -164,6 +164,7 @@ export default {
           findCircuitName = el.Circuit.circuitName;
           findRound = el.round;
           this.fetchRoundResults(findRound);
+          console.log('after fetch');
           findLapNum = this.lapNumber;
           showModal = true;
         }
