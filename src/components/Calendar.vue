@@ -24,15 +24,14 @@
 
     <div class="calendar">
       <ol class="weekdays">
-        <li v-for="(day, index) in days" :key="index" class="weekday">{{ day }}</li>
+        <li v-for="day in days" :key="day.index" class="weekday">{{ day }}</li>
       </ol>
 
       <ol class="dates">
-        <li v-for="(empty, index) in firstDayOfMonth" :key="index">&nbsp;</li>
-
+        <li v-for="dates in firstDayOfMonth" :key="dates.index">&nbsp;</li>
         <li
-          v-for="(date, index) in daysInMonth"
-          :key="index"
+          v-for="date in daysInMonth"
+          :key="date.index"
           :class="{ 'current-day': raceDates.includes(buildDate(date)) }"
           @click="getRaceInfo(buildDate(date))"
         >
@@ -157,8 +156,10 @@ export default {
       let findLapNum = '';
       // iterate through each race to match date of current
       this.allRaces.forEach(el => {
-        if (el.date == date) {
-          // if date match then give variables above values
+        if (el.date != date) {
+          return;
+        } else {
+          // if date match then give variables values
           findRaceName = el.raceName;
           findCircuitName = el.Circuit.circuitName;
           findRound = el.round;
@@ -167,7 +168,7 @@ export default {
           showModal = true;
         }
       });
-      // assign the variables just assigned to corresponding data properties
+      // assign the variables to corresponding data properties
       this.raceName = findRaceName;
       this.circuitName = findCircuitName;
       this.roundNum = findRound;
