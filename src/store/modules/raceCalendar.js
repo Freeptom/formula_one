@@ -15,24 +15,25 @@ const getters = {
 
 const mutations = {
   set_races: (state, races) => (state.races = races),
-  set_results: (state, results) => (state.results = results),
+  set_round_results: (state, results) => (state.results = results),
 };
 
 const actions = {
   async fetchRaces({ commit }) {
     try {
       const response = await axios.get('https://ergast.com/api/f1/current.json');
-      commit('set_races', response.data.MRData.RaceTable.Races);
+      const currentRaces = response.data.MRData.RaceTable.Races;
+      commit('set_races', currentRaces);
     } catch (e) {
       console.log(e);
     }
   },
+
   async fetchRoundResults({ commit }, roundNum) {
     try {
       const response = await axios.get(`http://ergast.com/api/f1/current/${roundNum}/results.json`);
-      console.log('got result');
-      await commit('set_results', response.data.MRData.RaceTable.Races[0]);
-      console.log('set result');
+      const roundInfo = response.data.MRData.RaceTable.Races[0];
+      await commit('set_round_results', roundInfo);
       return response;
     } catch (e) {
       console.log(e);

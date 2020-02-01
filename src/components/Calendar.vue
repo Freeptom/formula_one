@@ -148,27 +148,24 @@ export default {
       return fullDate;
     },
 
-    getRaceInfo(date) {
+    async getRaceInfo(date) {
       let showModal = false;
       let findRaceName = '';
       let findCircuitName = '';
       let findRound = '';
       let findLapNum = '';
       // iterate through each race to match date of current
-      this.allRaces.forEach(el => {
-        if (el.date != date) {
-          return;
-        } else {
+      for await (let el of this.allRaces) {
+        if (el.date == date) {
           // if date match then give variables values
           findRaceName = el.raceName;
           findCircuitName = el.Circuit.circuitName;
           findRound = el.round;
-          this.fetchRoundResults(findRound);
-          console.log('after fetch');
+          await this.$store.dispatch('fetchRoundResults', findRound);
           findLapNum = this.lapNumber;
           showModal = true;
         }
-      });
+      }
       // assign the variables to corresponding data properties
       this.raceName = findRaceName;
       this.circuitName = findCircuitName;
