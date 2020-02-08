@@ -1,6 +1,8 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign, no-return-assign */
-import axios from 'axios';
+
+import { RepositoryFactory } from '../../repositories/RepositoryFactory';
+const RacesRepository = RepositoryFactory.get('races');
 
 const state = {
   races: '',
@@ -21,7 +23,7 @@ const mutations = {
 const actions = {
   async fetchRaces({ commit }) {
     try {
-      const response = await axios.get('https://ergast.com/api/f1/current.json');
+      const response = await RacesRepository.get();
       const currentRaces = response.data.MRData.RaceTable.Races;
       commit('set_races', currentRaces);
     } catch (e) {
@@ -29,11 +31,9 @@ const actions = {
     }
   },
 
-  async fetchRoundResults({ commit }, roundNum) {
+  async fetchRoundResults({ commit }, round) {
     try {
-      const response = await axios.get(
-        `https://ergast.com/api/f1/current/${roundNum}/results.json`
-      );
+      const response = await RacesRepository.getRoundResults(round);
       const roundInfo = response.data.MRData.RaceTable.Races[0];
       await commit('set_round_results', roundInfo);
       return response;

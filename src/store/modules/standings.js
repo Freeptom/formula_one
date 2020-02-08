@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign, no-return-assign */
-import axios from 'axios';
+import { RepositoryFactory } from '../../repositories/RepositoryFactory';
+const StandingsRepository = RepositoryFactory.get('standings');
 
 const state = {
   standings: [],
@@ -22,7 +23,8 @@ const mutations = {
 
 const actions = {
   async fetchStandings({ commit }) {
-    const response = await axios.get('https://ergast.com/api/f1/current/driverStandings.json');
+    const response = await StandingsRepository.get();
+    console.log(StandingsRepository);
     commit('set_standings', response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings); // response.data is passed to 'standings' in the mutation (2nd arg)
   },
 };
