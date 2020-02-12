@@ -1,9 +1,9 @@
 import StandingsRepository from './standingsRepository';
-import RacesRepository from './racesRepository';
+import CurrentRepository from './currentRepository';
 
 const repositories = {
   standings: StandingsRepository,
-  races: RacesRepository,
+  current: CurrentRepository,
 };
 
 export const RepositoryFactory = {

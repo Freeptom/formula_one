@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign, no-return-assign */
 
 import { RepositoryFactory } from '../../repositories/RepositoryFactory';
-const RacesRepository = RepositoryFactory.get('races');
+const CurrentRepository = RepositoryFactory.get('current');
 
 const state = {
   races: '',
@@ -23,7 +23,7 @@ const mutations = {
 const actions = {
   async fetchRaces({ commit }) {
     try {
-      const response = await RacesRepository.get();
+      const response = await CurrentRepository.get();
       const currentRaces = response.data.MRData.RaceTable.Races;
       commit('set_races', currentRaces);
     } catch (e) {
@@ -33,7 +33,7 @@ const actions = {
 
   async fetchRoundResults({ commit }, round) {
     try {
-      const response = await RacesRepository.getRoundResults(round);
+      const response = await CurrentRepository.getRoundResults(round);
       const roundInfo = response.data.MRData.RaceTable.Races[0];
       await commit('set_round_results', roundInfo);
       return response;
