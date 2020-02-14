@@ -1,4 +1,4 @@
-import dashboard from './components/pages/Dashboard.vue';
+import dashboard from './components/Dashboard.vue';
 import Drivers from './components/Drivers.vue';
 
 export default [
