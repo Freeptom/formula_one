@@ -9,7 +9,7 @@ export default {
   getRoundResults(roundNum) {
     return Repository.get(`${resource}/${roundNum}/results${suffix}`);
   },
-  getDrivers() {
-    return Repository.get(`${resource}/drivers${suffix}`);
+  getDrivers(driverName) {
+    return Repository.get(`${resource}/drivers/${driverName}${suffix}`);
   },
 };

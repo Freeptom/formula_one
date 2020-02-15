@@ -1,6 +1,10 @@
 <template>
   <div>
-    <p v-for="driver in allDrivers" :key="driver.driverId">{{ driver.driverId }}</p>
+    <div v-for="driver in allDrivers" :key="driver.driverId">
+      <router-link :to="'/drivers/' + driver.driverId">
+        <p>{{ driver.driverId }}</p>
+      </router-link>
+    </div>
   </div>
 </template>
 
