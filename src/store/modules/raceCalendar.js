@@ -11,7 +11,9 @@ const state = {
 
 const getters = {
   allRaces: state => state.races,
+  racesCount: state => state.races.length,
   raceDates: state => state.races.map(race => race.date),
+  allResults: state => state.results,
   lapNumber: state => state.results.Results[0].laps,
 };
 

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 // eslint-disable-next-line no-unused-vars
 import styles from '../styles/styles.scss';
 
@@ -21,24 +21,21 @@ export default {
   },
 
   computed: {
-    ...mapState(['races']),
-    ...mapGetters(['driver', 'allRaces', 'results']),
+    ...mapGetters(['driver', 'racesCount', 'allResults']),
   },
 
   created() {
-    this.fetchDrivers(this.driverId);
-    this.fetchRaces();
+    this.fetchDrivers(this.driverId); // get driver info
+    this.fetchRaces(); // fetch races to get count
     this.getPlacements();
   },
 
   methods: {
     ...mapActions(['fetchDrivers', 'fetchRaces', 'fetchRoundResults']),
-    async getPlacements() {
-      for await (let el of this.allRaces) {
-        this.fetchRoundResults(el).then(() => console.log(this.results));
+    getPlacements() {
+      for (let i = 0; i < this.racesCount; i++) {
+        this.fetchRoundResults(i); // for each race, fetch the round result
       }
-
-      // request each race in allRaces?
 
       // add grid and finish place to data arrays for each
     },
