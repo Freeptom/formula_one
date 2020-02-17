@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ driver }}</h1>
+    <h1>{{ driverId }}</h1>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['driver', 'racesCount', 'allResults']),
+    ...mapGetters(['driver', 'racesCount', 'allRaces', 'allResults']),
   },
 
   created() {
@@ -32,11 +32,13 @@ export default {
 
   methods: {
     ...mapActions(['fetchDrivers', 'fetchRaces', 'fetchRoundResults']),
-    getPlacements() {
-      for (let i = 0; i < this.racesCount; i++) {
-        this.fetchRoundResults(i); // for each race, fetch the round result
+    async getPlacements() {
+      // forEach race entry
+      for await (let [key, val] of this.allRaces.entries()) {
+        console.log(`element${key}, index ${val}`);
+        await this.$store.dispatch('fetchRoundResults', key); // for each race, fetch the round result
+        console.log(this.allResults.Results); // need to search for driver in here!
       }
-
       // add grid and finish place to data arrays for each
     },
   },
