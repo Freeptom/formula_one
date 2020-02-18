@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>{{ driverId }}</h1>
-    <p>{{ gridPlacement }}</p>
+    <p>Starting Grid Placement {{ gridPlacement }}</p>
+    <p>Finishing Placement {{ finishPlacement }}</p>
   </div>
 </template>
 
@@ -22,17 +23,16 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['driver', 'racesCount', 'allRaces', 'allResults']),
+    ...mapGetters(['racesCount', 'allRaces', 'allResults']),
   },
 
   created() {
-    this.fetchDrivers(this.driverId); // get driver info
     this.fetchRaces(); // fetch races to get count
     this.getPlacements();
   },
 
   methods: {
-    ...mapActions(['fetchDrivers', 'fetchRaces', 'fetchRoundResults']),
+    ...mapActions(['fetchRaces', 'fetchRoundResults']),
     async getPlacements() {
       // forEach race entry
       for await (let key of this.allRaces.keys()) {
@@ -41,6 +41,7 @@ export default {
         this.allResults.Results.forEach(el => {
           if (el.Driver.driverId === this.driverId) {
             this.gridPlacement.push(el.grid);
+            this.finishPlacement.push(el.position);
           }
         });
       }

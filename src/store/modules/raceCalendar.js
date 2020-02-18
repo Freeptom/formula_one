@@ -6,7 +6,7 @@ const CurrentRepository = RepositoryFactory.get('current');
 
 const state = {
   races: '',
-  results: '',
+  results: '', // TODO make this an array to hold all results. Currently being overwritten with each mutation, so fetchRoundResults has to be called lots!
 };
 
 const getters = {
