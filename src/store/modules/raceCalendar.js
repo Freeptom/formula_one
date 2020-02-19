@@ -33,6 +33,7 @@ const actions = {
     }
   },
 
+  // TODO refactor this bad boi, possibly commit response and use roundInfo in a getter (need to check what roundInfo actually is)?
   async fetchRoundResults({ commit }, round) {
     try {
       const response = await CurrentRepository.getRoundResults(round);
