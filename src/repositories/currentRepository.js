@@ -7,7 +7,7 @@ export default {
   get() {
     return Repository.get(`${resource}${suffix}`);
   },
-  getAllRoundsResults() {
+  getAllRoundResults() {
     return Repository.get(`${resource}/results${suffix}${limit}`);
   },
   getSingleRoundResults(roundNum) {

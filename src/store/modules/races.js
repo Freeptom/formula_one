@@ -29,7 +29,7 @@ const actions = {
     try {
       const response = await CurrentRepository.get();
       const currentRaces = response.data.MRData.RaceTable.Races;
-      console.log(currentRaces);
+
       commit('set_races', currentRaces);
     } catch (e) {
       console.log(e);
@@ -49,11 +49,10 @@ const actions = {
   },
   // http://ergast.com/api/f1/current/results.json - can be used to access ALL races in season's results!!
 
-  async fetchAllRoundsResults({ commit }) {
+  async fetchAllRoundResults({ commit }) {
     try {
-      const response = await CurrentRepository.getAllRoundsResults();
-      const races = response.data.MRData.RaceTable;
-      console.log(races);
+      const response = await CurrentRepository.getAllRoundResults();
+      const races = response.data.MRData.RaceTable.Races;
       await commit('set_race_results', races);
       return response;
     } catch (e) {

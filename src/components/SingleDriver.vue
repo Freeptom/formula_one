@@ -28,25 +28,26 @@ export default {
 
   created() {
     this.getPlacements();
-    console.log(this.allRaces);
   },
 
   methods: {
-    ...mapActions(['fetchAllRoundsResults']),
+    ...mapActions(['fetchAllRoundResults']),
     async getPlacements() {
-      // forEach race entry
+      await this.$store.dispatch('fetchAllRoundResults');
+      for await (let [index, key] of this.allResults.entries()) {
+        console.log(index, key.Results[0]); // test to get first driver in race result
+      }
 
-      await this.$store.dispatch('fetchAllRoundsResults'); // for each race, fetch the round result
-      // for each Result, search through each driver
-      this.allResults.Results.forEach(el => {
-        // maybe use filter???
-        if (el.Driver.driverId === this.driverId) {
-          this.gridPlacement.push(el.grid);
-          this.finishPlacement.push(el.position);
-        }
-      });
-
-      console.log(this.allResults);
+      //  for await (let key of this.allRaces.keys()) {
+      //   await this.$store.dispatch('fetchRoundResults', key); // for each race, fetch the round result
+      //   // for each Result, search through each driver
+      //   this.allResults.Results.forEach(el => {
+      //     if (el.Driver.driverId === this.driverId) {
+      //       this.gridPlacement.push(el.grid);
+      //       this.finishPlacement.push(el.position);
+      //     }
+      //   });
+      // }
     },
   },
 };
