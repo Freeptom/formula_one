@@ -161,7 +161,7 @@ export default {
           findRaceName = el.raceName;
           findCircuitName = el.Circuit.circuitName;
           findRound = el.round;
-          await this.$store.dispatch('fetchRoundResults', findRound);
+          await this.$store.dispatch('fetchSingleRoundResults', findRound);
           findLapNum = this.lapNumber;
           showModal = true;
         }

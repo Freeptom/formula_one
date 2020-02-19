@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import standings from './modules/standings';
-import raceCalendar from './modules/raceCalendar';
+import races from './modules/races';
 import drivers from './modules/drivers';
 
 Vue.use(Vuex);
@@ -9,7 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     standings,
-    raceCalendar,
+    races,
     drivers,
   },
   state: {},

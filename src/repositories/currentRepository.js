@@ -6,7 +6,10 @@ export default {
   get() {
     return Repository.get(`${resource}${suffix}`);
   },
-  getRoundResults(roundNum) {
+  getAllRoundsResults() {
+    return Repository.get(`${resource}/current/results${suffix}`);
+  },
+  getSingleRoundResults(roundNum) {
     return Repository.get(`${resource}/${roundNum}/results${suffix}`);
   },
   getDrivers(driverName) {
