@@ -34,8 +34,12 @@ export default {
     ...mapActions(['fetchAllRoundResults']),
     async getPlacements() {
       await this.$store.dispatch('fetchAllRoundResults');
-      for await (let [index, key] of this.allResults.entries()) {
-        console.log(index, key.Results[0]); // test to get first driver in race result
+      // loop through each race
+      for (let [index, key] of this.allResults.entries()) {
+        for (let i = 0; i < key.Results.length; i++) {
+          // get each driver
+          console.log(index, key.Results[i]);
+        }
       }
 
       //  for await (let key of this.allRaces.keys()) {
