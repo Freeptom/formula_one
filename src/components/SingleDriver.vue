@@ -38,7 +38,7 @@ export default {
       for (let [index, key] of this.allResults.entries()) {
         for (let i = 0; i < key.Results.length; i++) {
           // get each driver
-          console.log(index, key.Results[i]);
+          console.log(index, key.Results[i].Driver.driverId);
         }
       }
 
