@@ -23,30 +23,29 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['racesCount', 'allRaces', 'allResults']),
+    ...mapGetters(['allResults']),
   },
 
   created() {
-    this.fetchRaces(); // fetch races to get count
     this.getPlacements();
     console.log(this.allRaces);
   },
 
   methods: {
-    ...mapActions(['fetchRaces', 'fetchRoundResults']),
+    ...mapActions(['fetchAllRoundsResults']),
     async getPlacements() {
       // forEach race entry
-      for await (let key of this.allRaces.keys()) {
-        await this.$store.dispatch('fetchRoundResults', key); // for each race, fetch the round result
-        // for each Result, search through each driver
-        this.allResults.Results.forEach(el => {
-          // maybe use filter???
-          if (el.Driver.driverId === this.driverId) {
-            this.gridPlacement.push(el.grid);
-            this.finishPlacement.push(el.position);
-          }
-        });
-      }
+
+      await this.$store.dispatch('fetchAllRoundsResults'); // for each race, fetch the round result
+      // for each Result, search through each driver
+      this.allResults.Results.forEach(el => {
+        // maybe use filter???
+        if (el.Driver.driverId === this.driverId) {
+          this.gridPlacement.push(el.grid);
+          this.finishPlacement.push(el.position);
+        }
+      });
+
       console.log(this.allResults);
     },
   },

@@ -7,19 +7,21 @@ const CurrentRepository = RepositoryFactory.get('current');
 const state = {
   races: '',
   raceResult: '', // TODO make this an array to hold all results. Currently being overwritten with each mutation, so fetchRoundResults has to be called lots!
+  allRaceResults: '',
 };
 
 const getters = {
   allRaces: state => state.races,
   racesCount: state => state.races.length,
   raceDates: state => state.races.map(race => race.date),
-  allResults: state => state.results,
+  allResults: state => state.allRaceResults,
   lapNumber: state => state.results.Results[0].laps,
 };
 
 const mutations = {
   set_races: (state, races) => (state.races = races),
   set_round_result: (state, raceResult) => (state.result = raceResult),
+  set_race_results: (state, allRaceResults) => (state.allRaceResults = allRaceResults),
 };
 
 const actions = {
@@ -50,7 +52,8 @@ const actions = {
   async fetchAllRoundsResults({ commit }) {
     try {
       const response = await CurrentRepository.getAllRoundsResults();
-      const races = response.data.MRData.RaceTable.Races[0]; // get specifically RaceTable info
+      const races = response.data.MRData.RaceTable;
+      console.log(races);
       await commit('set_race_results', races);
       return response;
     } catch (e) {

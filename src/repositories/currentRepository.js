@@ -2,12 +2,13 @@ import Repository from './Repository';
 
 const resource = '/f1/current';
 const suffix = '.json';
+const limit = '?limit=1000';
 export default {
   get() {
     return Repository.get(`${resource}${suffix}`);
   },
   getAllRoundsResults() {
-    return Repository.get(`${resource}/current/results${suffix}`);
+    return Repository.get(`${resource}/results${suffix}${limit}`);
   },
   getSingleRoundResults(roundNum) {
     return Repository.get(`${resource}/${roundNum}/results${suffix}`);
