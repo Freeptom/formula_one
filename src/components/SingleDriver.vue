@@ -14,7 +14,7 @@ import styles from '../styles/styles.scss';
 export default {
   name: 'SingleDriver',
 
-  data () {
+  data() {
     return {
       driverId: this.$route.params.driver,
       gridPlacement: [],
@@ -26,7 +26,7 @@ export default {
     ...mapGetters(['racesCount', 'allRaces', 'allResults']),
   },
 
-  created () {
+  created() {
     this.fetchRaces(); // fetch races to get count
     this.getPlacements();
     console.log(this.allRaces);
@@ -34,7 +34,7 @@ export default {
 
   methods: {
     ...mapActions(['fetchRaces', 'fetchRoundResults']),
-    async getPlacements () {
+    async getPlacements() {
       // forEach race entry
       for await (let key of this.allRaces.keys()) {
         await this.$store.dispatch('fetchRoundResults', key); // for each race, fetch the round result
@@ -47,6 +47,7 @@ export default {
           }
         });
       }
+      console.log(this.allResults);
     },
   },
 };
