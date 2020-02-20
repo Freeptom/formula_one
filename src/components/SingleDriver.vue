@@ -35,10 +35,13 @@ export default {
     async getPlacements() {
       await this.$store.dispatch('fetchAllRoundResults');
       // loop through each race
-      for (let [index, key] of this.allResults.entries()) {
+      for await (let [index, key] of this.allResults.entries()) {
         for (let i = 0; i < key.Results.length; i++) {
           // get each driver
-          console.log(index, key.Results[i].Driver.driverId);
+          if (key.Results[i].Driver.driverId === this.driverId) {
+            this.gridPlacement.push(key.Results[i].grid);
+            this.finishPlacement.push(key.Results[i].position);
+          }
         }
       }
 
