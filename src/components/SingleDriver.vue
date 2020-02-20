@@ -39,6 +39,7 @@ export default {
   },
   mounted() {
     this.fillData();
+    // console.log(this.gridPlacement);
   },
 
   methods: {
@@ -55,15 +56,16 @@ export default {
           }
         }
       }
+      console.log(this.gridPlacement);
     },
     fillData() {
       this.datacollection = {
-        labels: [this.getRandomInt(), this.getRandomInt()],
+        labels: ['Races'],
         datasets: [
           {
-            label: 'Data One',
+            label: 'Grid Placement',
             backgroundColor: '#f87979',
-            data: [this.getRandomInt(), this.getRandomInt()],
+            data: [this.gridPlacement],
           },
           {
             label: 'Data One',
