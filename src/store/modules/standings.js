@@ -24,7 +24,6 @@ const mutations = {
 const actions = {
   async fetchStandings({ commit }) {
     const response = await StandingsRepository.get();
-    console.log(StandingsRepository);
     commit('set_standings', response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings); // response.data is passed to 'standings' in the mutation (2nd arg)
   },
 };

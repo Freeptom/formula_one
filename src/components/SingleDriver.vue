@@ -35,26 +35,15 @@ export default {
     async getPlacements() {
       await this.$store.dispatch('fetchAllRoundResults');
       // loop through each race
-      for await (let [index, key] of this.allResults.entries()) {
-        for (let i = 0; i < key.Results.length; i++) {
+      for await (let value of this.allResults.values()) {
+        for (let i = 0; i < value.Results.length; i++) {
           // get each driver
-          if (key.Results[i].Driver.driverId === this.driverId) {
-            this.gridPlacement.push(key.Results[i].grid);
-            this.finishPlacement.push(key.Results[i].position);
+          if (value.Results[i].Driver.driverId === this.driverId) {
+            this.gridPlacement.push(parseInt(value.Results[i].grid));
+            this.finishPlacement.push(parseInt(value.Results[i].position));
           }
         }
       }
-
-      //  for await (let key of this.allRaces.keys()) {
-      //   await this.$store.dispatch('fetchRoundResults', key); // for each race, fetch the round result
-      //   // for each Result, search through each driver
-      //   this.allResults.Results.forEach(el => {
-      //     if (el.Driver.driverId === this.driverId) {
-      //       this.gridPlacement.push(el.grid);
-      //       this.finishPlacement.push(el.position);
-      //     }
-      //   });
-      // }
     },
   },
 };
