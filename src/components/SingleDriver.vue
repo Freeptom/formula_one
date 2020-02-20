@@ -1,6 +1,10 @@
 <template>
   <div>
     <h1>{{ driverId }}</h1>
+    <div class="small">
+      <LineChart :chart-data="datacollection"></LineChart>
+      <button @click="fillData()">Randomize</button>
+    </div>
     <p>Starting Grid Placement {{ gridPlacement }}</p>
     <p>Finishing Placement {{ finishPlacement }}</p>
   </div>
@@ -8,17 +12,21 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-// eslint-disable-next-line no-unused-vars
-import styles from '../styles/styles.scss';
+import LineChart from './charts/LineChart.js';
+// import RandomChart from './charts/RandomChart.vue';
 
 export default {
   name: 'SingleDriver',
+  components: {
+    LineChart,
+  },
 
   data() {
     return {
       driverId: this.$route.params.driver,
       gridPlacement: [],
       finishPlacement: [],
+      datacollection: null,
     };
   },
 
@@ -28,6 +36,9 @@ export default {
 
   created() {
     this.getPlacements();
+  },
+  mounted() {
+    this.fillData();
   },
 
   methods: {
@@ -45,8 +56,26 @@ export default {
         }
       }
     },
+    fillData() {
+      this.datacollection = {
+        labels: [this.getRandomInt(), this.getRandomInt()],
+        datasets: [
+          {
+            label: 'Data One',
+            backgroundColor: '#f87979',
+            data: [this.getRandomInt(), this.getRandomInt()],
+          },
+          {
+            label: 'Data One',
+            backgroundColor: '#f87979',
+            data: [this.getRandomInt(), this.getRandomInt()],
+          },
+        ],
+      };
+    },
+    getRandomInt() {
+      return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
+    },
   },
 };
 </script>
-
-<style scoped lang="scss"></style>
