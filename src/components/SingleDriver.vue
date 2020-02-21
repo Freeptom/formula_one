@@ -2,8 +2,7 @@
   <div>
     <h1>{{ driverId }}</h1>
     <div class="small">
-      <LineChart :chart-data="datacollection"></LineChart>
-      <button @click="fillData()">Randomize</button>
+      <LineChart :chart-data="chartData" :options="chartOptions"></LineChart>
     </div>
     <p>Starting Grid Placement {{ gridPlacement }}</p>
     <p>Finishing Placement {{ finishPlacement }}</p>
@@ -13,7 +12,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import LineChart from './charts/LineChart.js';
-// import RandomChart from './charts/RandomChart.vue';
 
 export default {
   name: 'SingleDriver',
@@ -26,7 +24,8 @@ export default {
       driverId: this.$route.params.driver,
       gridPlacement: [],
       finishPlacement: [],
-      datacollection: null,
+      chartData: {},
+      chartOptions: {},
     };
   },
 
@@ -39,7 +38,8 @@ export default {
   },
   mounted() {
     this.fillData();
-    // console.log(this.gridPlacement);
+    console.log(this.chartData);
+    console.log(this.chartOptions);
   },
 
   methods: {
@@ -56,27 +56,53 @@ export default {
           }
         }
       }
-      console.log(this.gridPlacement);
+      // console.log(this.gridPlacement);
     },
     fillData() {
-      this.datacollection = {
-        labels: ['Races'],
+      (this.chartData = {
         datasets: [
           {
-            label: 'Grid Placement',
-            backgroundColor: '#f87979',
-            data: [this.gridPlacement],
+            label: 'Grid Positions',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: ['rgba(255, 99, 132,0.2)'],
+            borderColor: ['rgba(255, 99, 132, 1)'],
+            borderWidth: 1,
           },
           {
-            label: 'Data One',
-            backgroundColor: '#f87979',
-            data: [this.getRandomInt(), this.getRandomInt()],
+            label: 'Finishing Positions',
+            data: [6, 2, 4, 5, 1, 10],
+            backgroundColor: ['rgba(0, 178, 117, 0.5)'],
+            borderColor: ['rgba(0, 178, 132, 1)'],
+            borderWidth: 1,
           },
         ],
-      };
-    },
-    getRandomInt() {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
+      }),
+        (this.chartOptions = {
+          scales: {
+            xAxes: [
+              {
+                type: 'category',
+                labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Round Number',
+                },
+              },
+            ],
+            yAxes: [
+              {
+                labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                ticks: {
+                  beginAtZero: true,
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Position',
+                },
+              },
+            ],
+          },
+        });
     },
   },
 };
