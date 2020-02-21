@@ -65,15 +65,17 @@ export default {
             label: 'Grid Positions',
             data: [12, 19, 3, 5, 2, 3],
             backgroundColor: ['rgba(255, 99, 132,0.2)'],
+            fill: 'none',
             borderColor: ['rgba(255, 99, 132, 1)'],
-            borderWidth: 1,
+            borderWidth: 2,
           },
           {
             label: 'Finishing Positions',
             data: [6, 2, 4, 5, 1, 10],
             backgroundColor: ['rgba(0, 178, 117, 0.5)'],
+            fill: 'none',
             borderColor: ['rgba(0, 178, 132, 1)'],
-            borderWidth: 1,
+            borderWidth: 2,
           },
         ],
       }),
@@ -81,8 +83,10 @@ export default {
           scales: {
             xAxes: [
               {
-                type: 'category',
                 labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                ticks: {
+                  min: 1,
+                },
                 scaleLabel: {
                   display: true,
                   labelString: 'Round Number',
@@ -93,7 +97,7 @@ export default {
               {
                 labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                 ticks: {
-                  beginAtZero: true,
+                  min: 1,
                 },
                 scaleLabel: {
                   display: true,
