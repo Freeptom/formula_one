@@ -61,7 +61,7 @@ export default {
       }
 
       for (let i = 1; i < this.allResults.length + 1; i++) {
-        console.log(this.chartOptions.scales.xAxes[0].labels.push(i));
+        this.chartOptions.scales.xAxes[0].labels.push(i);
       }
       this.loaded = true;
     },
