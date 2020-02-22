@@ -6,7 +6,7 @@ const CurrentRepository = RepositoryFactory.get('current');
 
 const state = {
   races: '',
-  raceResult: '', // TODO make this an array to hold all results. Currently being overwritten with each mutation, so fetchRoundResults has to be called lots!
+  raceResult: '',
   allRaceResults: '',
 };
 
@@ -15,12 +15,12 @@ const getters = {
   racesCount: state => state.races.length,
   raceDates: state => state.races.map(race => race.date),
   allResults: state => state.allRaceResults,
-  lapNumber: state => state.results.Results[0].laps,
+  lapNumber: state => state.raceResult.Results[0].laps,
 };
 
 const mutations = {
   set_races: (state, races) => (state.races = races),
-  set_round_result: (state, raceResult) => (state.result = raceResult),
+  set_round_result: (state, raceResult) => (state.raceResult = raceResult),
   set_race_results: (state, allRaceResults) => (state.allRaceResults = allRaceResults),
 };
 
