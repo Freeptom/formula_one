@@ -113,10 +113,8 @@ export default {
     align-items: center;
     position: relative;
     margin: 0;
-    color: #fff;
-    background-color: $primary-color;
+    color: $primary-color;
     font-size: 1rem;
-
     h1 {
       margin: 0;
     }

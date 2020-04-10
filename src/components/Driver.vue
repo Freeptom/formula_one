@@ -25,7 +25,6 @@ export default {
       finishPlacement: [],
       chartData: {},
       chartOptions: {},
-      test: [1, 2, 3, 4, 5],
     };
   },
 
@@ -43,9 +42,9 @@ export default {
 
   methods: {
     ...mapActions(['fetchAllRoundResults']),
+
     async getPlacements() {
       await this.$store.dispatch('fetchAllRoundResults');
-
       // loop through each race
       for await (let value of this.allResults.values()) {
         for (let i = 0; i < value.Results.length; i++) {
@@ -59,29 +58,31 @@ export default {
           }
         }
       }
-
       for (let i = 1; i < this.allResults.length + 1; i++) {
         this.chartOptions.scales.xAxes[0].labels.push(i);
       }
       this.loaded = true;
     },
+
     fillData() {
       (this.chartData = {
         datasets: [
           {
             label: 'Grid Positions',
             data: [],
-            backgroundColor: ['rgba(255, 99, 132,0.2)'],
-            fill: 'none',
-            borderColor: ['rgba(255, 99, 132, 1)'],
+            fill: 'origin',
+            borderColor: ['rgba(126, 218, 220, 1)'],
+            pointBackgroundColor: 'rgba(126, 218, 220, 1)',
+            pointBorderColor: 'white',
             borderWidth: 2,
           },
           {
             label: 'Finishing Positions',
             data: [],
-            backgroundColor: ['rgba(0, 178, 117, 0.5)'],
-            fill: 'none',
-            borderColor: ['rgba(0, 178, 132, 1)'],
+            fill: 'origin',
+            borderColor: ['rgba(65, 110, 212 ,1)'],
+            pointBackgroundColor: 'rgba(65, 110, 212 ,1)',
+            pointBorderColor: 'white',
             borderWidth: 2,
           },
         ],
