@@ -22,7 +22,7 @@ table.standings {
   td {
     color: $black;
     text-align: left;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.5rem 1rem;
     &.number {
       position: relative;
       text-align: right;
@@ -30,6 +30,10 @@ table.standings {
       &:first-of-type {
         padding: 0.5rem 0.5rem 0.5rem 0.5rem;
       }
+    }
+    & strong {
+      font-weight: 700;
+      font-style: normal;
     }
   }
   tr:last-of-type > td {

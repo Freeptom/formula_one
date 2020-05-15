@@ -60,6 +60,9 @@
         </tr>
       </tbody>
     </table>
+    <p v-if="filteredStandings.length === 0" class="no-results">
+      <strong>No drivers found</strong>
+    </p>
   </section>
 </template>
 
@@ -114,5 +117,11 @@ export default {
 }
 .fade-enter-to {
   opacity: 1;
+}
+
+.no-results {
+  padding: 0 1rem 1rem 1rem;
+  margin: 0;
+  text-align: center;
 }
 </style>

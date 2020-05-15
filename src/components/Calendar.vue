@@ -40,13 +40,13 @@
       </ol>
       <modal v-show="isModalVisible" @close="closeModal">
         <template v-slot:header>
-          <span class="modal__round-num">Round {{ roundNum }}</span>
-          <h2 class="modal__title">{{ raceName }}</h2>
-          <p>{{ lapNum }} Laps</p>
+          <span class="modal-header__round-num"
+            >Round <strong>{{ roundNum }}</strong></span
+          >
+          <h2 class="modal-header__title">{{ raceName }}</h2>
+          <p>{{ circuitName }} - {{ lapNum }} Laps</p>
         </template>
-        <template v-slot:body>
-          <p>{{ circuitName }}</p>
-        </template>
+        <template v-slot:body></template>
       </modal>
     </div>
   </section>
@@ -307,14 +307,13 @@ export default {
 }
 
 /* modal */
-.modal {
-  &__round-num {
-    position: absolute;
-  }
-
+.modal-header {
   &__title {
-    margin: 1.5rem 0 1rem 0rem;
-    text-align: center;
+    margin: 1.5rem 0 0 0;
+    text-align: left;
+  }
+  p {
+    margin: 0;
   }
 }
 </style>

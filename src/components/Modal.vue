@@ -78,7 +78,6 @@ $modal-tb-padding: 30px;
 
 .modal-header {
   padding: 0 $modal-lr-padding;
-  border-bottom: 1px solid #eeeeee;
   color: $gray4;
   justify-content: space-between;
 }
@@ -93,7 +92,6 @@ $modal-tb-padding: 30px;
   padding: $modal-tb-padding $modal-lr-padding 0 $modal-lr-padding;
   display: flex;
   width: 100%;
-  border-top: 1px solid #eeeeee;
   justify-content: flex-end;
 }
 
