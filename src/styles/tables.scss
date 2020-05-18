@@ -3,46 +3,91 @@ table.standings {
   table-layout: fixed;
   overflow: hidden;
   border-collapse: collapse;
+  font-size: 0.825rem;
+
+  tr:last-of-type > td {
+    padding-bottom: 2rem;
+  }
+
+  th,
+  th.number,
+  td {
+    padding: 1rem 1rem 0.5rem 1rem;
+    text-align: right;
+  }
 
   th {
-    padding: 1rem;
     color: $gray4;
     text-align: left;
     text-transform: uppercase;
     font-weight: 400;
     letter-spacing: 1px;
     &.number {
-      text-align: right;
-      padding: 0.5rem 2.5rem 0.5rem 1rem;
-      &:first-of-type {
-        padding: 0.5rem;
-      }
+      position: relative;
     }
   }
+
   td {
     color: $black;
     text-align: left;
-    padding: 0.5rem 1rem;
-    &.number {
-      position: relative;
-      text-align: right;
-      padding: 0.5rem 2.5rem 0.5rem 0px;
-      &:first-of-type {
-        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-      }
-    }
-    & strong {
-      font-weight: 700;
-      font-style: normal;
+  }
+
+  td.number {
+    padding: 1rem 1rem 0.5rem 2.4rem;
+    text-align: right;
+    &:last-of-type {
+      padding: 1rem 2.5rem 0.5rem 1.5rem;
     }
   }
-  tr:last-of-type > td {
-    padding-bottom: 2rem;
+
+  .nat {
+    display: none;
   }
 }
 
-.icon-holder {
-  position: relative;
+@media screen and (min-width: 450px) {
+  table.standings {
+    td.number:last-of-type {
+      padding: 1rem 1rem 0.5rem 2.4rem;
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  table.standings {
+    font-size: 1rem;
+
+    th {
+      padding: 1rem;
+      &.number {
+        text-align: right;
+        padding: 0.5rem 2.5rem 1rem 1rem;
+        &:first-of-type {
+          padding: 0.5rem;
+        }
+      }
+    }
+
+    td {
+      padding: 0.5rem 1rem;
+      &.number {
+        padding: 0.5rem 2.5rem 0.5rem 1rem;
+        &:first-of-type {
+          padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+        }
+        &:last-of-type {
+          padding: 0.5rem 2.5rem 0.5rem 1rem;
+        }
+      }
+      & strong {
+        font-weight: 700;
+        font-style: normal;
+      }
+    }
+    .nat {
+      display: table-cell;
+    }
+  }
 }
 
 .limiter {
@@ -51,21 +96,5 @@ table.standings {
   width: 2%;
   @media screen and (max-width: 900px) {
     display: table-cell;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  table.standings {
-    font-size: 0.825rem;
-    th,
-    th.number,
-    td,
-    td.number {
-      padding: 1rem 1rem 0.5rem 1rem;
-    }
-
-    .nat {
-      display: none;
-    }
   }
 }

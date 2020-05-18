@@ -14,7 +14,7 @@
 
     <table class="standings">
       <thead>
-        <th class="limiter"></th>
+        <!-- <th class="limiter"></th> -->
         <th
           class="number"
           @click="
@@ -43,11 +43,11 @@
         <th>Team</th>
         <th class="number">Wins</th>
         <th class="number">Pts</th>
-        <th class="limiter"></th>
+        <!-- <th class="limiter"></th> -->
       </thead>
       <tbody>
         <tr v-for="standing in filteredStandings" :key="standing.position" class="standing">
-          <td class="limiter"></td>
+          <!-- <td class="limiter"></td> -->
           <td class="number">{{ standing.position }}</td>
           <td>
             <strong>{{ standing.Driver.familyName | toUppercase | abrv }}</strong>
@@ -56,7 +56,7 @@
           <td>{{ standing.Constructors[0].constructorId | toTitleCase }}</td>
           <td class="number">{{ standing.wins }}</td>
           <td class="number">{{ standing.points }}</td>
-          <td class="limiter"></td>
+          <!-- <td class="limiter"></td> -->
         </tr>
       </tbody>
     </table>
