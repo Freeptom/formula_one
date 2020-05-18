@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>{{ driverId }}</h1>
+    <p>{{ driver }}</p>
     <div class="small">
       <LineChart v-if="loaded" :chart-data="chartData" :options="chartOptions"></LineChart>
     </div>
@@ -29,19 +30,22 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['allResults']),
+    ...mapGetters(['allResults', 'driver']),
   },
 
   created() {
     this.getPlacements();
+    this.fetchDrivers(this.driverId);
+    console.log();
   },
+
   mounted() {
     this.loaded = false;
     this.fillData();
   },
 
   methods: {
-    ...mapActions(['fetchAllRoundResults']),
+    ...mapActions(['fetchAllRoundResults', 'fetchDrivers']),
 
     async getPlacements() {
       await this.$store.dispatch('fetchAllRoundResults');

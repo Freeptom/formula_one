@@ -6,8 +6,8 @@
       <input
         type="text"
         :value="standings.search"
-        placeholder="Search Driver"
-        class="form-input"
+        placeholder="Search driver name"
+        class="form-input search-box"
         @input="filterStandings"
       />
     </div>
@@ -118,7 +118,6 @@ export default {
 .fade-enter-to {
   opacity: 1;
 }
-
 .no-results {
   padding: 0 1rem 1rem 1rem;
   margin: 0;

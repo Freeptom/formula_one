@@ -2,7 +2,7 @@
   <div class="driver-list">
     <div v-for="driver in allDrivers" :key="driver.driverId" class="driver-list__item">
       <router-link :to="'/drivers/' + driver.driverId">
-        <p>{{ driver.driverId }}</p>
+        <p>{{ driver.givenName }} {{ driver.familyName }}</p>
       </router-link>
     </div>
   </div>
@@ -15,7 +15,6 @@ import styles from '../styles/styles.scss';
 
 export default {
   name: 'Drivers',
-
   data() {
     return {};
   },
@@ -53,6 +52,7 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
+      text-decoration: none;
     }
   }
 }

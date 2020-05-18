@@ -309,7 +309,7 @@ export default {
 /* modal */
 .modal-header {
   &__title {
-    margin: 1.5rem 0 0 0;
+    margin: 1.2rem 0 0 0;
     text-align: left;
   }
   p {
