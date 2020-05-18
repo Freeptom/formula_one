@@ -62,9 +62,6 @@ table.standings {
       &.number {
         text-align: right;
         padding: 0.5rem 2.5rem 1rem 1rem;
-        &:first-of-type {
-          padding: 0.5rem;
-        }
       }
     }
 
@@ -72,9 +69,6 @@ table.standings {
       padding: 0.5rem 1rem;
       &.number {
         padding: 0.5rem 2.5rem 0.5rem 1rem;
-        &:first-of-type {
-          padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-        }
         &:last-of-type {
           padding: 0.5rem 2.5rem 0.5rem 1rem;
         }
