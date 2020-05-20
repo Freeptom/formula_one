@@ -44,7 +44,6 @@ export default {
   flex-wrap: wrap;
   // Grid
   display: grid;
-  // height: 100vh;
   grid-template-rows: var(--app-header-height) 1fr;
   grid-template-columns: 1fr;
   grid-template-areas:

@@ -16,7 +16,7 @@
       <thead>
         <!-- <th class="limiter"></th> -->
         <th
-          class="number"
+          class="number order-list"
           @click="
             sortBy('position');
             flipIcon();
@@ -41,7 +41,7 @@
         <th>Driver</th>
         <th class="nat">Nat</th>
         <th>Team</th>
-        <th class="number">Wins</th>
+        <th class="number win-amount">Wins</th>
         <th class="number">Pts</th>
         <!-- <th class="limiter"></th> -->
       </thead>
@@ -54,7 +54,7 @@
           </td>
           <td class="nat">{{ standing.Driver.nationality | toTitleCase }}</td>
           <td>{{ standing.Constructors[0].constructorId | toTitleCase }}</td>
-          <td class="number">{{ standing.wins }}</td>
+          <td class="number win-amount">{{ standing.wins }}</td>
           <td class="number">{{ standing.points }}</td>
           <!-- <td class="limiter"></td> -->
         </tr>

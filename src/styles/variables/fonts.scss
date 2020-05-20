@@ -2,20 +2,21 @@ $line-height: 1.5;
 @import url('https://use.typekit.net/ihq4ork.css');
 html,
 body {
-  font-family: neue-haas-grotesk-text, sans-serif;
+  font-family: interstate-condensed, sans-serif;
 }
 body {
-  font-size: 16px;
+  font-size: 18px;
   box-sizing: border-box;
   line-height: $line-height;
 }
 #app {
-  font-family: neue-haas-grotesk-text, sans-serif;
+  font-family: interstate-condensed, sans-serif;
 }
 h2 {
-  font-family: neue-haas-grotesk-display, sans-serif;
+  font-family: interstate-condensed, sans-serif;
   color: #49507e;
   font-size: 1.825rem;
+  font-weight: 700;
 }
 
 h3 {
