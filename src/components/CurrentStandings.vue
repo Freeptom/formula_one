@@ -50,7 +50,9 @@
           <!-- <td class="limiter"></td> -->
           <td class="number">{{ standing.position }}</td>
           <td>
-            <strong>{{ standing.Driver.familyName | toUppercase | abrv }}</strong>
+            <router-link :to="'/drivers/' + standing.Driver.driverId">
+              <strong>{{ standing.Driver.familyName | toUppercase | abrv }}</strong>
+            </router-link>
           </td>
           <td class="nat">{{ standing.Driver.nationality | toTitleCase }}</td>
           <td>{{ standing.Constructors[0].constructorId | toTitleCase }}</td>
@@ -109,6 +111,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/variables/colors.scss';
+
 .fade-enter {
   opacity: 0;
 }
@@ -122,5 +126,9 @@ export default {
   padding: 0 1rem 1rem 1rem;
   margin: 0;
   text-align: center;
+}
+a {
+  text-decoration: none;
+  color: $black;
 }
 </style>
