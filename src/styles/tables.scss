@@ -4,6 +4,7 @@ table.standings {
   overflow: hidden;
   border-collapse: collapse;
   font-size: 0.825rem;
+  font-family: interstate-condensed, sans-serif;
   tbody {
     border-bottom: 2rem solid transparent;
   }
@@ -40,6 +41,7 @@ table.standings {
     & strong {
       font-weight: 800;
       font-style: normal;
+      letter-spacing: 0.75px;
     }
   }
 
