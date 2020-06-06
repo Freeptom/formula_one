@@ -1,66 +1,71 @@
 <template>
-  <section v-if="!loading" class="module calendar-module">
-    <div class="module-header">
-      <h3 class="module-heading">Race Calendar</h3>
-    </div>
-
-    <div class="current-month">
-      <div class="arrow-selector" @click="subtractMonth">
-        <img
-          class="icon-arrow icon-arrow--nav"
-          src="../assets/chevron-left-solid.svg"
-          alt="chevron-left"
-        />
+  <div>
+    <Loader v-if="loading" :loading="loading"></Loader>
+    <section v-else class="module calendar-module">
+      <div class="module-header">
+        <h3 class="module-heading">Race Calendar</h3>
       </div>
-      <h4>{{ month + ' - ' + year }}</h4>
-      <div class="arrow-selector" @click="addMonth">
-        <img
-          class="icon-arrow icon-arrow--nav"
-          src="../assets/chevron-right-solid.svg"
-          alt="chevron-right"
-        />
+
+      <div class="current-month">
+        <div class="arrow-selector" @click="subtractMonth">
+          <img
+            class="icon-arrow icon-arrow--nav"
+            src="../assets/chevron-left-solid.svg"
+            alt="chevron-left"
+          />
+        </div>
+        <h4>{{ month + ' - ' + year }}</h4>
+        <div class="arrow-selector" @click="addMonth">
+          <img
+            class="icon-arrow icon-arrow--nav"
+            src="../assets/chevron-right-solid.svg"
+            alt="chevron-right"
+          />
+        </div>
       </div>
-    </div>
 
-    <div class="calendar">
-      <ol class="weekdays">
-        <li v-for="day in days" :key="day.index" class="weekday">{{ day }}</li>
-      </ol>
+      <div class="calendar">
+        <ol class="weekdays">
+          <li v-for="day in days" :key="day.index" class="weekday">{{ day }}</li>
+        </ol>
 
-      <ol class="dates">
-        <li v-for="dates in firstDayOfMonth" :key="dates.index">&nbsp;</li>
-        <li
-          v-for="date in daysInMonth"
-          :key="date.index"
-          :class="{ 'current-day': raceDates.includes(buildDate(date)) }"
-          @click="getRaceInfo(buildDate(date))"
-        >
-          <span>{{ date }}</span>
-        </li>
-      </ol>
-      <modal v-show="isModalVisible" @close="closeModal">
-        <template v-slot:header>
-          <span class="modal-header__round-num"
-            >Round <strong>{{ roundNum }}</strong></span
+        <ol class="dates">
+          <li v-for="dates in firstDayOfMonth" :key="dates.index">&nbsp;</li>
+          <li
+            v-for="date in daysInMonth"
+            :key="date.index"
+            :class="{ 'current-day': raceDates.includes(buildDate(date)) }"
+            @click="getRaceInfo(buildDate(date))"
           >
-          <h2 class="modal-header__title">{{ raceName }}</h2>
-          <p>{{ circuitName }} - {{ lapNum }} Laps</p>
-        </template>
-        <template v-slot:body></template>
-      </modal>
-    </div>
-  </section>
+            <span>{{ date }}</span>
+          </li>
+        </ol>
+        <modal v-show="isModalVisible" @close="closeModal">
+          <template v-slot:header>
+            <span class="modal-header__round-num"
+              >Round <strong>{{ roundNum }}</strong></span
+            >
+            <h2 class="modal-header__title">{{ raceName }}</h2>
+            <p>{{ circuitName }} - {{ lapNum }} Laps</p>
+          </template>
+          <template v-slot:body></template>
+        </modal>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import modal from '@/components/Modal.vue';
 import moment from 'moment';
+import Loader from '@/components/Loader.vue';
 
 export default {
   name: 'RaceCalendar',
   components: {
     modal,
+    Loader,
   },
   data() {
     return {
@@ -126,7 +131,9 @@ export default {
   },
 
   created() {
-    this.fetchRaces().then(() => (this.loading = false));
+    this.fetchRaces();
+
+    // this.fetchRaces().then(() => (this.loading = false));
   },
 
   methods: {
