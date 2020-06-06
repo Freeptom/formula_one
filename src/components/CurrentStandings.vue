@@ -11,8 +11,8 @@
         @input="filterStandings"
       />
     </div>
-
-    <table class="standings">
+    <Loader v-if="loading" :loading="loading"></Loader>
+    <table v-else class="standings">
       <thead>
         <!-- <th class="limiter"></th> -->
         <th
@@ -62,7 +62,7 @@
         </tr>
       </tbody>
     </table>
-    <p v-if="filteredStandings.length === 0" class="no-results">
+    <p v-if="filteredStandings.length === 0 && loading === false" class="no-results">
       <strong>No drivers found</strong>
     </p>
   </section>
@@ -72,13 +72,18 @@
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
 // eslint-disable-next-line no-unused-vars
 import styles from '../styles/styles.scss';
+import Loader from '@/components/Loader.vue';
 
 export default {
   name: 'CurrentStandings',
+  components: {
+    Loader,
+  },
 
   data() {
     return {
       numericalOrder: true,
+      loading: true,
     };
   },
 
@@ -88,7 +93,7 @@ export default {
   },
 
   created() {
-    this.fetchStandings();
+    this.fetchStandings().then(() => (this.loading = false));
   },
 
   methods: {
