@@ -40,7 +40,7 @@ export default {
     position: relative;
     margin: 2rem;
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: 12px;
     background: white;
     @include box_shadow(1);
     a {

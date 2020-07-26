@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>{{ driverId }}</h1>
-    <p>{{ driver }}</p>
     <div class="small">
       <LineChart v-if="loaded" :chart-data="chartData" :options="chartOptions"></LineChart>
     </div>

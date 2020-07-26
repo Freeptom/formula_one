@@ -42,9 +42,12 @@
         </ol>
         <modal v-show="isModalVisible" @close="closeModal">
           <template v-slot:header>
-            <span class="modal-header__round-num"
-              >Round <strong>{{ roundNum }}</strong></span
-            >
+            <p class="modal-header__round-meta">
+              Round <strong>{{ roundNum }}</strong>
+            </p>
+            <p class="modal-header__round-meta">
+              <strong>{{ lapNum }}</strong> Laps
+            </p>
             <h2 class="modal-header__title">{{ raceName }}</h2>
             <p>{{ circuitName }} - {{ lapNum }} Laps</p>
           </template>
@@ -314,7 +317,19 @@ export default {
 }
 
 /* modal */
+
+modal {
+  font-family: interstate sans-serif;
+}
 .modal-header {
+  &__round-meta {
+    font-size: 18px;
+    strong {
+      font-size: 32px;
+      font-family: interstate-black, sans-serif;
+      font-weight: 900;
+    }
+  }
   &__title {
     margin: 1.2rem 0 0 0;
     text-align: left;

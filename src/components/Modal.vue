@@ -37,6 +37,14 @@ export default {
       title: 'I am a dynamic title',
     };
   },
+  created() {
+    document.onkeydown = evt => {
+      evt = evt || window.event;
+      if (evt.keyCode == 27) {
+        this.close();
+      }
+    };
+  },
   methods: {
     close() {
       this.$emit('close');
