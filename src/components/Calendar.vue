@@ -45,7 +45,7 @@
             <p class="modal-header__round-meta">
               Round <strong>{{ roundNum }}</strong>
             </p>
-            <p class="modal-header__round-meta">
+            <p v-if="lapNum" class="modal-header__round-meta">
               <strong>{{ lapNum }}</strong> Laps
             </p>
             <h2 class="modal-header__title">{{ raceName }}</h2>
@@ -92,7 +92,6 @@ export default {
 
   computed: {
     ...mapGetters(['allRaces', 'raceDates', 'lapNumber']),
-
     // view items
     year() {
       const t = this;
@@ -172,6 +171,7 @@ export default {
           findCircuitName = el.Circuit.circuitName;
           findRound = el.round;
           await this.$store.dispatch('fetchSingleRoundResults', findRound);
+          console.log(this.lapNumber);
           findLapNum = this.lapNumber;
           showModal = true;
         }
