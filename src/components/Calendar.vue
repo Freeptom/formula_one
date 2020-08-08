@@ -48,8 +48,11 @@
             <p v-if="lapNum" class="modal-header__round-meta">
               <strong>{{ lapNum }}</strong> Laps
             </p>
+            <p v-if="raceWinner" class="modal-header__round-meta">
+              Winner: <strong>{{ winner }}</strong>
+            </p>
             <h2 class="modal-header__title">{{ raceName }}</h2>
-            <p>{{ circuitName }} - {{ lapNum }} Laps</p>
+            <p>{{ circuitName }}</p>
           </template>
           <template v-slot:body></template>
         </modal>
@@ -76,6 +79,7 @@ export default {
       raceName: '',
       circuitName: '',
       roundNum: '',
+      raceWinner: '',
       lapNum: '',
 
       // date vars
@@ -91,7 +95,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['allRaces', 'raceDates', 'lapNumber']),
+    ...mapGetters(['allRaces', 'raceDates', 'lapNumber', 'winner']),
     // view items
     year() {
       const t = this;
@@ -163,6 +167,8 @@ export default {
       let findCircuitName = '';
       let findRound = '';
       let findLapNum = '';
+      // eslint-disable-next-line no-unused-vars
+      let findWinner = '';
       // iterate through each race to match date of current
       for await (let el of this.allRaces) {
         if (el.date == date) {
@@ -171,8 +177,8 @@ export default {
           findCircuitName = el.Circuit.circuitName;
           findRound = el.round;
           await this.$store.dispatch('fetchSingleRoundResults', findRound);
-          console.log(this.lapNumber);
           findLapNum = this.lapNumber;
+          findWinner = this.winner;
           showModal = true;
         }
       }
@@ -181,6 +187,8 @@ export default {
       this.circuitName = findCircuitName;
       this.roundNum = findRound;
       this.lapNum = findLapNum;
+      this.raceWinner = findWinner;
+      console.log(this.winner);
       return showModal ? (this.isModalVisible = true) : '';
     },
 
