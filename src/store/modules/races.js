@@ -46,6 +46,7 @@ const actions = {
     try {
       const response = await CurrentRepository.getSingleRoundResults(round);
       let roundInfo = response.data.MRData.RaceTable.Races[0]; // get specifically RaceTable info
+      // check if the race has happened yet, meaning a result is available
       let isResult = result => {
         if (result) return true;
       };
@@ -66,7 +67,6 @@ const actions = {
     } catch (e) {
       console.log(e);
     }
-    // http://ergast.com/api/f1/current/results.json - can be used to access ALL races in season's results!!
   },
 };
 

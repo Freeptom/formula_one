@@ -10,6 +10,7 @@ const state = {
 };
 
 const getters = {
+  // TODO: need to learn how to use mapState in modules to reduce need for redundant getters
   allDrivers: state => state.drivers,
   driver: state => state.singleDriver,
 };
@@ -24,6 +25,7 @@ const actions = {
     try {
       const response = await CurrentRepository.getDrivers(driverName);
       const currentDrivers = response.data.MRData.DriverTable.Drivers;
+      // if no driver is passed, get all drivers
       driverName === ''
         ? commit('set_drivers', currentDrivers)
         : commit('set_single_driver', currentDrivers);
