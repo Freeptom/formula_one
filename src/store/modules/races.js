@@ -17,11 +17,11 @@ const getters = {
   allResults: state => state.allRaceResults,
   lapNumber: state =>
     // console.log(state.roundResult),
-    state.roundResult != false ? state.roundResult.Results[0].laps : false,
+    state.roundResult == false ? false : state.roundResult.Results[0].laps,
   winner: state =>
-    state.roundResult != false
-      ? (state.roundResult = `${state.roundResult.Results[0].Driver.givenName} ${state.roundResult.Results[0].Driver.familyName}`)
-      : false,
+    state.roundResult == false
+      ? false
+      : `${state.roundResult.Results[0].Driver.givenName} ${state.roundResult.Results[0].Driver.familyName}`,
 };
 
 const mutations = {
@@ -46,8 +46,11 @@ const actions = {
     try {
       const response = await CurrentRepository.getSingleRoundResults(round);
       let roundInfo = response.data.MRData.RaceTable.Races[0]; // get specifically RaceTable info
-      roundInfo != null ? '' : (roundInfo = false);
-      await commit('set_round_result', roundInfo);
+      let isResult = result => {
+        if (result) return true;
+      };
+      if (isResult(roundInfo)) await commit('set_round_result', roundInfo);
+      if (isResult(roundInfo) == null) await commit('set_round_result', false);
       return response;
     } catch (e) {
       console.log(e);
