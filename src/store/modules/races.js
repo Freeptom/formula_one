@@ -15,10 +15,9 @@ const getters = {
   racesCount: state => state.races.length,
   raceDates: state => state.races.map(race => race.date),
   allResults: state => state.allRaceResults,
-  lapNumber: state => (
-    console.log(state.roundResult),
-    state.roundResult != false ? state.roundResult.Results[0].laps : false
-  ),
+  lapNumber: state =>
+    // console.log(state.roundResult),
+    state.roundResult != false ? state.roundResult.Results[0].laps : false,
   winner: state =>
     state.roundResult != false
       ? (state.roundResult = `${state.roundResult.Results[0].Driver.givenName} ${state.roundResult.Results[0].Driver.familyName}`)

@@ -49,7 +49,7 @@
               <strong>{{ lapNum }}</strong> Laps
             </p>
             <p v-if="raceWinner" class="modal-header__round-meta">
-              Winner: <strong>{{ winner }}</strong>
+              Winner: <strong>{{ raceWinner }}</strong>
             </p>
             <h2 class="modal-header__title">{{ raceName }}</h2>
             <p>{{ circuitName }}</p>
@@ -167,7 +167,6 @@ export default {
       let findCircuitName = '';
       let findRound = '';
       let findLapNum = '';
-      // eslint-disable-next-line no-unused-vars
       let findWinner = '';
       // iterate through each race to match date of current
       for await (let el of this.allRaces) {
@@ -188,7 +187,6 @@ export default {
       this.roundNum = findRound;
       this.lapNum = findLapNum;
       this.raceWinner = findWinner;
-      console.log(this.winner);
       return showModal ? (this.isModalVisible = true) : '';
     },
 
