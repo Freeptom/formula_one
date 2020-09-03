@@ -1,19 +1,32 @@
+// FONTS
+@font-face {
+  font-family: 'Inter';
+  src: url('~@/assets/fonts/inter.ttf') format('truetype');
+}
+
+// VARIABLES
 $line-height: 1.5;
-@import url('https://use.typekit.net/ihq4ork.css');
+
+:root {
+  --main-font: 'Inter', sans-serif;
+}
+
 html,
 body {
-  font-family: interstate, sans-serif;
+  font-family: var(--main-font);
 }
 body {
   font-size: 18px;
   box-sizing: border-box;
   line-height: $line-height;
 }
+
 #app {
-  font-family: interstate, sans-serif;
+  font-family: var(--main-font);
 }
+
+// HEADING STYLING
 h2 {
-  font-family: interstate, sans-serif;
   color: #49507e;
   font-size: 1.825rem;
   font-weight: 700;
@@ -21,8 +34,4 @@ h2 {
 
 h3 {
   font-size: 1.25rem;
-}
-
-button {
-  font-family: interstate, sans-serif;
 }

@@ -10,7 +10,7 @@
         <div class="arrow-selector" @click="subtractMonth">
           <img
             class="icon-arrow icon-arrow--nav"
-            src="../assets/chevron-left-solid.svg"
+            src="../assets/icons/chevron-left-solid.svg"
             alt="chevron-left"
           />
         </div>
@@ -18,7 +18,7 @@
         <div class="arrow-selector" @click="addMonth">
           <img
             class="icon-arrow icon-arrow--nav"
-            src="../assets/chevron-right-solid.svg"
+            src="../assets/icons/chevron-right-solid.svg"
             alt="chevron-right"
           />
         </div>
@@ -325,14 +325,12 @@ export default {
 /* modal */
 
 modal {
-  font-family: interstate sans-serif;
 }
 .modal-header {
   &__round-meta {
     font-size: 18px;
     strong {
       font-size: 32px;
-      font-family: interstate-black, sans-serif;
       font-weight: 900;
     }
   }
