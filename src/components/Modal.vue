@@ -1,6 +1,6 @@
 <template>
   <transition name="modal-fade">
-    <div class="modal-backdrop">
+    <div class="modal-scrim">
       <div
         class="modal"
         role="dialog"
@@ -16,7 +16,7 @@
           </slot>
         </header>
         <section class="modal-body">
-          <slot id="modalDescription" name="body">I'm the default body!</slot>
+          <slot id="modalDescription" name="body"></slot>
         </section>
         <footer class="modal-footer">
           <button type="button" class="btn-close" aria-label="Close modal" @click="close">
@@ -57,7 +57,7 @@ export default {
 $modal-lr-padding: 60px;
 $modal-tb-padding: 30px;
 
-.modal-backdrop {
+.modal-scrim {
   z-index: 1;
   position: fixed;
   top: 0;
@@ -121,6 +121,6 @@ $modal-tb-padding: 30px;
 
 .modal-fade-enter-active,
 .modal-fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 250ms ease;
 }
 </style>

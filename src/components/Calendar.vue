@@ -42,16 +42,11 @@
         </ol>
         <modal v-show="isModalVisible" @close="closeModal">
           <template v-slot:header>
-            <p class="modal-header__round-meta">
-              Round <strong>{{ roundNum }}</strong>
-            </p>
-            <p v-if="lapNum" class="modal-header__round-meta">
-              <strong>{{ lapNum }}</strong> Laps
-            </p>
-            <p v-if="raceWinner" class="modal-header__round-meta">
-              Winner: <strong>{{ raceWinner }}</strong>
-            </p>
-            <h2 class="modal-header__title">{{ raceName }}</h2>
+            <p>{{ raceDate }}</p>
+            <p class="modal-header__round-meta">Round {{ roundNum }}</p>
+            <p v-if="lapNum" class="modal-header__round-meta">{{ lapNum }} Laps</p>
+            <p v-if="raceWinner" class="modal-header__round-meta">Winner: {{ raceWinner }}</p>
+            <h2 class="modal-header__title">{{ raceCountry }}</h2>
             <p>{{ circuitName }}</p>
           </template>
           <template v-slot:body></template>
@@ -76,6 +71,8 @@ export default {
   data() {
     return {
       // race vars
+      raceDate: '',
+      raceCountry: '',
       raceName: '',
       circuitName: '',
       roundNum: '',
@@ -163,6 +160,7 @@ export default {
 
     async getRaceInfo(date) {
       let showModal = false;
+      let findCountry = '';
       let findRaceName = '';
       let findCircuitName = '';
       let findRound = '';
@@ -172,6 +170,7 @@ export default {
       for await (let el of this.allRaces) {
         if (el.date == date) {
           // if date match then give variables values
+          findCountry = el.Circuit.Location.country;
           findRaceName = el.raceName;
           findCircuitName = el.Circuit.circuitName;
           findRound = el.round;
@@ -182,6 +181,11 @@ export default {
         }
       }
       // assign the variables to corresponding data properties
+      this.raceDate = date
+        .split('-')
+        .reverse()
+        .join('/');
+      this.raceCountry = findCountry;
       this.raceName = findRaceName;
       this.circuitName = findCircuitName;
       this.roundNum = findRound;
@@ -322,18 +326,13 @@ export default {
 
 /* modal */
 
-modal {
-}
 .modal-header {
   &__round-meta {
-    font-size: 18px;
-    strong {
-      font-size: 32px;
-      font-weight: 900;
-    }
+    font-size: 14px;
+    font-weight: 300;
   }
   &__title {
-    margin: 1.2rem 0 0 0;
+    margin: 0;
     text-align: left;
   }
   p {
