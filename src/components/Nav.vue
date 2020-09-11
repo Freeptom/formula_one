@@ -29,8 +29,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/variables/colors.scss';
-
 nav {
   background: white;
   border-right: 1px solid $gray2;

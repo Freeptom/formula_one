@@ -208,8 +208,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/variables/colors.scss';
-@import '../mixins/drop-shadows.scss';
 .fade-enter {
   opacity: 0;
 }

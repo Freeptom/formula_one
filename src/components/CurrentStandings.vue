@@ -71,7 +71,6 @@
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
 // eslint-disable-next-line no-unused-vars
-import styles from '../styles/styles.scss';
 import Loader from '@/components/Loader.vue';
 
 export default {
@@ -116,8 +115,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/variables/colors.scss';
-
 .fade-enter {
   opacity: 0;
 }

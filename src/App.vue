@@ -21,7 +21,6 @@
 
 <script>
 import Nav from './components/Nav.vue';
-
 export default {
   name: 'App',
   components: {
@@ -31,7 +30,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/variables/colors.scss';
 // variables
 
 .drive {

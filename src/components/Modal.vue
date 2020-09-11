@@ -54,9 +54,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/variables/colors.scss';
-@import '../mixins/drop-shadows.scss';
-
 $modal-lr-padding: 60px;
 $modal-tb-padding: 30px;
 

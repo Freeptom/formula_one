@@ -31,7 +31,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../mixins/drop-shadows.scss';
 .driver-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
