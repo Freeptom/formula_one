@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Loader v-if="loading" :loading="loading"></Loader>
-    <section v-else class="module calendar-module">
+    <section class="module calendar-module">
       <div class="module-header">
         <h3 class="module-heading">Race Calendar</h3>
       </div>
@@ -60,13 +59,11 @@
 import { mapGetters, mapActions } from 'vuex';
 import modal from '@/components/Modal.vue';
 import moment from 'moment';
-import Loader from '@/components/Loader.vue';
 
 export default {
   name: 'RaceCalendar',
   components: {
     modal,
-    Loader,
   },
   data() {
     return {
@@ -86,7 +83,6 @@ export default {
       days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
 
       // general vars
-      loading: true,
       isModalVisible: false,
     };
   },

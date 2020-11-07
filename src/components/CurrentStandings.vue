@@ -62,7 +62,7 @@
         </tr>
       </tbody>
     </table>
-    <p v-if="filteredStandings.length === 0 && loading === false" class="no-results">
+    <p v-if="filteredStandings.length === 0" class="no-results">
       <strong>No drivers found</strong>
     </p>
   </section>

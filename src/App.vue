@@ -6,7 +6,8 @@
           <h1>Drive</h1>
         </router-link>
       </header>
-      <Nav class="drive__nav"></Nav>
+      <Loader v-if="loading" :loading="loading"></Loader>
+      <Nav v-else class="drive__nav"></Nav>
       <main class="drive__main">
         <transition name="fade">
           <router-view></router-view>
@@ -20,11 +21,18 @@
 </template>
 
 <script>
+import Loader from '@/components/Loader.vue';
 import Nav from './components/Nav.vue';
 export default {
   name: 'App',
   components: {
     Nav,
+    Loader,
+  },
+  data() {
+    return {
+      loading: true,
+    };
   },
 };
 </script>
