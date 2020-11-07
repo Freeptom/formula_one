@@ -71,18 +71,12 @@
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
 // eslint-disable-next-line no-unused-vars
-import Loader from '@/components/Loader.vue';
 
 export default {
   name: 'CurrentStandings',
-  components: {
-    Loader,
-  },
-
   data() {
     return {
       numericalOrder: true,
-      loading: true,
     };
   },
 

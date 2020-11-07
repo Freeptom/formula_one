@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-    <div class="drive">
-      <header class="drive__header">
-        <router-link class="menu__link logo" to="/">
-          <h1>Drive</h1>
-        </router-link>
-      </header>
-      <Loader v-if="loading" :loading="loading"></Loader>
-      <Nav v-else class="drive__nav"></Nav>
-      <main class="drive__main">
-        <transition name="fade">
-          <router-view></router-view>
-        </transition>
-      </main>
+    <Loader v-if="loading" :loading="loading"> </Loader>
+    <div v-else>
+      <div class="drive">
+        <header class="drive__header">
+          <router-link class="menu__link logo" to="/">
+            <h1>Drive</h1>
+          </router-link>
+        </header>
+
+        <Nav class="drive__nav"></Nav>
+        <main class="drive__main">
+          <transition name="fade">
+            <router-view></router-view>
+          </transition>
+        </main>
+      </div>
       <!-- <footer class="drive__footer">
         <span>&copy; 2019 Drive Inc.</span>
       </footer>-->
@@ -31,7 +34,7 @@ export default {
   },
   data() {
     return {
-      loading: true,
+      loading: false,
     };
   },
 };

@@ -132,7 +132,7 @@ export default {
   created() {
     // this.fetchRaces();
 
-    this.fetchRaces().then(() => (this.loading = false));
+    this.fetchRaces();
   },
 
   methods: {
