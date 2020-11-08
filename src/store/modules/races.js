@@ -41,13 +41,7 @@ const actions = {
 
   async fetchRoundResults({ commit }, round = null) {
     try {
-      // fetch all round results if none is supplied
-      if (!round) {
-        const response = await CurrentRepository.getAllRoundResults();
-        const races = response.data.MRData.RaceTable.Races;
-        await commit('set_all_race_results', races);
-        return response;
-      } else {
+      if (round) {
         const response = await CurrentRepository.getSingleRoundResults(round);
         let roundInfo = response.data.MRData.RaceTable.Races[0];
         // check if the race has happened yet
@@ -58,6 +52,12 @@ const actions = {
         if (isResult(roundInfo)) await commit('set_round_result', roundInfo);
         // if no result yet, set round result to false
         if (isResult(roundInfo) == null) await commit('set_round_result', false);
+        return response;
+        // fetch all round results if none is supplied
+      } else {
+        const response = await CurrentRepository.getAllRoundResults();
+        const races = response.data.MRData.RaceTable.Races;
+        await commit('set_all_race_results', races);
         return response;
       }
     } catch (e) {
