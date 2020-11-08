@@ -14,7 +14,7 @@ const getters = {
   allResults: state => state.allRaceResults,
   // return number of laps if results exist
   raceOptions: state =>
-    state.roundResult == false
+    !state.roundResult
       ? ''
       : {
           winner: `${state.roundResult.Results[0].Driver.givenName}`,
@@ -51,7 +51,7 @@ const actions = {
         // if result, set round result with returned info
         if (isResult(roundInfo)) await commit('set_round_result', roundInfo);
         // if no result yet, set round result to false
-        if (isResult(roundInfo) == null) await commit('set_round_result', false);
+        if (!isResult(roundInfo)) await commit('set_round_result', false);
         return response;
         // fetch all round results if none is supplied
       } else {
