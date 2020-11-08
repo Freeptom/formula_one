@@ -130,8 +130,6 @@ export default {
   },
 
   created() {
-    // this.fetchRaces();
-
     this.fetchRaces();
   },
 

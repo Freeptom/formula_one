@@ -11,10 +11,8 @@
         @input="filterStandings"
       />
     </div>
-    <Loader v-if="loading" :loading="loading"></Loader>
-    <table v-else class="standings">
+    <table class="standings">
       <thead>
-        <!-- <th class="limiter"></th> -->
         <th
           class="number order-list"
           @click="
@@ -43,7 +41,6 @@
         <th>Team</th>
         <th class="number win-amount">Wins</th>
         <th class="number">Pts</th>
-        <!-- <th class="limiter"></th> -->
       </thead>
       <tbody>
         <tr v-for="standing in filteredStandings" :key="standing.position" class="standing">
@@ -86,7 +83,7 @@ export default {
   },
 
   created() {
-    this.fetchStandings().then(() => (this.loading = false));
+    this.fetchStandings();
   },
 
   methods: {

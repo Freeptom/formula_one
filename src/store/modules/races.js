@@ -5,9 +5,9 @@ import { RepositoryFactory } from '../../repositories/RepositoryFactory';
 const CurrentRepository = RepositoryFactory.get('current');
 
 const state = {
-  races: '',
+  races: [],
   roundResult: '',
-  allRaceResults: '',
+  allRaceResults: [],
 };
 
 const getters = {
@@ -15,9 +15,8 @@ const getters = {
   racesCount: state => state.races.length,
   raceDates: state => state.races.map(race => race.date),
   allResults: state => state.allRaceResults,
-  lapNumber: state =>
-    // console.log(state.roundResult),
-    state.roundResult == false ? false : state.roundResult.Results[0].laps,
+  // if round doesn't yet exist, set roundResult to false, otherwise return number of laps
+  lapNumber: state => (state.roundResult == false ? false : state.roundResult.Results[0].laps),
   winner: state =>
     state.roundResult == false
       ? false
@@ -35,6 +34,7 @@ const actions = {
     try {
       const response = await CurrentRepository.get();
       const currentRaces = response.data.MRData.RaceTable.Races;
+      console.log(currentRaces, 'got races');
       commit('set_races', currentRaces);
     } catch (e) {
       console.log(e);
@@ -46,11 +46,15 @@ const actions = {
     try {
       const response = await CurrentRepository.getSingleRoundResults(round);
       let roundInfo = response.data.MRData.RaceTable.Races[0]; // get specifically RaceTable info
-      // check if the race has happened yet, meaning a result is available
+
+      // check if the race has happened yet
       let isResult = result => {
         if (result) return true;
       };
+
+      // if result, set round result with returned info
       if (isResult(roundInfo)) await commit('set_round_result', roundInfo);
+      // if no result yet, set round result to false
       if (isResult(roundInfo) == null) await commit('set_round_result', false);
       return response;
     } catch (e) {
