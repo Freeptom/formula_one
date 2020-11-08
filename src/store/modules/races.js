@@ -16,11 +16,14 @@ const getters = {
   raceDates: state => state.races.map(race => race.date),
   allResults: state => state.allRaceResults,
   // if round doesn't yet exist, set roundResult to false, otherwise return number of laps
-  raceLaps: state => (state.roundResult == false ? false : state.roundResult.Results[0].laps),
-  raceWinner: state =>
+  // eslint-disable-next-line no-empty-pattern
+  raceOptions: (state, {}) =>
     state.roundResult == false
       ? false
-      : `${state.roundResult.Results[0].Driver.givenName} ${state.roundResult.Results[0].Driver.familyName}`,
+      : {
+          winner: `${state.roundResult.Results[0].Driver.givenName}`,
+          laps: state.roundResult.Results[0].laps,
+        },
 };
 
 const mutations = {

@@ -81,7 +81,6 @@ export default {
       },
 
       // date vars
-      isSameVar: '',
       today: moment(),
       dateContext: moment(),
       days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
@@ -92,7 +91,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['allRaces', 'raceDates', 'raceLaps', 'raceWinner']),
+    ...mapGetters(['allRaces', 'raceDates', 'raceOptions']),
     // view items
     year() {
       const t = this;
@@ -174,8 +173,8 @@ export default {
           getCircuit = el.Circuit.circuitName;
           getRound = el.round;
           await this.$store.dispatch('fetchSingleRoundResults', getRound);
-          getLaps = this.raceLaps;
-          getWinner = this.raceWinner;
+          getLaps = this.raceOptions.laps;
+          getWinner = this.raceOptions.winner;
           showModal = true;
         }
       }
