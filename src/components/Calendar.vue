@@ -172,7 +172,7 @@ export default {
           getName = el.raceName;
           getCircuit = el.Circuit.circuitName;
           getRound = el.round;
-          await this.$store.dispatch('fetchSingleRoundResults', getRound);
+          await this.$store.dispatch('fetchRoundResults', getRound);
           getLaps = this.raceOptions.laps;
           getWinner = this.raceOptions.winner;
           showModal = true;

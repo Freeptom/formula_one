@@ -44,10 +44,10 @@ export default {
   },
 
   methods: {
-    ...mapActions(['fetchAllRoundResults', 'fetchDrivers']),
+    ...mapActions(['fetchDrivers']),
 
     async getPlacements() {
-      await this.$store.dispatch('fetchAllRoundResults');
+      await this.$store.dispatch('fetchRoundResults');
       // loop through each race
       for await (let value of this.allResults.values()) {
         for (let i = 0; i < value.Results.length; i++) {

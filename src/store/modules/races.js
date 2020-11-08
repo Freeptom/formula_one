@@ -1,12 +1,9 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-param-reassign, no-return-assign */
-
 import { RepositoryFactory } from '../../repositories/RepositoryFactory';
 const CurrentRepository = RepositoryFactory.get('current');
 
 const state = {
   races: [],
-  roundResult: '',
+  roundResult: false,
   allRaceResults: [],
 };
 
@@ -15,11 +12,10 @@ const getters = {
   racesCount: state => state.races.length,
   raceDates: state => state.races.map(race => race.date),
   allResults: state => state.allRaceResults,
-  // if round doesn't yet exist, set roundResult to false, otherwise return number of laps
-  // eslint-disable-next-line no-empty-pattern
-  raceOptions: (state, {}) =>
+  // return number of laps if results exist
+  raceOptions: state =>
     state.roundResult == false
-      ? false
+      ? ''
       : {
           winner: `${state.roundResult.Results[0].Driver.givenName}`,
           laps: state.roundResult.Results[0].laps,
@@ -43,33 +39,27 @@ const actions = {
     }
   },
 
-  // TODO refactor this bad boi, possibly commit response and use roundInfo in a getter (need to check what roundInfo actually is)?
-  async fetchSingleRoundResults({ commit }, round) {
+  async fetchRoundResults({ commit }, round = null) {
     try {
-      const response = await CurrentRepository.getSingleRoundResults(round);
-      let roundInfo = response.data.MRData.RaceTable.Races[0]; // get specifically RaceTable info
-
-      // check if the race has happened yet
-      let isResult = result => {
-        if (result) return true;
-      };
-
-      // if result, set round result with returned info
-      if (isResult(roundInfo)) await commit('set_round_result', roundInfo);
-      // if no result yet, set round result to false
-      if (isResult(roundInfo) == null) await commit('set_round_result', false);
-      return response;
-    } catch (e) {
-      console.log(e);
-    }
-  },
-
-  async fetchAllRoundResults({ commit }) {
-    try {
-      const response = await CurrentRepository.getAllRoundResults();
-      const races = response.data.MRData.RaceTable.Races;
-      await commit('set_all_race_results', races);
-      return response;
+      // fetch all round results if none is supplied
+      if (!round) {
+        const response = await CurrentRepository.getAllRoundResults();
+        const races = response.data.MRData.RaceTable.Races;
+        await commit('set_all_race_results', races);
+        return response;
+      } else {
+        const response = await CurrentRepository.getSingleRoundResults(round);
+        let roundInfo = response.data.MRData.RaceTable.Races[0];
+        // check if the race has happened yet
+        let isResult = result => {
+          if (result) return true;
+        };
+        // if result, set round result with returned info
+        if (isResult(roundInfo)) await commit('set_round_result', roundInfo);
+        // if no result yet, set round result to false
+        if (isResult(roundInfo) == null) await commit('set_round_result', false);
+        return response;
+      }
     } catch (e) {
       console.log(e);
     }
