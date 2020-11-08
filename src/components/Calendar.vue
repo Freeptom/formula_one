@@ -41,12 +41,14 @@
         </ol>
         <modal v-show="isModalVisible" @close="closeModal">
           <template v-slot:header>
-            <p>{{ raceDate }}</p>
-            <p class="modal-header__round-meta">Round {{ roundNum }}</p>
-            <p v-if="lapNum" class="modal-header__round-meta">{{ lapNum }} Laps</p>
-            <p v-if="raceWinner" class="modal-header__round-meta">Winner: {{ raceWinner }}</p>
-            <h2 class="modal-header__title">{{ raceCountry }}</h2>
-            <p>{{ circuitName }}</p>
+            <p>{{ raceInfo.raceDate }}</p>
+            <p class="modal-header__round-meta">Round {{ raceInfo.roundNum }}</p>
+            <p v-if="raceInfo.laps" class="modal-header__round-meta">{{ raceInfo.laps }} Laps</p>
+            <p v-if="raceInfo.winner" class="modal-header__round-meta">
+              Winner: {{ raceInfo.winner }}
+            </p>
+            <h2 class="modal-header__title">{{ raceInfo.country }}</h2>
+            <p>{{ raceInfo.circuit }}</p>
           </template>
           <template v-slot:body></template>
         </modal>
@@ -68,13 +70,15 @@ export default {
   data() {
     return {
       // race vars
-      raceDate: '',
-      raceCountry: '',
-      raceName: '',
-      circuitName: '',
-      roundNum: '',
-      raceWinner: '',
-      lapNum: '',
+      raceInfo: {
+        raceDate: '',
+        country: '',
+        raceName: '',
+        circuit: '',
+        roundNum: '',
+        winner: '',
+        laps: '',
+      },
 
       // date vars
       isSameVar: '',
@@ -88,7 +92,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['allRaces', 'raceDates', 'lapNumber', 'winner']),
+    ...mapGetters(['allRaces', 'raceDates', 'raceLaps', 'raceWinner']),
     // view items
     year() {
       const t = this;
@@ -137,7 +141,8 @@ export default {
     ...mapActions(['fetchRaces', 'fetchRoundResults']),
     // date formatters
     prependUnderTen(day) {
-      return day < 10 ? `0${day}` : day;
+      const reformatDay = day < 10 ? `0${day}` : day;
+      return reformatDay;
     },
 
     buildDate(day) {
@@ -154,37 +159,38 @@ export default {
 
     async getRaceInfo(date) {
       let showModal = false;
-      let findCountry = '';
-      let findRaceName = '';
-      let findCircuitName = '';
-      let findRound = '';
-      let findLapNum = '';
-      let findWinner = '';
+      let getCountry = '';
+      let getName = '';
+      let getCircuit = '';
+      let getRound = '';
+      let getLaps = '';
+      let getWinner = '';
       // iterate through each race to match date of current
       for await (let el of this.allRaces) {
         if (el.date == date) {
           // if date match then give variables values
-          findCountry = el.Circuit.Location.country;
-          findRaceName = el.raceName;
-          findCircuitName = el.Circuit.circuitName;
-          findRound = el.round;
-          await this.$store.dispatch('fetchSingleRoundResults', findRound);
-          findLapNum = this.lapNumber;
-          findWinner = this.winner;
+          getCountry = el.Circuit.Location.country;
+          getName = el.raceName;
+          getCircuit = el.Circuit.circuitName;
+          getRound = el.round;
+          await this.$store.dispatch('fetchSingleRoundResults', getRound);
+          getLaps = this.raceLaps;
+          getWinner = this.raceWinner;
           showModal = true;
         }
       }
+
       // assign the variables to corresponding data properties
-      this.raceDate = date
+      this.raceInfo.raceDate = date
         .split('-')
         .reverse()
         .join('/');
-      this.raceCountry = findCountry;
-      this.raceName = findRaceName;
-      this.circuitName = findCircuitName;
-      this.roundNum = findRound;
-      this.lapNum = findLapNum;
-      this.raceWinner = findWinner;
+      this.raceInfo.country = getCountry;
+      this.raceInfo.raceName = getName;
+      this.raceInfo.circuit = getCircuit;
+      this.raceInfo.roundNum = getRound;
+      this.raceInfo.laps = getLaps;
+      this.raceInfo.winner = getWinner;
       return showModal ? (this.isModalVisible = true) : '';
     },
 

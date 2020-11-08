@@ -16,8 +16,8 @@ const getters = {
   raceDates: state => state.races.map(race => race.date),
   allResults: state => state.allRaceResults,
   // if round doesn't yet exist, set roundResult to false, otherwise return number of laps
-  lapNumber: state => (state.roundResult == false ? false : state.roundResult.Results[0].laps),
-  winner: state =>
+  raceLaps: state => (state.roundResult == false ? false : state.roundResult.Results[0].laps),
+  raceWinner: state =>
     state.roundResult == false
       ? false
       : `${state.roundResult.Results[0].Driver.givenName} ${state.roundResult.Results[0].Driver.familyName}`,
@@ -34,7 +34,6 @@ const actions = {
     try {
       const response = await CurrentRepository.get();
       const currentRaces = response.data.MRData.RaceTable.Races;
-      console.log(currentRaces, 'got races');
       commit('set_races', currentRaces);
     } catch (e) {
       console.log(e);
