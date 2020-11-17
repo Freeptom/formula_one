@@ -12,7 +12,7 @@ const getters = {
   racesCount: state => state.races.length,
   raceDates: state => state.races.map(race => race.date),
   allResults: state => state.allRaceResults,
-  // return number of laps if results exist
+  // return number of laps, winner if results exist
   raceOptions: state =>
     !state.roundResult
       ? ''
@@ -39,7 +39,7 @@ const actions = {
     }
   },
 
-  async fetchRoundResults({ commit }, round = null) {
+  async fetchResults({ commit }, round = null) {
     try {
       if (round) {
         const response = await CurrentRepository.getSingleRoundResults(round);

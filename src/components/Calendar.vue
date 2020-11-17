@@ -137,7 +137,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['fetchRaces', 'fetchRoundResults']),
+    ...mapActions(['fetchRaces', 'fetchResults']),
     // date formatters
     prependUnderTen(day) {
       const reformatDay = day < 10 ? `0${day}` : day;
@@ -172,7 +172,7 @@ export default {
           getName = el.raceName;
           getCircuit = el.Circuit.circuitName;
           getRound = el.round;
-          await this.$store.dispatch('fetchRoundResults', getRound);
+          await this.$store.dispatch('fetchResults', getRound);
           getLaps = this.raceOptions.laps;
           getWinner = this.raceOptions.winner;
           showModal = true;

@@ -47,7 +47,7 @@ export default {
     ...mapActions(['fetchDrivers']),
 
     async getPlacements() {
-      await this.$store.dispatch('fetchRoundResults');
+      await this.$store.dispatch('fetchResults');
       // loop through each race
       for await (let value of this.allResults.values()) {
         for (let i = 0; i < value.Results.length; i++) {
