@@ -17,7 +17,7 @@ const getters = {
     !state.roundResult
       ? ''
       : {
-          winner: `${state.roundResult.Results[0].Driver.givenName}`,
+          winner: `${state.roundResult.Results[0].Driver.givenName} ${state.roundResult.Results[0].Driver.familyName}`,
           laps: state.roundResult.Results[0].laps,
         },
 };

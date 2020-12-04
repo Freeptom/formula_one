@@ -39,18 +39,28 @@
             <span>{{ date }}</span>
           </li>
         </ol>
+
         <modal v-show="isModalVisible" @close="closeModal">
           <template v-slot:header>
             <p>{{ raceInfo.raceDate }}</p>
-            <p class="modal-header__round-meta">Round {{ raceInfo.roundNum }}</p>
-            <p v-if="raceInfo.laps" class="modal-header__round-meta">{{ raceInfo.laps }} Laps</p>
-            <p v-if="raceInfo.winner" class="modal-header__round-meta">
-              Winner: {{ raceInfo.winner }}
-            </p>
-            <h2 class="modal-header__title">{{ raceInfo.country }}</h2>
-            <p>{{ raceInfo.circuit }}</p>
+            <h2 class="title">{{ raceInfo.raceName }}</h2>
+            <span class="subtitle">{{ raceInfo.circuit }} &#8212; {{ raceInfo.country }}</span>
           </template>
-          <template v-slot:body></template>
+          <template v-slot:body>
+            <p v-if="raceInfo.winner">
+              <img src="../assets/icons/trophy.svg" alt="winner" />{{ raceInfo.winner }}
+            </p>
+            <p>
+              <img src="../assets/icons/round.svg" alt="round number" />Round
+              <strong>{{ raceInfo.roundNum }}</strong>
+            </p>
+            <p v-if="raceInfo.laps">
+              <img src="../assets/icons/laps.svg" alt="number of laps" /><strong>{{
+                raceInfo.laps
+              }}</strong>
+              Laps
+            </p>
+          </template>
         </modal>
       </div>
     </section>
@@ -326,16 +336,32 @@ export default {
 /* modal */
 
 .modal-header {
-  &__round-meta {
-    font-size: 14px;
-    font-weight: 300;
-  }
-  &__title {
+  h2.title {
+    color: $primary-color;
+    font-size: 1.5rem;
+    line-height: 1;
     margin: 0;
     text-align: left;
+    @media screen and (min-width: 768px) {
+      line-height: 1.2;
+    }
   }
+  .subtitle {
+    display: inline-block;
+    font-weight: 400;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    @media screen and (min-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+}
+.modal-body {
   p {
-    margin: 0;
+    margin: 0.5rem 0;
+    img {
+      margin-right: 0.5rem;
+    }
   }
 }
 </style>

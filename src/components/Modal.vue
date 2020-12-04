@@ -8,7 +8,7 @@
         aria-describedby="modalDescription"
       >
         <header id="modalTitle" class="modal-header">
-          <slot name="header" class="title">
+          <slot name="header">
             {{ title }}
             <button type="button" class="btn-close" aria-label="Close modal" @click="close">
               x
@@ -54,8 +54,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$modal-lr-padding: 60px;
-$modal-tb-padding: 30px;
+$modal-lr-padding--sml: 2rem;
+$modal-tb-padding--sml: 2rem;
+$modal-lr-padding--lg: 40px;
+$modal-tb-padding--lg: 40px;
 
 .modal-scrim {
   z-index: 1;
@@ -70,31 +72,35 @@ $modal-tb-padding: 30px;
   align-items: center;
 }
 
+// modal and modal item spacing and margins
 .modal {
-  padding: $modal-tb-padding 0;
+  position: relative;
+  margin: 0 0.5rem;
+  line-height: 1;
+  min-width: 90%;
+  padding: $modal-tb-padding--sml $modal-lr-padding--sml;
   background: #ffffff;
+  color: $gray4;
   @include box_shadow(4);
   overflow-x: auto;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   border-radius: 15px;
-}
-
-.modal-header {
-  padding: 0 $modal-lr-padding;
-  color: $gray4;
-  justify-content: space-between;
+  @media screen and (min-width: 768px) {
+    min-width: 30%;
+    padding: $modal-tb-padding--lg $modal-lr-padding--lg;
+  }
 }
 
 .modal-body {
-  padding: 0 $modal-lr-padding;
-  position: relative;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .modal-footer {
-  padding: $modal-tb-padding $modal-lr-padding 0 $modal-lr-padding;
   display: flex;
   width: 100%;
   justify-content: flex-end;
@@ -121,6 +127,6 @@ $modal-tb-padding: 30px;
 
 .modal-fade-enter-active,
 .modal-fade-leave-active {
-  transition: opacity 250ms ease;
+  transition: opacity 150ms ease-in;
 }
 </style>
