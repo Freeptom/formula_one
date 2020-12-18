@@ -23,6 +23,7 @@
             Close
           </button>
         </footer>
+        <span class="decoration">{{ circuit }}</span>
       </div>
     </div>
   </transition>
@@ -31,7 +32,9 @@
 <script>
 export default {
   name: 'Modal',
-
+  props: {
+    circuit: { type: String, required: true },
+  },
   data() {
     return {
       title: 'I am a dynamic title',
@@ -72,8 +75,22 @@ $modal-tb-padding--lg: 40px;
   align-items: center;
 }
 
+.decoration {
+  position: absolute;
+  top: 0.5rem;
+  left: -8px;
+  height: 100%;
+  color: rgba(73, 80, 87, 8%);
+  font-size: 90px;
+  font-weight: 900;
+  z-index: 0;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
 // modal and modal item spacing and margins
 .modal {
+  overflow: hidden;
   position: relative;
   margin: 0 0.5rem;
   line-height: 1;
@@ -91,6 +108,12 @@ $modal-tb-padding--lg: 40px;
     min-width: 30%;
     padding: $modal-tb-padding--lg $modal-lr-padding--lg;
   }
+}
+
+header,
+.modal-body,
+.modal-footer {
+  z-index: 1;
 }
 
 .modal-body {

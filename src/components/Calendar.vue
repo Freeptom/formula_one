@@ -40,9 +40,9 @@
           </li>
         </ol>
 
-        <modal v-show="isModalVisible" @close="closeModal">
+        <modal v-show="isModalVisible" :circuit="raceInfo.circuit" @close="closeModal">
           <template v-slot:header>
-            <p>{{ raceInfo.raceDate }}</p>
+            <!-- <p>{{ raceInfo.raceDate }}</p> -->
             <h2 class="title">{{ raceInfo.raceName }}</h2>
             <span class="subtitle">{{ raceInfo.circuit }} &#8212; {{ raceInfo.country }}</span>
           </template>
