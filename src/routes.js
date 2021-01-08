@@ -1,6 +1,6 @@
-import dashboard from './components/Dashboard.vue';
-import DriversList from './components/DriversList.vue';
-import Driver from './components/Driver.vue';
+import dashboard from './views/Dashboard.vue';
+import DriversList from './views/DriversList.vue';
+import Driver from './views/Driver.vue';
 
 export default [
   { path: '/', component: dashboard },

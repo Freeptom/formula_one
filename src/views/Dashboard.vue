@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import CurrentStandings from './CurrentStandings.vue';
-import Calendar from './Calendar.vue';
+import CurrentStandings from '../components/CurrentStandings.vue';
+import Calendar from '../components/Calendar.vue';
 
 export default {
   name: 'App',

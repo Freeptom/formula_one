@@ -9,7 +9,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import LineChart from './charts/LineChart.js';
+import LineChart from '../components/charts/LineChart.js';
 
 export default {
   name: 'SingleDriver',
