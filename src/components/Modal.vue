@@ -59,8 +59,8 @@ export default {
 <style scoped lang="scss">
 $modal-lr-padding--sml: 2rem;
 $modal-tb-padding--sml: 2rem;
-$modal-lr-padding--lg: 40px;
-$modal-tb-padding--lg: 40px;
+$modal-lr-padding--lg: 24px;
+$modal-tb-padding--lg: 24px;
 
 .modal-scrim {
   z-index: 1;

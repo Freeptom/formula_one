@@ -44,22 +44,30 @@
           <template v-slot:header>
             <!-- <p>{{ raceInfo.raceDate }}</p> -->
             <h2 class="title">{{ raceInfo.raceName }}</h2>
-            <span class="subtitle">{{ raceInfo.circuit }} &#8212; {{ raceInfo.country }}</span>
+            <span class="subtitle"
+              >{{ raceInfo.circuit }} <strong>&#8212;</strong> {{ raceInfo.country }}</span
+            >
           </template>
           <template v-slot:body>
-            <p v-if="raceInfo.winner">
-              <img src="../assets/icons/trophy.svg" alt="winner" />{{ raceInfo.winner }}
-            </p>
-            <p>
-              <img src="../assets/icons/round.svg" alt="round number" />Round
-              <strong>{{ raceInfo.roundNum }}</strong>
-            </p>
-            <p v-if="raceInfo.laps">
-              <img src="../assets/icons/laps.svg" alt="number of laps" /><strong>{{
-                raceInfo.laps
-              }}</strong>
-              Laps
-            </p>
+            <div>
+              <img src="../assets/icons/trophy.svg" alt="race winner" />
+              <p v-if="raceInfo.winner">
+                {{ raceInfo.winner.forename }} <strong>{{ raceInfo.winner.surname }}</strong>
+              </p>
+            </div>
+            <div>
+              <img src="../assets/icons/round.svg" alt="round number" />
+              <p>
+                Round <strong>{{ raceInfo.roundNum }}</strong>
+              </p>
+            </div>
+            <div>
+              <img src="../assets/icons/laps.svg" alt="number of laps" />
+              <p v-if="raceInfo.laps">
+                <strong>{{ raceInfo.laps }}</strong>
+                Laps
+              </p>
+            </div>
           </template>
         </modal>
       </div>
@@ -338,7 +346,7 @@ export default {
 .modal-header {
   h2.title {
     color: $primary-color;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     line-height: 1;
     margin: 0;
     text-align: left;
@@ -350,18 +358,33 @@ export default {
     display: inline-block;
     font-weight: 400;
     font-size: 0.875rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     @media screen and (min-width: 768px) {
       font-size: 1rem;
     }
   }
 }
 .modal-body {
+  div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
   p {
     margin: 0.5rem 0;
-    img {
-      margin-right: 0.5rem;
-    }
+  }
+  img {
+    background-color: #9da5ff;
+    border-radius: 15%;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+    margin-right: 0.7rem;
+    height: 24px;
+    width: 24px;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 8px;
   }
 }
 </style>
