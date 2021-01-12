@@ -12,6 +12,11 @@
           <Calendar></Calendar>
         </div>
       </div>
+      <div class="dashboard__item">
+        <div class="card">
+          <TabContainer></TabContainer>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -19,12 +24,14 @@
 <script>
 import CurrentStandings from '../components/CurrentStandings.vue';
 import Calendar from '../components/Calendar.vue';
+import TabContainer from '../components/TabContainer.vue';
 
 export default {
   name: 'App',
   components: {
     CurrentStandings,
     Calendar,
+    TabContainer,
   },
 };
 </script>

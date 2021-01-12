@@ -16,9 +16,6 @@
           </transition>
         </main>
       </div>
-      <!-- <footer class="drive__footer">
-        <span>&copy; 2019 Drive Inc.</span>
-      </footer>-->
     </div>
   </div>
 </template>
